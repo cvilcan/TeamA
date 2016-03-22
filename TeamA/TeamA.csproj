@@ -126,11 +126,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountVM.cs" />
     <Compile Include="Models\HomeworkVM.cs" />
     <Compile Include="Models\TeacherVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -330,6 +332,9 @@
     <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
     <Content Include="Views\Admin\CreateTeacher.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
