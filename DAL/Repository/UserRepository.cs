@@ -37,7 +37,22 @@ namespace TeamA.Repository
             }
         }
 
-        
+        public void CreateStudentUser(string userName, string email, string password)
+        {
+            using(SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("spCreateStudent");
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@username", userName);
+                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@email", email);
+
+                cmd.ExecuteNonQuery();
+
+            }
+        }
 
     }
 }
