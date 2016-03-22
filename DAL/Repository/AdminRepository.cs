@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Security;
 namespace DAL.Repository
 {
-    class AdminRepository
+    public class AdminRepository
     {
 
 
