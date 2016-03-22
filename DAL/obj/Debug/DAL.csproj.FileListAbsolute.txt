@@ -6,3 +6,11 @@ C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\DAL\bin
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\DAL\bin\Debug\Models.pdb
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\DAL\obj\Debug\DAL.dll
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\DAL\obj\Debug\DAL.pdb
+D:\Documentatie\TeamANou\TeamA\DAL\bin\Debug\DAL.dll.config
+D:\Documentatie\TeamANou\TeamA\DAL\bin\Debug\DAL.dll
+D:\Documentatie\TeamANou\TeamA\DAL\bin\Debug\DAL.pdb
+D:\Documentatie\TeamANou\TeamA\DAL\bin\Debug\Models.dll
+D:\Documentatie\TeamANou\TeamA\DAL\bin\Debug\Models.pdb
+D:\Documentatie\TeamANou\TeamA\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\Documentatie\TeamANou\TeamA\DAL\obj\Debug\DAL.dll
+D:\Documentatie\TeamANou\TeamA\DAL\obj\Debug\DAL.pdb

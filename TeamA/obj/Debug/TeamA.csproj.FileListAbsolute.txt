@@ -36,3 +36,41 @@ C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\TeamA\b
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\TeamA\bin\BusinessLayer.pdb
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\TeamA\bin\DAL.pdb
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\TeamA\bin\Models.pdb
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\TeamA.dll.config
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\TeamA.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\TeamA.pdb
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\Antlr3.Runtime.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\BusinessLayer.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\EntityFramework.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\Microsoft.Web.Infrastructure.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\Newtonsoft.Json.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Net.Http.Formatting.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.Http.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.Http.WebHost.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.Mvc.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.Optimization.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.Providers.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.Razor.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.WebPages.Deployment.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.WebPages.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.WebPages.Razor.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\WebGrease.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\DAL.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\Models.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\BusinessLayer.pdb
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\EntityFramework.xml
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\Newtonsoft.Json.xml
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Net.Http.Formatting.xml
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.Http.xml
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.Http.WebHost.xml
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.Mvc.xml
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.Razor.xml
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.WebPages.xml
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.WebPages.Deployment.xml
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\System.Web.WebPages.Razor.xml
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\DAL.pdb
+D:\Documentatie\TeamANou\TeamA\TeamA\bin\Models.pdb
+D:\Documentatie\TeamANou\TeamA\TeamA\obj\Debug\TeamA.csprojResolveAssemblyReference.cache
+D:\Documentatie\TeamANou\TeamA\TeamA\obj\Debug\TeamA.dll
+D:\Documentatie\TeamANou\TeamA\TeamA\obj\Debug\TeamA.pdb
