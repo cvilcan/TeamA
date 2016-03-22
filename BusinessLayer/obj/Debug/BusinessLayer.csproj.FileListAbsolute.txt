@@ -7,3 +7,12 @@ C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\Busines
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\BusinessLayer\obj\Debug\BusinessLayer.dll
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Users\alina.craciun\Desktop\TeamA\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\alina.craciun\Desktop\TeamA\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\alina.craciun\Desktop\TeamA\BusinessLayer\bin\Debug\DAL.dll
+C:\Users\alina.craciun\Desktop\TeamA\BusinessLayer\bin\Debug\Models.dll
+C:\Users\alina.craciun\Desktop\TeamA\BusinessLayer\bin\Debug\DAL.pdb
+C:\Users\alina.craciun\Desktop\TeamA\BusinessLayer\bin\Debug\Models.pdb
+C:\Users\alina.craciun\Desktop\TeamA\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
+C:\Users\alina.craciun\Desktop\TeamA\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\alina.craciun\Desktop\TeamA\BusinessLayer\obj\Debug\BusinessLayer.pdb
