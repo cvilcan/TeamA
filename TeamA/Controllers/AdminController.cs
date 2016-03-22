@@ -25,7 +25,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateTeacher(TeacherVM tcr)
         {
-            UserService.CreateTeacher();
+            //UserService.CreateTeacher();
 
             return View();
         }

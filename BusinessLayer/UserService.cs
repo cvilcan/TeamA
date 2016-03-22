@@ -10,14 +10,7 @@ namespace BusinessLayer
 {
     public class UserService
     {
-        private UserRepository userRepository;
-
-
-        public UserService(UserRepository userRepository)
-        {
-            this.userRepository = userRepository;
-        }
-
+        private UserRepository userRepository = new UserRepository();
 
         public IEnumerable<UserProfile> GetAllUsers() {
 
