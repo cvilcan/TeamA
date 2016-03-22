@@ -36,6 +36,7 @@ C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\TeamA\b
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\TeamA\bin\BusinessLayer.pdb
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\TeamA\bin\DAL.pdb
 C:\Users\ciprian.vilcan\Documents\Visual Studio 2013\Projects\Junk\TeamA\TeamA\bin\Models.pdb
+<<<<<<< HEAD
 D:\Documentatie\TeamANou\TeamA\TeamA\bin\TeamA.dll.config
 D:\Documentatie\TeamANou\TeamA\TeamA\bin\TeamA.dll
 D:\Documentatie\TeamANou\TeamA\TeamA\bin\TeamA.pdb
@@ -74,3 +75,43 @@ D:\Documentatie\TeamANou\TeamA\TeamA\bin\Models.pdb
 D:\Documentatie\TeamANou\TeamA\TeamA\obj\Debug\TeamA.csprojResolveAssemblyReference.cache
 D:\Documentatie\TeamANou\TeamA\TeamA\obj\Debug\TeamA.dll
 D:\Documentatie\TeamANou\TeamA\TeamA\obj\Debug\TeamA.pdb
+=======
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\TeamA.dll.config
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\TeamA.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\TeamA.pdb
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\Antlr3.Runtime.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\BusinessLayer.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\EntityFramework.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\Newtonsoft.Json.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Net.Http.Formatting.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.Http.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.Http.WebHost.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.Mvc.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.Optimization.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.Providers.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.Razor.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.WebPages.Deployment.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.WebPages.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.WebPages.Razor.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\WebGrease.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\DAL.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\Models.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\BusinessLayer.pdb
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\EntityFramework.xml
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\Newtonsoft.Json.xml
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Net.Http.Formatting.xml
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.Http.xml
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.Http.WebHost.xml
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.Mvc.xml
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.Razor.xml
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.WebPages.xml
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.WebPages.Deployment.xml
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\System.Web.WebPages.Razor.xml
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\DAL.pdb
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\bin\Models.pdb
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\obj\Debug\TeamA.csprojResolveAssemblyReference.cache
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\obj\Debug\TeamA.dll
+C:\Users\alina.craciun\Desktop\TeamA\TeamA\obj\Debug\TeamA.pdb
+>>>>>>> b571f26ab2f3b37d96bccb5bb5db5a80418cf0b3
