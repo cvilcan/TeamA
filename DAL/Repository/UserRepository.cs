@@ -15,22 +15,29 @@ namespace TeamA.Repository
 
         public IEnumerable<UserProfile> GetAllUsers()
         {
-            using (SqlConnection conn = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
-                IEnumerable<UserProfile> userList = new List<UserProfile>();
-                SqlCommand cmd = new SqlCommand();
+                List<UserProfile> userList = new List<UserProfile>();
+                SqlCommand cmd = new SqlCommand("spGetAllUsers",con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                conn.Open();
+                con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
                     UserProfile u = new UserProfile();
                     u.ID = Convert.ToInt32(rdr["ID"]);
-                    //...
-                    //userList.Add(u);
+                    u.Username = rdr["Username"].ToString();
+                    u.Password=rdr["Password"].ToString();
+                    u.Email = rdr["Email"].ToString();
+                    u.RoleName = rdr["RoleName"].ToString();
+
+                    userList.Add(u);
                 }
                 return userList;
             }
         }
+
+        
+
     }
 }
