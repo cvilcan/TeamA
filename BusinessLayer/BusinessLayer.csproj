@@ -47,6 +47,10 @@
       <Project>{50eadb4d-1bf9-43af-b556-a70c79bb43e9}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Models\AccessModels.csproj">
+      <Project>{c1b1e163-0ce6-4892-9ad7-41cb5b70dc6b}</Project>
+      <Name>AccessModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
