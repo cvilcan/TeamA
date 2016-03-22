@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AccessModels.Models;
 using DAL.Repository;
 using System.Data.SqlClient;
+using BusinessLayer.Mail;
 namespace BusinessLayer
 {
     class AdminService
@@ -19,6 +20,13 @@ namespace BusinessLayer
 
              try
             {
+               
+                MailHelper mp = new MailHelper();
+
+                List<string> list = new List<string>() { up.Email };
+                MailHelper.SendMail(list, "admin@admin.com", "Registration Details", up.Password);
+
+
                 adminRepository.addTeachersFromAdmin(up);
 
 
@@ -31,6 +39,10 @@ namespace BusinessLayer
 
 
         }
+
+
+
+
 
 
         
