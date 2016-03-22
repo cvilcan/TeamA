@@ -9,8 +9,9 @@ create table UserProfile(
 		ID int identity(1,1),
 		Username nvarchar(50) UNIQUE not null,
 		[Password] nvarchar(128) not null,
-		Email nvarchar(128) not null,
+		Email nvarchar(128)UNIQUE not null,
 		RoleID int,
+		IsConfirmed int,
 		constraint PK_UserProfile primary key(ID),
 		constraint FK_UserProfile_Role foreign key(RoleID) references UserRole(RoleID)
 	)
@@ -55,3 +56,10 @@ create table HomeworkFile
 		constraint PK_HomeworkFiles primary key(UploadID),
 		constraint FK_HomeworkFiles_StudentToHomework foreign key(UploadID) references StudentToHomework(UploadID)
 	)
+
+Create table RegistrationHash
+(
+UserID int primary key,
+HashConfirmationCode nvarchar(max),
+constraint FK_RegistrationHash_UserID foreign key(UserID) references UserProfile(ID)
+)
