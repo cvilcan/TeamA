@@ -8,6 +8,13 @@ namespace TeamA
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new StyleBundle("~/bundles/bootstrap").Include(
+              "~/Content/bootstrap-theme.css",
+              "~/Content/bootstrap-theme.min.css",
+              "~/Content/bootstrap.css",
+              "~/Content/bootstrap.min.css"
+              //"~/Content/bootstrap-datetimepicker-build.less"
+              ));
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -24,6 +31,8 @@ namespace TeamA
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+
+          
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

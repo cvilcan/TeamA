@@ -1,0 +1,53 @@
+﻿@model TeamA.Models.HomeworkVM
+
+@{
+    ViewBag.Title = "Create Homework";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Create Homework</h1>
+    </div>
+</div>
+    
+@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
+<div class="container">
+  
+  <div class="panel panel-default">
+    <div class="panel-body">
+        <form role="form">           
+            <div class="form-group">
+                <label for="usr">Problem Description</label>
+                <input type="text" class="form-control" id="usr">
+            </div>
+            <div class="form-group">
+                <label for="dt">Deadline</label>
+                <input type="text" class="form-control" id="datetimepicker4">
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#datetimepicker4').datetimepicker();
+                    });
+                </script>
+
+            </div>       
+                <p>
+                    <input type="submit" value="Create" />
+                </p>
+     
+        </form>
+
+    </div>
+
+  </div>
+</div>
+        
+    }
+
+<div>
+   @Html.ActionLink("Back to List", "Index")
+</div>
+

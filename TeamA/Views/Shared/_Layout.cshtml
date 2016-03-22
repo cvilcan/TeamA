@@ -6,6 +6,12 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/Scripts/jquery.datetimepicker.full.js")
+        @Styles.Render("~/Content/jquery.datetimepicker.css")
+        @RenderSection("scripts", required: false)
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
@@ -15,9 +21,9 @@
                     <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
-                    <section id="login">
+                    @*<section id="login">
                         @Html.Partial("_LoginPartial")
-                    </section>
+                    </section>*@
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "AdminController")</li>
@@ -42,7 +48,7 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
+
         @RenderSection("scripts", required: false)
     </body>
 </html>
