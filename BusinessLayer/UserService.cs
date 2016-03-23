@@ -15,24 +15,16 @@ namespace BusinessLayer
 
         public IEnumerable<UserProfile> GetAllUsers()
         {
-
             try
             {
                 IEnumerable<UserProfile> users = userRepository.GetAllUsers();
                 return users;
-
-
-
-
             }
             catch (SqlException e)
             {
                 Console.WriteLine("Service error " + e);
             }
-
-
             return null;
-
 
         }
         public IEnumerable<UserProfile> GetAllStudents()
@@ -42,28 +34,11 @@ namespace BusinessLayer
             return students;
         }
 
-
-
-
         public void CreateStudentUser(string username, string password, string email, int? teacherID)
         {
-
-
             userRepository.CreateStudentUser(username, email, password, teacherID);
             var guidstring = userRepository.GetGuid(username);
-            
-            Mail.MailHelper.SendMail(new List<string>() { "xulescu@yahoo.com" }, "admin@admin.com", "draga apas aici pt confirmare", GetBaseUrl() + guidstring);
 
-
-
-
-
-
-
-        }
-
-        public string GetBaseUrl()
-        {
             var request = HttpContext.Current.Request;
             var appUrl = HttpRuntime.AppDomainAppVirtualPath;
 
@@ -71,13 +46,15 @@ namespace BusinessLayer
 
             var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
 
-            return baseUrl;
+            string body = "Click the link to confirm the mail:\n";
+
+            Mail.MailHelper.SendMail(new List<string>() { email }, "admin@admin.com", "Confirmation mail", body + baseUrl + "Account/ConfirmRegistration?GUID=" + guidstring);
+
         }
 
-
-        public void CheckGuid(string guid)
+        public int CheckGuid(string guid)
         {
-            userRepository.CheckGuid(guid);
+            return userRepository.CheckGuid(guid);
         }
 
     }

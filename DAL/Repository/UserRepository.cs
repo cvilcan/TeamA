@@ -56,20 +56,14 @@ namespace TeamA.Repository
                     cmd.Parameters.AddWithValue("@teacherId", teacherID);
                     con.Open();
                     cmd.ExecuteNonQuery();
-
                 }
             }
-
             catch (SqlException)
             {
 
 
             }
-
-
-
         }
-
 
         public bool Login(string username, string password)
         {
@@ -84,7 +78,6 @@ namespace TeamA.Repository
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", password);
 
-
                     int number = Convert.ToInt32( cmd.ExecuteReader());
                     if(number==1)
                     {
@@ -94,21 +87,13 @@ namespace TeamA.Repository
                     {
                         return false;
                     }
-
-                    
                 }
             }
             catch(SqlException )
-           {
-               return false;
-           }
-            catch(Exception)
-           {
-               return false;
-           }
-
+            {
+                return false;
+            }
         }
-
 
         public string GetGuid(string username)
         {
@@ -127,39 +112,25 @@ namespace TeamA.Repository
                    g =rdr["HashConfirmationCode"].ToString();
                     readguidlist.Add(g);
                 }
+                guid=readguidlist[0];
 
-                
-                  
-                   guid=readguidlist[0];
-                                    
-
-                    
-                
                 return guid;
             }
         }
 
-        public void CheckGuid(string guid)
+        public int CheckGuid(string guid)
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
-                
                 SqlCommand cmd = new SqlCommand("spCheckGuid", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@guid", guid);
                 con.Open();
-                cmd.ExecuteNonQuery();
 
-
+                return (int)cmd.ExecuteScalar();
             }
-
-
         }
-    
-    
     }
-
-
-    }
+}
 
     
