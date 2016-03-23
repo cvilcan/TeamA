@@ -37,12 +37,12 @@ namespace BusinessLayer
         }
 
 
-
-        public void CreateStudentUser(string username, string email, string password, int? teacherID)
+        
+        public void CreateStudentUser(string username, string password, string email, int? teacherID)
         {
-
+            var guidstring = userRepository.GetGuid(username);
             userRepository.CreateStudentUser(username, email, password, teacherID);
-            Mail.MailHelper.SendMail(new List<string>() { "xulescu@yahoo.com" }, "admin@admin.com", "draga apas aici pt confirmare", "loclalhost/confirm?guid=....");
+            Mail.MailHelper.SendMail(new List<string>() { "xulescu@yahoo.com" }, "admin@admin.com", "draga apas aici pt confirmare", "loclalhost/confirm?guid="+guidstring);
 
         }
    
