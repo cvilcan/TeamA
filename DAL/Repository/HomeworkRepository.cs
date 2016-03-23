@@ -25,8 +25,7 @@ namespace DAL.Repository
                 cmd.Parameters.AddWithValue("@deadlineInDays", deadline);
                 
 
-                cmd.ExecuteNonQuery();
-
+                return (int)cmd.ExecuteScalar();
             }
         }
     }
