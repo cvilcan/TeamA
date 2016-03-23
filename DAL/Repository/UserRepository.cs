@@ -40,7 +40,7 @@ namespace TeamA.Repository
         }
 
 
-        public void CreateStudentUser(string userName, string email, string password,int teacherID)
+        public void CreateStudentUser(string userName, string email, string password,int? teacherID)
         {
             try
             {
