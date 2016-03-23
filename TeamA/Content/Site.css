@@ -5,6 +5,10 @@
     background-color: #fff;
 }
 
+.table{
+    width:76em !important;
+}
+
 header, footer, nav, section {
     display: block;
 }

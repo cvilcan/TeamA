@@ -12,5 +12,6 @@ namespace TeamA.Models
         public string Description { get; set; }
         
         public DateTime Deadline { get; set; }
+        public int TeacherID { get; set; }
     }
 }

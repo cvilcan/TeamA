@@ -19,8 +19,6 @@ namespace BusinessLayer
             return users;
 
 
-
-
         }catch(SqlException e){
             Console.WriteLine("Service error "+e);}
           
@@ -29,6 +27,7 @@ namespace BusinessLayer
 
 
     }
+
         public IEnumerable<UserProfile> GetAllStudents()
         {
             var users = userRepository.GetAllUsers();
@@ -36,6 +35,12 @@ namespace BusinessLayer
             return students;
         }
 
+        public IEnumerable<UserProfile> GetAllTeachers()
+        {
+            var users = userRepository.GetAllUsers();
+            var teachers = users.Where(x => x.RoleName == "Teacher");
+            return teachers;
+        }
 
 
 
@@ -47,6 +52,22 @@ namespace BusinessLayer
 
         }
    
+        public List<Tuple<UserProfile, string>> GetStudentTeacher()
+        {
+            throw new NotImplementedException();
+            //var students = GetAllStudents();
+            //var studentsToTeachers = GetAllStudentsToTeachers();
+            //var teachers = GetAllTeachers();
+            //List<Tuple<UserProfile, string>> pairList = new List<Tuple<UserProfile, string>>();
+            //foreach (var student in students)
+            //{
+            //    pairList.Add(new Tuple<UserProfile,string>()
+            //        {
+            //            Item1 = student,
+            //            Item2 = teachers.Where(t => t.Role == )
+            //        })
+            //}
+        }
 
 
     
