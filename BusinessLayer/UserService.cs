@@ -36,7 +36,11 @@ namespace BusinessLayer
             return students;
         }
 
-         
+       public void  CreateStudentUser(string userName, string email, string password,int teacherID)
+        {
+
+
+        }
 
 
    
