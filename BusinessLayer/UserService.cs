@@ -74,5 +74,11 @@ namespace BusinessLayer
             return baseUrl;
         }
 
+
+        public void CheckGuid(string guid)
+        {
+            userRepository.CheckGuid(guid);
+        }
+
     }
 }

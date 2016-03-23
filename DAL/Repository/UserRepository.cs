@@ -133,6 +133,18 @@ namespace TeamA.Repository
 
         public void CheckGuid(string guid)
         {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                
+                SqlCommand cmd = new SqlCommand("spCheckGuid", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@guid", guid);
+                con.Open();
+                cmd.ExecuteNonQuery();
+
+
+            }
+
 
         }
     
