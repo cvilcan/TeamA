@@ -7,6 +7,7 @@ using AccessModels.Models;
 using DAL.Repository;
 using System.Data.SqlClient;
 using BusinessLayer.Mail;
+using System.IO;
 namespace BusinessLayer
 {
     class AdminService
@@ -25,7 +26,7 @@ namespace BusinessLayer
 
                 List<string> list = new List<string>() { up.Email };
                 MailHelper.SendMail(list, "admin@admin.com", "Registration Details", up.Password);
-
+                Directory.CreateDirectory(@"~/Uploads/" + up.Username + '_' + Convert.ToString(up.ID));
 
                 adminRepository.addTeachersFromAdmin(up);
 
