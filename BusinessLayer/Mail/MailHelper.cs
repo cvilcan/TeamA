@@ -28,5 +28,6 @@ namespace BusinessLayer.Mail
             smtpClient.Send(mailMsg);
         }
     }
-}
 
+
+}
