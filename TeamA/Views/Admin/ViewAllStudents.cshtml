@@ -17,7 +17,7 @@
     <table class="table">
         <thead>
             <tr class="success">
-                <th>@Html.DisplayNameFor(model => model.Username)</th>
+                <th>@Html.DisplayNameFor(model => model.UserName)</th>
                 <th>@Html.DisplayNameFor(model => model.Email)</th>
                 <th>Reset Password</th>
             </tr>
@@ -27,7 +27,7 @@
             {
                 <tr class="info">
                     <td>
-                        @Html.DisplayFor(modelItem => item.Username)
+                        @Html.DisplayFor(modelItem => item.UserName)
                     </td>
                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
                     <td>
@@ -40,26 +40,3 @@
     </table>
 
 </div>
-
-
-<h2>ViewAllStudents</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>
