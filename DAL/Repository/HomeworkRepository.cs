@@ -12,7 +12,7 @@ namespace DAL.Repository
     {
         string cs = ConfigurationManager.ConnectionStrings["TeamAConnection"].ConnectionString;
         
-        public int CreateHomework(int TeacherUserID,string description, DateTime deadline)
+        public int CreateHomework(int TeacherUserID, string name, string description, DateTime deadline)
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
@@ -21,6 +21,7 @@ namespace DAL.Repository
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@teacherID", TeacherUserID);
+                cmd.Parameters.AddWithValue("@homeWorkName", name);
                 cmd.Parameters.AddWithValue("@homeWorkDescription", description);
                 cmd.Parameters.AddWithValue("@deadlineInDays", deadline);
                 
