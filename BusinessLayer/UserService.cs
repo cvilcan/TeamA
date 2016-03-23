@@ -49,9 +49,9 @@ namespace BusinessLayer
         {
 
 
-
-            var guidstring = userRepository.GetGuid(username);
             userRepository.CreateStudentUser(username, email, password, teacherID);
+            var guidstring = userRepository.GetGuid(username);
+            
             Mail.MailHelper.SendMail(new List<string>() { "xulescu@yahoo.com" }, "admin@admin.com", "draga apas aici pt confirmare", GetBaseUrl() + guidstring);
 
 
