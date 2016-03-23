@@ -40,7 +40,7 @@ namespace TeamA.Repository
         }
 
 
-        public void CreateStudentUser(string userName, string email, string password)
+        public void CreateStudentUser(string userName, string email, string password,int teacherID)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace TeamA.Repository
                     cmd.Parameters.AddWithValue("@username", userName);
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.Parameters.AddWithValue("@email", email);
-
+                    cmd.Parameters.AddWithValue("@teacherId", teacherID);
                     cmd.ExecuteNonQuery();
 
                 }
