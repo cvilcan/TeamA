@@ -19,6 +19,8 @@ namespace BusinessLayer
             {
                 IEnumerable<UserProfile> users = userRepository.GetAllUsers();
                 return users;
+
+
             }
             catch (SqlException e)
             {
@@ -27,12 +29,22 @@ namespace BusinessLayer
             return null;
 
         }
+
         public IEnumerable<UserProfile> GetAllStudents()
         {
             var users = userRepository.GetAllUsers();
             var students = users.Where(x => x.RoleName == "Student");
             return students;
         }
+
+        public IEnumerable<UserProfile> GetAllTeachers()
+        {
+            var users = userRepository.GetAllUsers();
+            var teachers = users.Where(x => x.RoleName == "Teacher");
+            return teachers;
+        }
+
+
 
         public void CreateStudentUser(string username, string password, string email, int? teacherID)
         {
@@ -50,14 +62,29 @@ namespace BusinessLayer
 
             Mail.MailHelper.SendMail(new List<string>() { email }, "admin@admin.com", "Confirmation mail", body + baseUrl + "Account/ConfirmRegistration?GUID=" + guidstring);
 
+
+
+
+
         }
 
-        public IEnumerable<UserProfile> GetAllTeachers()
+        public List<Tuple<UserProfile, string>> GetStudentTeacher()
         {
-            var users = userRepository.GetAllUsers();
-            var teachers = users.Where(x => x.RoleName == "Teacher");
-            return teachers;
+            throw new NotImplementedException();
+            //var students = GetAllStudents();
+            //var studentsToTeachers = GetAllStudentsToTeachers();
+            //var teachers = GetAllTeachers();
+            //List<Tuple<UserProfile, string>> pairList = new List<Tuple<UserProfile, string>>();
+            //foreach (var student in students)
+            //{
+            //    pairList.Add(new Tuple<UserProfile,string>()
+            //        {
+            //            Item1 = student,
+            //            Item2 = teachers.Where(t => t.Role == )
+            //        })
+            //}
         }
+
         public int CheckGuid(string guid)
         {
             return userRepository.CheckGuid(guid);
