@@ -32,10 +32,14 @@ namespace TeamA.Controllers
 
         public ActionResult Index()
         {
-            return View("CreateTeacher");
+            
+            return View(userService.GetAllStudents());
         }
 
-
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
 
 
     }

@@ -29,11 +29,23 @@ namespace BusinessLayer
 
 
     }
+        public IEnumerable<UserProfile> GetAllStudents()
+        {
+            var users = userRepository.GetAllUsers();
+            var students = users.Where(x => x.RoleName == "Student");
+            return students;
+        }
 
-       
-     
 
 
+
+        public void CreateStudentUser(string username, string password, string email, int? teacherID)
+        {
+
+            userRepository.CreateStudentUser(username, password,email , teacherID);
+            Mail.MailHelper.SendMail(new List<string>() { "xulescu@yahoo.com" }, "admin@admin.com", "draga apas aici pt confirmare", "loclalhost/confirm?guid=....");
+
+        }
    
 
 

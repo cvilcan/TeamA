@@ -27,7 +27,7 @@ create table StudentsToTeachers
 
 create table Homework
 	(
-		HomeworkID int,
+		HomeworkID int identity,
 		TeacherUserID int,
 		[Description] nvarchar(511),
 		Deadline datetime,
