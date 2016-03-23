@@ -13,6 +13,7 @@ namespace BusinessLayer
     public class AdminService
     {
         private AdminRepository adminRepository = new AdminRepository();
+
         public AdminService(AdminRepository adminRepository)
         {
             this.adminRepository=adminRepository;

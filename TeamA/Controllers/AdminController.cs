@@ -16,7 +16,7 @@ namespace TeamA.Controllers
 {
     public class AdminController : Controller
     {
-        AdminService adminService = new AdminService();
+        private AdminService adminService = new AdminService();
         UserService userService = new UserService();
         public ActionResult CreateTeacher()
         {

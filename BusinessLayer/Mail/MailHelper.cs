@@ -31,11 +31,3 @@ namespace BusinessLayer.Mail
 
     }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 5b8fd8e9af037ea426b5e4ac26ee9669d1320cb6
-
-
-
-
