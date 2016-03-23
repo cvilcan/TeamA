@@ -73,19 +73,43 @@ namespace TeamA.Repository
 
         public bool Login(string username, string password)
         {
+
+            //List<string> readguidlist = new List<string>();
+
+            //while (rdr.Read())
+            //{
+            //    string g;
+            //    g = rdr["HashConfirmationCode"].ToString();
+            //    readguidlist.Add(g);
+            //}
+
+
+
+            //guid = readguidlist[0];
+
            try
             {
                 using (SqlConnection con = new SqlConnection(cs))
                 {
-                    SqlCommand cmd = new SqlCommand("spLogin");
+                    SqlCommand cmd = new SqlCommand("spLogin",con);
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", password);
+                    con.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    List<int> loginlist = new List<int>();
+                    while (rdr.Read())
+                    {
+                        
+                       int g;
+                           g = (int) rdr["ReturnCode"];
+                          loginlist.Add(g);
+                    }
 
-
-                    int number = Convert.ToInt32( cmd.ExecuteReader());
+                    int number = loginlist[0];
+                    
                     if(number==1)
                     {
                         return true;

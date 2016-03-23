@@ -24,7 +24,10 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult Login(AccountVM vm)
         {
-            return RedirectToAction("Index");
+            if (userService.Login(vm.UserName, vm.Password))
+                return RedirectToAction("Register");
+            else
+                return View("Index");
         }
 
         public ActionResult Register()

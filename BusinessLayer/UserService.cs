@@ -79,6 +79,16 @@ namespace BusinessLayer
         {
             userRepository.CheckGuid(guid);
         }
+        public bool Login(string username, string password)
+        {
+            if (userRepository.Login(username, password))
+                return true;
+            else
+                return false;
+                
+           
 
+        }
     }
+       
 }
