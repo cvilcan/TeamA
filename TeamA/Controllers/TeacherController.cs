@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace TeamA.Controllers
 {
     public class TeacherController : Controller
     {
+        private HomeworkService homeworkService = new HomeworkService();
         //
         // GET: /Teacher/
 
@@ -25,7 +27,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
-            //homeworkService.CreateHomework(vm.);
+           // homeworkService.CreateHomework(vm.Description, vm.Deadline, vm.TeacherID);
 
             return RedirectToAction("Index");
         }

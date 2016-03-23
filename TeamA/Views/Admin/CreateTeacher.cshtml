@@ -37,46 +37,53 @@
         <form role="form">           
             <div class="form-group">
                 <label for="usr">Username</label>
-                <input type="text" name="username" class="form-control" id="usr" placeholder="Enter username">
+                <input type="text" name="username" class="form-control" id="usr" placeholder="Enter username" required>
             </div>
+            
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" name="email" class="form-control" id="email4" placeholder="Enter email">
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $('#email4').email();
-                    });
-                </script>
+                <label for="em">Email</label>
+                <input type="email" name="Email" value=""class="form-control" id="em" placeholder="username@email.com" required />
+                
+            </div>
+               <p>
+                 <input type="submit" class="btn btn-primary" value="Create new Teacher Account">
+                   </p>
+                    
+            
+               
 
-            </div>       
-                <p>
-                    @*<button type="button" class="btn btn-primary">Create Account</button>*@
-                    <input type="submit" class="btn btn-primary" value="Create new Teacher Account">
-                    @*<input type="submit" value="Create" />*@
-                </p>
-     
-        </form>
 
-    </div>
 
+
+
+
+
+                                
+                                   
+
+      </form>
+
+   </div>
+
+ </div>
   </div>
-</div>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+                   
+
+
+
+
+
+
+
+
+
+
+
+
+
     @*<div class="container">
-  
+
   <div class="panel panel-default">
       <div class="panel-body">
           <form role="form">
@@ -95,20 +102,20 @@
                   </script>
                   </div>
           </form>
-     
 
-            </div>   
-      </div>    
+
+            </div>
+      </div>
                 <p>
                     <input type="submit" value="Create" />
                 </p>
-     
-        
+
+
 
     </div>
     </body>*@
 
-    
+
         @*<legend>TeacherVM</legend>
         <div class="container">
             <h3>Create a Teacher Account</h3>
@@ -118,7 +125,7 @@
                     <input type="text" class="form-control" id="usr" placeholder="Enter username">
                 </div>
         </div>
-                
+
 
                 <div class="col-sm-4 col-xs-12">
                     @Html.LabelFor(model => model.Email)
@@ -134,10 +141,16 @@
                 </div>
     </body>*@
 
-            
-    
+
+
+
 }
+
+                    <div>
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
