@@ -44,7 +44,7 @@ namespace BusinessLayer
             return teachers;
         }
 
-<<<<<<< HEAD
+
         public Tuple<int, string, string> GetUser(string username)
         {
             var a = GetAllUsers();
@@ -53,9 +53,6 @@ namespace BusinessLayer
             return new Tuple<int, string, string>(user.ID, user.Username, user.Email);
         }
 
-
-=======
->>>>>>> 606b1f73e764a64dd1507aee141bb225e825aaa2
         public void CreateStudentUser(string username, string password, string email, int? teacherID)
         {
             _userRepository.CreateStudentUser(username, email, password, teacherID);

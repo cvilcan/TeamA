@@ -13,34 +13,38 @@
     </p>
 </div>
 
-<div class="container">    
-        <table class="table">
-            <thead>
-                <tr class="success">
-                    <th>@Html.DisplayNameFor(model => model.Username)</th>
-                    <th>@Html.DisplayNameFor(model => model.Email)</th>
-                    <th>Reset Password</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="info">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Username)
-                        </td>
-                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-xs" onclick="">Reset</button>
-                        </td>
-                    </tr>
+    <div class="container">
+ 
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <table class="table">
+                        <thead>
+                            <tr class="success">
+                                <th>@Html.DisplayNameFor(model => model.Username)</th>
+                                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                                <th>Reset Password</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="info">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Username)
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-xs" onclick="">Reset</button>
+                                    </td>
+                                </tr>
 
-                }
-            </tbody>
-        </table>
-    
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
 </div>
-
 
 
 

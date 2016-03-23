@@ -15,11 +15,8 @@ namespace DAL.Repository
 {
     public class StudentRepository
     {
-<<<<<<< HEAD
+
         public string cs = ConfigurationManager.ConnectionStrings["TeamAConnection"].ConnectionString;
-=======
-        string cs = ConfigurationManager.ConnectionStrings["TeamAConnection"].ConnectionString;
->>>>>>> 606b1f73e764a64dd1507aee141bb225e825aaa2
 
         public void AddStudentHomework(string username, string fileName, int homeworkID)
         {
