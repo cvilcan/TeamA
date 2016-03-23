@@ -1,8 +1,13 @@
 ﻿@model TeamA.Models.HomeworkVM
 
 @{
+   
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Create Homework";
 }
+    
+
 
 <div class="container">
     <div class="page-header">
@@ -19,6 +24,7 @@
   
   <div class="panel panel-default">
     <div class="panel-body">
+        @Html.Display("_layout.cshtml")
         <form role="form">           
             <div class="form-group">
                 <label for="usr">Problem Description</label>
@@ -48,5 +54,7 @@
 
 <div>
    @Html.ActionLink("Back to List", "Index")
+    
 </div>
+
 
