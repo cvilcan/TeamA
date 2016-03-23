@@ -109,50 +109,6 @@ namespace TeamA.Repository
         }
 
 
-        public IEnumerable<UserProfile> GetAllStudents()
-        {
-            try
-            {
-                List<UserProfile> listStudents = new List<UserProfile>();
-                using (SqlConnection con = new SqlConnection(cs))
-                {
-                                        
-                    SqlCommand cmd = new SqlCommand("spGetAllStudents");
-
-                    cmd.CommandType = CommandType.StoredProcedure;
-                                       
-                    SqlDataReader rdr=cmd.ExecuteReader();
-
-                    while(rdr.Read())
-                    {
-                        UserProfile student = new UserProfile();
-
-                        student.Username = rdr["Username"].ToString();
-                        student.Email = rdr["Email"].ToString();
-
-                        listStudents.Add(student);
-
-                    }
-
-                }
-
-                return listStudents;
-            }
-            catch(SqlException)
-            {
-                return null;
-            }
-            catch(Exception)
-            {
-                return null;
-            }
-
-
-        }
-
-
-
-
         public string GetGuid(string username)
         {
             using (SqlConnection con = new SqlConnection(cs))
@@ -174,7 +130,14 @@ namespace TeamA.Repository
                 return guid;
             }
         }
+
+        public void CheckGuid(string guid)
+        {
+
         }
+    
+    
+    }
 
 
     }
