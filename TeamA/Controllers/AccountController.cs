@@ -25,7 +25,18 @@ namespace TeamA.Controllers
         public ActionResult Login(AccountVM vm)
         {
             if (userService.Login(vm.UserName, vm.Password))
+            {
+                Session["SessionUser"] = vm.UserName;
+                
+                
+                var cookie = new HttpCookie("CookieUser");
+                cookie.Value = vm.UserName;
+                Response.Cookies.Add(cookie);
+
+
+
                 return RedirectToAction("Register");
+            }
             else
                 return View("Index");
         }

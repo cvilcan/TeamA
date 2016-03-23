@@ -74,18 +74,7 @@ namespace TeamA.Repository
         public bool Login(string username, string password)
         {
 
-            //List<string> readguidlist = new List<string>();
-
-            //while (rdr.Read())
-            //{
-            //    string g;
-            //    g = rdr["HashConfirmationCode"].ToString();
-            //    readguidlist.Add(g);
-            //}
-
-
-
-            //guid = readguidlist[0];
+           
 
            try
             {
@@ -179,7 +168,7 @@ namespace TeamA.Repository
 
 
         }
-    
+       
     
     }
 
