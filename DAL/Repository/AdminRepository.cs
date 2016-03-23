@@ -22,15 +22,16 @@ namespace DAL.Repository
 
                 using (SqlConnection con = new SqlConnection(cs))
                 {
-                    SqlCommand cmd = new SqlCommand("spCreateTeacher)",
+                    SqlCommand cmd = new SqlCommand("spCreateTeacher",
                                 con);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
 
 
                     string encryptedPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(up.Password, "SHA1");
-                    cmd.Parameters.AddWithValue("@Username", up.Username);
-                    cmd.Parameters.AddWithValue("@Password", encryptedPassword);
-                    cmd.Parameters.AddWithValue("@Email", up.Email);
+                    cmd.Parameters.AddWithValue("@teacherName", up.Username);
+                    cmd.Parameters.AddWithValue("@password", encryptedPassword);
+                    cmd.Parameters.AddWithValue("@email", up.Email);
                     con.Open();
 
                     cmd.ExecuteNonQuery();
