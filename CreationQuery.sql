@@ -35,27 +35,21 @@ create table Homework
 		constraint FK_Homework_Teacher foreign key(TeacherUserID) references UserProfile(ID)
 	)
 
-create table StudentToHomework
+Create table StudentToHomework
 	(
 		StudentUserID int,
 		HomeworkID int,
 		UploadID int identity(1,1),
+		[FileName] nvarchar(50),
 		UploadDate datetime,
 		Comment nvarchar(255),
 		[Status] nvarchar(12),
-		Grade int,
+		Grade int
 		constraint PK_StudentToHomework primary key(UploadID),
 		constraint FK_StudentToHomework_Student foreign key(StudentUserID) references UserProfile(ID),
 		constraint FK_StudentToHomework_Homework foreign key(HomeworkID) references Homework(HomeworkID)
 	)
 
-create table HomeworkFile
-	(
-		UploadID int,
-		NumeFisier nvarchar(50),
-		constraint PK_HomeworkFiles primary key(UploadID),
-		constraint FK_HomeworkFiles_StudentToHomework foreign key(UploadID) references StudentToHomework(UploadID)
-	)
 
 Create table RegistrationHash
 (

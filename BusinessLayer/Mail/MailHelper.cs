@@ -4,8 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Mail;
-using System.Text;
+
 namespace BusinessLayer.Mail
 {
     public class MailHelper
@@ -32,7 +31,10 @@ namespace BusinessLayer.Mail
 
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5b8fd8e9af037ea426b5e4ac26ee9669d1320cb6
 
 
 

@@ -15,6 +15,10 @@ namespace TeamA
               "~/Content/bootstrap.min.css"
               //"~/Content/bootstrap-datetimepicker-build.less"
               ));
+            bundles.Add(new ScriptBundle("~/bundles/BootstrapJS").Include(
+               "~/Scripts/bootstrap.js",
+                "~/Scripts/bootstrap.min.js"
+                ));
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
