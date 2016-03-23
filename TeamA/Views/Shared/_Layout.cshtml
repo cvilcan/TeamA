@@ -11,10 +11,24 @@
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/Scripts/jquery.datetimepicker.full.js")
         @Styles.Render("~/Content/jquery.datetimepicker.css")
-        @RenderSection("scripts", required: false)
         @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/BootstrapJS")
+
     </head>
     <body>
+        <div class="container">
+            <h2>Welcome!</h2>
+            
+            <ul class="nav nav-tabs">
+                <li>@Html.ActionLink("Home", "Index", "Admin", new { data_toggle = "pill" })</li>
+                <li>@Html.ActionLink("View All Teachers", "ResetPassword", "Admin", new  { data_toggle="pill" })</li>
+                <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
+                <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
+            </ul>
+
+            
+        </div>
+
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
@@ -47,8 +61,5 @@
                 </div>
             </div>
         </footer>
-
-
-        @RenderSection("scripts", required: false)
     </body>
 </html>

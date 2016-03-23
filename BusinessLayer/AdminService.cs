@@ -10,24 +10,32 @@ using BusinessLayer.Mail;
 using System.IO;
 namespace BusinessLayer
 {
-    class AdminService
+    public class AdminService
     {
-        private AdminRepository adminRepository;
+        private AdminRepository adminRepository = new AdminRepository();
         public AdminService(AdminRepository adminRepository)
         {
             this.adminRepository=adminRepository;
         }
-        public void addTeachersFromAdmin(UserProfile up) {
+        public AdminService()
+        {
+
+        }
+        public void addTeachersFromAdmin(string username,string email) {
 
              try
             {
-               
+                UserProfile up = new UserProfile(); 
                 MailHelper mp = new MailHelper();
+                 Random rndm = new Random();
+                 string password = rndm.Next(100000, 999999).ToString();
+                List<string> list = new List<string>() { email };
+                MailHelper.SendMail(list, "admin@admin.com", "Registration Details", password);
+                //Directory.CreateDirectory(@"~/Uploads/" + username + '_' + Convert.ToString(up.ID));
 
-                List<string> list = new List<string>() { up.Email };
-                MailHelper.SendMail(list, "admin@admin.com", "Registration Details", up.Password);
-                Directory.CreateDirectory(@"~/Uploads/" + up.Username + '_' + Convert.ToString(up.ID));
-
+                up.Email = email;
+                up.Username = username;
+                up.Password = password;
                 adminRepository.addTeachersFromAdmin(up);
 
 
@@ -41,7 +49,9 @@ namespace BusinessLayer
 
         }
 
-        
-        
+
+
+
+       
     }
 }

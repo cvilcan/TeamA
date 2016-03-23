@@ -4,8 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Mail;
-using System.Text;
+
 namespace BusinessLayer.Mail
 {
     public class MailHelper
@@ -28,10 +27,7 @@ namespace BusinessLayer.Mail
 
             smtpClient.Send(mailMsg);
         }
-        
-       
+
+
     }
-
-
-
-
+}

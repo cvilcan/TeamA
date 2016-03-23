@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,8 @@ namespace TeamA.Controllers
 {
     public class AccountController : Controller
     {
+        UserService userService = new UserService();
+
         public ActionResult Index()
         {
             return View();
@@ -29,5 +32,21 @@ namespace TeamA.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public ActionResult Register(AccountVM vm)
+        {
+
+            userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherId);
+
+            return View();
+        }
+
+        public ActionResult ConfirmRegistration(string GUID)
+        {
+            if (userService.CheckGuid(GUID) == 1)
+                return View("RegistrationConfirmed");
+            else return View("Error");
+        }
     }
 }

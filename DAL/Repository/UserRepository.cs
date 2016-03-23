@@ -46,7 +46,7 @@ namespace TeamA.Repository
             {
                 using (SqlConnection con = new SqlConnection(cs))
                 {
-                    SqlCommand cmd = new SqlCommand("spCreateStudent");
+                    SqlCommand cmd = new SqlCommand("spCreateStudent",con);
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -54,21 +54,16 @@ namespace TeamA.Repository
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@teacherId", teacherID);
+                    con.Open();
                     cmd.ExecuteNonQuery();
-
                 }
             }
-
             catch (SqlException)
             {
 
 
             }
-
-
-
         }
-
 
         public bool Login(string username, string password)
         {
@@ -83,7 +78,6 @@ namespace TeamA.Repository
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", password);
 
-
                     int number = Convert.ToInt32( cmd.ExecuteReader());
                     if(number==1)
                     {
@@ -93,62 +87,51 @@ namespace TeamA.Repository
                     {
                         return false;
                     }
-
-                    
                 }
             }
             catch(SqlException )
-           {
-               return false;
-           }
-            catch(Exception)
-           {
-               return false;
-           }
-
+            {
+                return false;
+            }
         }
 
-
-        public IEnumerable<UserProfile> GetAllStudents()
+        public string GetGuid(string username)
         {
-            try
+            using (SqlConnection con = new SqlConnection(cs))
             {
-                List<UserProfile> listStudents = new List<UserProfile>();
-                using (SqlConnection con = new SqlConnection(cs))
-                {
-                                        
-                    SqlCommand cmd = new SqlCommand("spGetAllStudents");
-
-                    cmd.CommandType = CommandType.StoredProcedure;
-                                       
-                    SqlDataReader rdr=cmd.ExecuteReader();
-
-                    while(rdr.Read())
-                    {
-                        UserProfile student = new UserProfile();
-
-                        student.Username = rdr["Username"].ToString();
-                        student.Email = rdr["Email"].ToString();
-
-                        listStudents.Add(student);
-
-                    }
-
+                string guid;
+                SqlCommand cmd = new SqlCommand("spGetGUID", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username",username);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                List<string> readguidlist = new List<string>();
+                
+                while(rdr.Read()){
+                 string g  ;
+                   g =rdr["HashConfirmationCode"].ToString();
+                    readguidlist.Add(g);
                 }
+                guid=readguidlist[0];
 
-                return listStudents;
+                return guid;
             }
-            catch(SqlException)
-            {
-                return null;
-            }
-            catch(Exception)
-            {
-                return null;
-            }
-
-
         }
+
+        public int CheckGuid(string guid)
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("spCheckGuid", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@guid", guid);
+                con.Open();
+
+                return (int)cmd.ExecuteScalar();
+            }
+        }
+    }
+}
 
         public UserProfile GetUserProfile(int userid) { }
             
