@@ -29,6 +29,7 @@ create table Homework
 	(
 		HomeworkID int identity,
 		TeacherUserID int,
+		Name nvarchar(20),
 		[Description] nvarchar(511),
 		Deadline datetime,
 		constraint PK_Homework primary key(HomeworkID),

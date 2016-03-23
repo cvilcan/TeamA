@@ -42,6 +42,11 @@ namespace TeamA.Controllers
             return View();
         }
 
-
+        public ActionResult ConfirmRegistration(string GUID)
+        {
+            if (userService.CheckGuid(GUID) == 1)
+                return View("RegistrationConfirmed");
+            else return View("Error");
+        }
     }
 }
