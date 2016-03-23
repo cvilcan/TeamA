@@ -151,5 +151,32 @@ namespace TeamA.Repository
         }
 
 
+
+
+        public string GetGuid(string username)
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                string guid;
+                SqlCommand cmd = new SqlCommand("spGetGUID", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username",username);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                
+                
+                  
+                    guid=rdr["HashConfirmationCode"].ToString();
+                                    
+
+                    
+                
+                return guid;
+            }
+        }
+        }
+
+
     }
-}
+
+    
