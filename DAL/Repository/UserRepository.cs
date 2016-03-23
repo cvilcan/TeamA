@@ -46,7 +46,7 @@ namespace TeamA.Repository
             {
                 using (SqlConnection con = new SqlConnection(cs))
                 {
-                    SqlCommand cmd = new SqlCommand("spCreateStudent");
+                    SqlCommand cmd = new SqlCommand("spCreateStudent",con);
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -54,6 +54,7 @@ namespace TeamA.Repository
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@teacherId", teacherID);
+                    con.Open();
                     cmd.ExecuteNonQuery();
 
                 }
@@ -163,10 +164,17 @@ namespace TeamA.Repository
                 cmd.Parameters.AddWithValue("@username",username);
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
+                List<string> readguidlist = new List<string>();
                 
+                while(rdr.Read()){
+                 string g  ;
+                   g =rdr["HashConfirmationCode"].ToString();
+                    readguidlist.Add(g);
+                }
+
                 
                   
-                    guid=rdr["HashConfirmationCode"].ToString();
+                   guid=readguidlist[0];
                                     
 
                     
