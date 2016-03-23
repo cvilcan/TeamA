@@ -335,6 +335,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Admin\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -346,6 +347,10 @@
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
       <Project>{70e35be9-8723-40cc-9c96-465f0898c309}</Project>
       <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\AccessModels.csproj">
+      <Project>{c1b1e163-0ce6-4892-9ad7-41cb5b70dc6b}</Project>
+      <Name>AccessModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
