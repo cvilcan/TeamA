@@ -44,6 +44,13 @@ namespace BusinessLayer
             return teachers;
         }
 
+        public Tuple<int, string, string> GetUser(string username)
+        {
+            var a = GetAllUsers();
+            var user = a.Where(q => q.Username == username).SingleOrDefault();
+
+            return new Tuple<int, string, string>(user.ID, user.Username, user.Email);
+        }
 
 
         public void CreateStudentUser(string username, string password, string email, int? teacherID)
