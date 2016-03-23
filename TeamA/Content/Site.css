@@ -4,6 +4,9 @@
     color: #232323;
     background-color: #fff;
 }
+.page-header{
+    width:76em !important;
+}
 
 .table{
     width:76em !important;

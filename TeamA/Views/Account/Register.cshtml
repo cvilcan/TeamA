@@ -1,5 +1,7 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model TeamA.Models.TeacherListVM
+
+@{
+    ViewBag.Title = "Register";
 }
 
 <div class="container">
@@ -8,40 +10,71 @@
     </div>
 </div>
 
+@using (Html.BeginForm("Register", "Account", "POST"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
-@Html.BeginForm("Register","Account")
-<div class="container">
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="email">Username:</label>
+    <div class="container">
+        <form role="form">
+   
+                   
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label class="control-label col-sm-2" for="text">Username:</label>
+            </div>
             <div class="col-sm-4">
-                <input type="text" name="UserName" class="form-control" id="txt" placeholder="Enter username">
+                <input type="text" class="form-control" id="txt" placeholder="Enter username">
+                @*@Html.ValidationMessageFor(model => model.UserName)*@
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="email">Email:</label>
-            <div class="col-sm-4">
-                <input type="email" name="Email" class="form-control" id="email" placeholder="Enter email">
+            <div class="form-group row" >
+                <div class="col-sm-2">
+                    <label class="control-label col-sm-2" for="password">Password:</label>
+                </div>                   
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+                        @*@Html.ValidationMessageFor(model => model.Password)*@
+                    </div>
+                </div>
+            
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label class="control-label col-sm-2" for="email">Email:</label>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Password:</label>
-            <div class="col-sm-4">
-                <input type="password" name="Password" class="form-control" id="pwd" placeholder="Enter password">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-4">
-                <div class="checkbox">
-                    <label><input type="checkbox"> Remember me</label>
+                <div class="col-sm-4">
+                    <input type="email" class="form-control" id="email" placeholder="Enter email">
+                    @*@Html.ValidationMessageFor(model => model.Email)*@
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-default">Submit</button>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label for="sel1">TeacherId:</label>
+            </div>
+            <div class="col-sm-4">
+                <select class="form-control col-sm-2" id="sel1">
+                    @foreach (var item in Model.TeacherNameList)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
             </div>
         </div>
-    </form>
-</div>
+
+                <p>
+                    <div class="form-group row">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                    </div>
+                </p>
+            
+        </form>
+    </div>
+    
+
+   
+}
+
 

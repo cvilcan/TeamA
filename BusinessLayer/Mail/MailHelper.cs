@@ -27,19 +27,8 @@ namespace BusinessLayer.Mail
 
             smtpClient.Send(mailMsg);
         }
-<<<<<<< .mine
-
-
-=======
-
-
->>>>>>> .theirs
     }
-<<<<<<< .mine
-    }
-=======
 }
->>>>>>> .theirs
 
 
 
