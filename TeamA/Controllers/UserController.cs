@@ -23,8 +23,9 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateStudentUser(AccountVM vm)
         {
+            
             userService.CreateStudentUser(vm.UserName, vm.Password,vm.Email,vm.TeacherId);
-
+            
             return View();
         }
 
