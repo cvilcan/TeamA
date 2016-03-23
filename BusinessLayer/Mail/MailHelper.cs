@@ -28,13 +28,5 @@ namespace BusinessLayer.Mail
             smtpClient.Send(mailMsg);
         }
     }
-<<<<<<< HEAD
 }
 
-
-
-
-
-=======
-}
->>>>>>> 0b5dfac07c4d5b65861331d63175db991b218db4

@@ -51,13 +51,23 @@ namespace BusinessLayer
             userRepository.CreateStudentUser(username, email, password, teacherID);
             var guidstring = userRepository.GetGuid(username);
 
+            var request = HttpContext.Current.Request;
+            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
 
+            if (appUrl != "/") appUrl += "/";
+
+            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
+
+            string body = "Click the link to confirm the mail:\n";
+
+            Mail.MailHelper.SendMail(new List<string>() { email }, "admin@admin.com", "Confirmation mail", body + baseUrl + "Account/ConfirmRegistration?GUID=" + guidstring);
 
 
 
 
 
         }
+
         public List<Tuple<UserProfile, string>> GetStudentTeacher()
         {
             throw new NotImplementedException();
@@ -75,27 +85,6 @@ namespace BusinessLayer
             //}
         }
 
-        public string GetBaseUrl()
-        {
-            var request = HttpContext.Current.Request;
-            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
-
-            if (appUrl != "/") appUrl += "/";
-
-            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
-
-            string body = "Click the link to confirm the mail:\n";
-
-            Mail.MailHelper.SendMail(new List<string>() { email }, "admin@admin.com", "Confirmation mail", body + baseUrl + "Account/ConfirmRegistration?GUID=" + guidstring);
-
-        }
-
-        public IEnumerable<UserProfile> GetAllTeachers()
-        {
-            var users = userRepository.GetAllUsers();
-            var teachers = users.Where(x => x.RoleName == "Teacher");
-            return teachers;
-        }
         public int CheckGuid(string guid)
         {
             return userRepository.CheckGuid(guid);
