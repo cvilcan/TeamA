@@ -132,8 +132,3 @@ namespace TeamA.Repository
         }
     }
 }
-
-        public UserProfile GetUserProfile(int userid) { }
-            
-    }
-}
