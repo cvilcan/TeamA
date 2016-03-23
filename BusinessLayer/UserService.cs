@@ -45,8 +45,13 @@ namespace BusinessLayer
             Mail.MailHelper.SendMail(new List<string>() { "xulescu@yahoo.com" }, "admin@admin.com", "draga apas aici pt confirmare", "loclalhost/confirm?guid=....");
 
         }
-   
 
+        public IEnumerable<UserProfile> GetAllTeachers()
+        {
+            var users = userRepository.GetAllUsers();
+            var teachers = users.Where(x => x.RoleName == "Teacher");
+            return teachers;
+        }
 
     
 }}
