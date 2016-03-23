@@ -12,8 +12,8 @@ namespace TeamA.Controllers
 {
     public class AdminController : Controller
     {
+        AdminService adminService = new AdminService();
         UserService userService = new UserService();
-
         public ActionResult CreateTeacher()
         {
             return View();
@@ -22,7 +22,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateTeacher(TeacherVM tcr)
         {
-            //UserService.CreateTeacher();
+            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email);
 
             return View();
         }

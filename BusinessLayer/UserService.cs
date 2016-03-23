@@ -15,7 +15,6 @@ namespace BusinessLayer
 
         public IEnumerable<UserProfile> GetAllUsers()
         {
-
             try
             {
                 IEnumerable<UserProfile> users = userRepository.GetAllUsers();
@@ -27,10 +26,7 @@ namespace BusinessLayer
             {
                 Console.WriteLine("Service error " + e);
             }
-
-
             return null;
-
 
         }
 
@@ -52,12 +48,8 @@ namespace BusinessLayer
 
         public void CreateStudentUser(string username, string password, string email, int? teacherID)
         {
-
-
             userRepository.CreateStudentUser(username, email, password, teacherID);
             var guidstring = userRepository.GetGuid(username);
-            
-            Mail.MailHelper.SendMail(new List<string>() { "xulescu@yahoo.com" }, "admin@admin.com", "draga apas aici pt confirmare", GetBaseUrl() + guidstring);
 
 
 
@@ -92,13 +84,21 @@ namespace BusinessLayer
 
             var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
 
-            return baseUrl;
+            string body = "Click the link to confirm the mail:\n";
+
+            Mail.MailHelper.SendMail(new List<string>() { email }, "admin@admin.com", "Confirmation mail", body + baseUrl + "Account/ConfirmRegistration?GUID=" + guidstring);
+
         }
 
-
-        public void CheckGuid(string guid)
+        public IEnumerable<UserProfile> GetAllTeachers()
         {
-            userRepository.CheckGuid(guid);
+            var users = userRepository.GetAllUsers();
+            var teachers = users.Where(x => x.RoleName == "Teacher");
+            return teachers;
+        }
+        public int CheckGuid(string guid)
+        {
+            return userRepository.CheckGuid(guid);
         }
 
     }
