@@ -29,6 +29,12 @@ namespace BusinessLayer
 
 
     }
+        public IEnumerable<UserProfile> GetAllStudents()
+        {
+            var users = userRepository.GetAllUsers();
+            var students = users.Where(x => x.RoleName == "Student");
+            return students;
+        }
 
          
 
