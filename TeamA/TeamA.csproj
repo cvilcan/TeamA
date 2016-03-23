@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="Models\AccountVM.cs" />
     <Compile Include="Models\HomeworkVM.cs" />
+    <Compile Include="Models\StudentVM.cs" />
     <Compile Include="Models\TeacherListVM.cs" />
     <Compile Include="Models\TeacherVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -342,6 +343,8 @@
     <Content Include="Views\Admin\CreateTeacher.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Admin\ViewAllStudents.cshtml" />
+    <Content Include="Views\Admin\ViewAllTeachers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

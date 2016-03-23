@@ -17,5 +17,12 @@ namespace BusinessLayer
             _studentRepository.AddHomework(studentUserID, homeworkID);
             Directory.CreateDirectory(System.Configuration.ConfigurationManager.AppSettings["UploadPath"] + path);
         }
+
+        public IEnumerable<Tuple<string, string, string>> GetStudentTeacher(string teacherName)
+        {
+            var studentsToTeachers = _studentRepository.GetStudentsToTeachers();
+            var studentsFromSameTeacher = studentsToTeachers.Where(x => x.Item3 == teacherName);
+            return studentsFromSameTeacher.ToList();
+        }
     }
 }
