@@ -11,8 +11,9 @@
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/Scripts/jquery.datetimepicker.full.js")
         @Styles.Render("~/Content/jquery.datetimepicker.css")
-        @RenderSection("scripts", required: false)
         @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/BootstrapJS")
+
     </head>
     <body>
         <header>
@@ -49,6 +50,6 @@
         </footer>
 
 
-        @RenderSection("scripts", required: false)
+    
     </body>
 </html>
