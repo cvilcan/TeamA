@@ -6,27 +6,33 @@ using System.Threading.Tasks;
 using TeamA.Repository;
 using AccessModels.Models;
 using System.Data.SqlClient;
+using System.Web;
 namespace BusinessLayer
 {
     public class UserService
     {
         private UserRepository userRepository = new UserRepository();
 
-        public IEnumerable<UserProfile> GetAllUsers() {
+        public IEnumerable<UserProfile> GetAllUsers()
+        {
 
-           try{
-               IEnumerable<UserProfile> users = userRepository.GetAllUsers();
-            return users;
+            try
+            {
+                IEnumerable<UserProfile> users = userRepository.GetAllUsers();
+                return users;
 
 
-        }catch(SqlException e){
-            Console.WriteLine("Service error "+e);}
-          
-            
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Service error " + e);
+            }
+
+
             return null;
 
 
-    }
+        }
 
         public IEnumerable<UserProfile> GetAllStudents()
         {
@@ -47,11 +53,19 @@ namespace BusinessLayer
         public void CreateStudentUser(string username, string password, string email, int? teacherID)
         {
 
-            userRepository.CreateStudentUser(username, password,email , teacherID);
-            Mail.MailHelper.SendMail(new List<string>() { "xulescu@yahoo.com" }, "admin@admin.com", "draga apas aici pt confirmare", "loclalhost/confirm?guid=....");
+
+            userRepository.CreateStudentUser(username, email, password, teacherID);
+            var guidstring = userRepository.GetGuid(username);
+            
+            Mail.MailHelper.SendMail(new List<string>() { "xulescu@yahoo.com" }, "admin@admin.com", "draga apas aici pt confirmare", GetBaseUrl() + guidstring);
+
+
+
+
+
+
 
         }
-   
         public List<Tuple<UserProfile, string>> GetStudentTeacher()
         {
             throw new NotImplementedException();
@@ -69,6 +83,23 @@ namespace BusinessLayer
             //}
         }
 
+        public string GetBaseUrl()
+        {
+            var request = HttpContext.Current.Request;
+            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
 
-    
-}}
+            if (appUrl != "/") appUrl += "/";
+
+            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
+
+            return baseUrl;
+        }
+
+
+        public void CheckGuid(string guid)
+        {
+            userRepository.CheckGuid(guid);
+        }
+
+    }
+}
