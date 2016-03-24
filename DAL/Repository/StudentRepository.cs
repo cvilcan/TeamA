@@ -72,5 +72,46 @@ namespace DAL.Repository
                 return userList;
             }
         }
+
+        public Tuple<int, string, int, string> GetStudentUploadParameters(string username, int homeworkID)
+        {
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                   
+
+                    SqlCommand cmd = new SqlCommand("spGetStudentUploadPath", con);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
+                  
+                    con.Open();
+
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                  
+                    var uploadParams = new Tuple<int,string,int,string>(Convert.ToInt32(rdr["TeacherId"]),rdr["TeacherName"].ToString(),Convert.ToInt32(rdr["StudentId"]),rdr["StudentName"].ToString());
+
+
+                    return uploadParams;
+                }
+            }
+            catch (SqlException)
+            {
+               
+               
+                return null ;
+
+            }
+         
+
+
+
+        }
+
+
     }
 }
