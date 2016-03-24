@@ -25,136 +25,36 @@
 
 
 
-@using (Html.BeginForm("CreateTeacher","Admin")) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+@using (Html.BeginForm("CreateTeacher","Admin")) 
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true);
     
  
     <div class="container">
   
-  <div class="panel panel-default">
-    <div class="panel-body">
-        <form role="form">           
-            <div class="form-group">
-                <label for="usr">Username</label>
-                <input type="text" name="username" class="form-control" id="usr" placeholder="Enter username" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="em">Email</label>
-                <input type="email" name="Email" value=""class="form-control" id="em" placeholder="username@email.com" required />
-                
-            </div>
-               <p>
-                 <input type="submit" class="btn btn-primary" value="Create new Teacher Account">
-                   </p>
-                    
-            
-               
-
-
-
-
-
-
-
-                                
-                                   
-
-      </form>
-
-   </div>
-
- </div>
-  </div>
-    
-                   
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @*<div class="container">
-
-  <div class="panel panel-default">
-      <div class="panel-body">
-          <form role="form">
-              <div class="form-group">
-                  <label for="usr">Problem Description</label>
-                  <input type="text" class="form-control" id="usr">
-              </div>
-              <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input type="email" class="form-control" id="email" placeholder="Enter email">
-
-                  <script>
-                      $(document).ready(function () {
-                          $('#email').email();
-                      });
-                  </script>
-                  </div>
-          </form>
-
-
-            </div>
-      </div>
-                <p>
-                    <input type="submit" value="Create" />
-                </p>
-
-
-
-    </div>
-    </body>*@
-
-
-        @*<legend>TeacherVM</legend>
-        <div class="container">
-            <h3>Create a Teacher Account</h3>
-            <form role="form">
-                <div class="form-group">
-                    <label for="usr">Username:</label>
-                    <input type="text" class="form-control" id="usr" placeholder="Enter username">
-                </div>
-        </div>
-
-
-                <div class="col-sm-4 col-xs-12">
-                    @Html.LabelFor(model => model.Email)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.Email, new { @class = "editor-field", @placeholder = "insert email" })
-                    @Html.ValidationMessageFor(model => model.Email)
-
-                </div>
-                <div class="editor-field">
-                    <input type="submit" id="submit" value="subscribe" class="btn btn-default" />
-                </form>
-                </div>
-    </body>*@
-
-
-
-
-}
-
-                    <div>
-                        @Html.ActionLink("Back to List", "Index")
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form">           
+                    <div class="form-group">
+                        <label for="usr">Username</label>
+                        <input type="text" name="username" class="form-control" id="usr" placeholder="Enter username" required>
                     </div>
+            
+                    <div class="form-group">
+                        <label for="em">Email</label>
+                        <input type="email" name="Email" value=""class="form-control" id="em" placeholder="username@email.com" required />
+                
+                    </div>
+                       <p>
+                         <input type="submit" class="btn btn-primary" value="Create new Teacher Account">
+                           </p>
+                </form>
+            </div>
+        </div>
+    </div>
+}
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 74a98cb4588eb521e5e009a8168410f1013872e9
