@@ -348,6 +348,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Student\GetStudentPendingHomework.cshtml" />
     <Content Include="Views\Student\GetStudentCompletedHomework.cshtml" />
+    <Content Include="Views\Teacher\GetOneTeacherHomework.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

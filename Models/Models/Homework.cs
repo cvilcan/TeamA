@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace AccessModels.Models
 {
-    class Homework
+    public class Homework
     {
         public int HomeworkID { get; set; }
+        public string HomeworkName { get; set; }
         public int TeacherUserID { get; set; }
         public string Description { get; set; }
         public DateTime Deadline { get; set; }

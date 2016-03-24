@@ -30,19 +30,19 @@ namespace DAL.Repository
             }
         }
 
-        public List<StudentHomeworkDetails> GetOneTeacherHomework(string username)
+        public List<Homework> GetOneTeacherHomework(string username)
         {
             try {  
             using (SqlConnection con = new SqlConnection(cs))
             {
 
-                List<StudentHomeworkDetails> teacherHomeworkList = new List<StudentHomeworkDetails>();
+                List<Homework> teacherHomeworkList = new List<Homework>();
 
                 SqlCommand cmd = new SqlCommand("spGetOneTeacherHomework", con);
 
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@usernameName", username);
+                cmd.Parameters.AddWithValue("@usernameTeacher", username);
               
                 con.Open();
 
@@ -50,11 +50,11 @@ namespace DAL.Repository
                
                     while(rdr.Read())
                     {
-                        StudentHomeworkDetails teacherHomework = new StudentHomeworkDetails();
+                        Homework teacherHomework = new Homework();
 
-                        teacherHomework.HomeworkId = Convert.ToInt32(rdr["HomeworkId"]);
-                        teacherHomework.TeacherId = Convert.ToInt32(rdr["TeacherId"]);
-                        teacherHomework.HomeWorkName = rdr["HomeWorkName"].ToString();
+                        teacherHomework.HomeworkID = Convert.ToInt32(rdr["HomeworkId"]);
+                        teacherHomework.TeacherUserID = Convert.ToInt32(rdr["TeacherId"]);
+                        teacherHomework.HomeworkName = rdr["HomeWorkName"].ToString();
                         teacherHomework.Description = rdr["Description"].ToString();
                         teacherHomework.Deadline = Convert.ToDateTime(rdr["Deadline"]);
 
