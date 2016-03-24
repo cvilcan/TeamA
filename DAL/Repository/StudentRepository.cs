@@ -118,6 +118,7 @@ namespace DAL.Repository
                        studentPendingHomework.HomeWorkName=rdr["HomeWorkName"].ToString();
                        studentPendingHomework.Description=rdr["Description"].ToString();
                        studentPendingHomework.Deadline=Convert.ToDateTime(rdr["Deadline"]);
+                       studentPendingHomework.UploadId = Convert.ToInt32(rdr["UploadID"]);
 
                        studentPendingHomeworkList.Add(studentPendingHomework);
                    }
@@ -170,6 +171,7 @@ namespace DAL.Repository
                         studentCompletedHomework.HomeWorkName = rdr["HomeWorkName"].ToString();
                         studentCompletedHomework.Description = rdr["Description"].ToString();
                         studentCompletedHomework.Deadline = Convert.ToDateTime(rdr["Deadline"]);
+                        studentCompletedHomework.UploadId = Convert.ToInt32(rdr["UploadID"]);
 
                         studentCompletedHomeworkList.Add(studentCompletedHomework);
                     }
