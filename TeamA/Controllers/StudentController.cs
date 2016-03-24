@@ -19,7 +19,8 @@ namespace TeamA.Controllers
 
         public ActionResult GetStudentPendingHomeworkDetails(int studentID)
         {
-             // var studentPendingHomework= _studentService.GetStudentPendingHomeworkDetails(studentID);
+             //
+          var studentPendingHomework= _studentService.GetStudentPendingHomeworkDetails(studentID);
 
             return View();
         }
