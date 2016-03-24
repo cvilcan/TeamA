@@ -34,27 +34,15 @@ namespace TeamA.Controllers
 
         public List<StudentVM> L = new List<StudentVM>();
 
-        public ActionResult ListStudents(StudentVM st)
+        public ActionResult ListStudents()
         {
-            L.Add(new StudentVM()
-            {
-                StudentID = 1,
-                Username = "Gica Petrescu",
-                Email = "gica@mailingator.com"
-            });
-            L.Add(new StudentVM()
-            {
-                StudentID = 2,
-                Username = "Gheorghe Pop",
-                Email = "gheorghe@mailingator.com"
-            });
             var a = userService.GetAllStudents();
             foreach (var item in a)
                 L.Add(new StudentVM()
                 {
-                    Username = item.Username,
+                    StudentName = item.Username,
                     StudentID = item.ID,
-                    Email = item.Email
+                    StudentEmail = item.Email
                 });
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 

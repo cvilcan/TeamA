@@ -164,7 +164,7 @@ namespace TeamA.Repository
 
 
         }
-<<<<<<< HEAD
+
         public string GetRole(string username){
             using (SqlConnection con = new SqlConnection(cs))
             {
@@ -190,7 +190,6 @@ namespace TeamA.Repository
 
         }    
 
-=======
->>>>>>> 4efeaa4f353af0eb2623c5ed96e2c1624038a654
+
     }
 }

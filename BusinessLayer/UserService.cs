@@ -14,7 +14,7 @@ namespace BusinessLayer
     public class UserService
     {
         private UserRepository _userRepository = new UserRepository();
-        
+
 
         public IEnumerable<UserProfile> GetAllUsers()
         {
@@ -81,24 +81,23 @@ namespace BusinessLayer
                 return true;
             else
                 return false;
-                
-           
+
+
 
         }
 
 
-<<<<<<< HEAD
-       
-    }
-
-
-=======
         public string GetRole(string username)
         {
-            var role =_userRepository.GetRole(username);
+            var role = _userRepository.GetRole(username);
             return role;
         }
+
+
     }
-       
->>>>>>> 0f5ea88e3e131d14d59be58900ad971d11287566
 }
+
+
+
+       
+
