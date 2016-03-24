@@ -14,6 +14,7 @@ namespace TeamA.Controllers
         private HomeworkService homeworkService = new HomeworkService();
         private UserService userService = new UserService();
         private AdminService _adminService = new AdminService();
+        public List<StudentVM> L = new List<StudentVM>();
 
         public ActionResult Index()
         {
@@ -33,10 +34,11 @@ namespace TeamA.Controllers
             return RedirectToAction("Index");
         }
 
-        public List<StudentVM> L = new List<StudentVM>();
-
+       
         public ActionResult ListStudents()
         {
+             List<StudentVM> L = new List<StudentVM>();
+
             var a = userService.GetAllStudents();
             foreach (var item in a)
                 L.Add(new StudentVM()
@@ -56,5 +58,17 @@ namespace TeamA.Controllers
             _adminService.ResetPasswordSendMail(username);
             return new EmptyResult();
         }
+
+        public ActionResult GetOneTeacherHomework(string username)
+        {
+
+            homeworkService.GetOneTeacherHomework(username);
+
+
+            return View();
+        }
+
+
+
     }
 }
