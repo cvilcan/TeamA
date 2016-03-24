@@ -13,6 +13,7 @@ namespace TeamA.Controllers
     {
         private HomeworkService homeworkService = new HomeworkService();
         private UserService userService = new UserService();
+        private AdminService _adminService = new AdminService();
 
         public ActionResult Index()
         {
@@ -49,5 +50,11 @@ namespace TeamA.Controllers
             return View(L);
         }
 
+        [HttpPost]
+        public ActionResult SendMailWithPassword(string username)
+        {
+            _adminService.ResetPasswordSendMail(username);
+            return new EmptyResult();
+        }
     }
 }

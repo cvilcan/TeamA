@@ -8,21 +8,25 @@ using DAL.Repository;
 using System.Data.SqlClient;
 using System.IO;
 using Helpers.Mail;
+using TeamA.Repository;
 namespace BusinessLayer
 {
     public class AdminService
     {
         private AdminRepository adminRepository = new AdminRepository();
         private UserService userSerivce = new UserService();
+        private UserRepository _userRepository = new UserRepository();
 
         public AdminService(AdminRepository adminRepository)
         {
             this.adminRepository=adminRepository;
         }
+
         public AdminService()
         {
 
         }
+
         public void addTeachersFromAdmin(string username,string email, string basePath) {
 
              try
@@ -45,14 +49,17 @@ namespace BusinessLayer
              {
                  Console.WriteLine("admin service" + e);
              }
-             
-
-
         }
 
-
-
-
-       
+        public void ResetPasswordSendMail(string username)
+        {
+            string password = _userRepository.ResetPassword(username);
+            string getUserEmail = _userRepository.GetAllUsers().Where(x => x.RoleName == "Teacher" && x.Username == username).Select(x => x.Email).FirstOrDefault();
+            if (getUserEmail!=null)
+            {
+                //MailHelper.SendMail(new List<string> { getUserEmail }, "account@account.com", "New Password", password);
+            }
+        }
+      
     }
 }
