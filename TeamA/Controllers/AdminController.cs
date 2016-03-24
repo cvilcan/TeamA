@@ -7,12 +7,13 @@ using System.Web.Mvc;
 using System.Data.SqlClient;
 using TeamA.Models;
 using AccessModels.Models;
+using System.Configuration;
 
 namespace TeamA.Controllers
 {
     public class AdminController : Controller
     {
-        AdminService adminService = new AdminService();
+        private AdminService adminService = new AdminService();
         UserService userService = new UserService();
         public ActionResult CreateTeacher()
         {
@@ -22,7 +23,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateTeacher(TeacherVM tcr)
         {
-            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email);
+            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
 
             return View();
         }

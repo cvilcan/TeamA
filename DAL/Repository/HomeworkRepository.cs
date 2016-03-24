@@ -16,7 +16,7 @@ namespace DAL.Repository
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
-                SqlCommand cmd = new SqlCommand("spCreateHomework");
+                SqlCommand cmd = new SqlCommand("spCreateHomework", con);
 
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -24,7 +24,7 @@ namespace DAL.Repository
                 cmd.Parameters.AddWithValue("@homeWorkName", name);
                 cmd.Parameters.AddWithValue("@homeWorkDescription", description);
                 cmd.Parameters.AddWithValue("@deadlineInDays", deadline);
-                
+                con.Open();
 
                 return (int)cmd.ExecuteScalar();
             }

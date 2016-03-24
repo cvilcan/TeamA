@@ -7,19 +7,21 @@ using TeamA.Repository;
 using AccessModels.Models;
 using System.Data.SqlClient;
 using System.Web;
+using Helpers.Mail;
+using DAL.Repository;
 namespace BusinessLayer
 {
     public class UserService
     {
-        private UserRepository userRepository = new UserRepository();
+        private UserRepository _userRepository = new UserRepository();
+        
 
         public IEnumerable<UserProfile> GetAllUsers()
         {
             try
             {
-                IEnumerable<UserProfile> users = userRepository.GetAllUsers();
+                IEnumerable<UserProfile> users = _userRepository.GetAllUsers();
                 return users;
-
 
             }
             catch (SqlException e)
@@ -27,29 +29,35 @@ namespace BusinessLayer
                 Console.WriteLine("Service error " + e);
             }
             return null;
-
         }
 
         public IEnumerable<UserProfile> GetAllStudents()
         {
-            var users = userRepository.GetAllUsers();
+            var users = _userRepository.GetAllUsers();
             var students = users.Where(x => x.RoleName == "Student");
             return students;
         }
 
         public IEnumerable<UserProfile> GetAllTeachers()
         {
-            var users = userRepository.GetAllUsers();
+            var users = _userRepository.GetAllUsers();
             var teachers = users.Where(x => x.RoleName == "Teacher");
             return teachers;
         }
 
 
+        public Tuple<int, string, string> GetUser(string username)
+        {
+            var a = GetAllUsers();
+            var user = a.Where(q => q.Username == username).SingleOrDefault();
+
+            return new Tuple<int, string, string>(user.ID, user.Username, user.Email);
+        }
 
         public void CreateStudentUser(string username, string password, string email, int? teacherID)
         {
-            userRepository.CreateStudentUser(username, email, password, teacherID);
-            var guidstring = userRepository.GetGuid(username);
+            _userRepository.CreateStudentUser(username, email, password, teacherID);
+            var guidstring = _userRepository.GetGuid(username);
 
             var request = HttpContext.Current.Request;
             var appUrl = HttpRuntime.AppDomainAppVirtualPath;
@@ -60,39 +68,37 @@ namespace BusinessLayer
 
             string body = "Click the link to confirm the mail:\n";
 
-            Mail.MailHelper.SendMail(new List<string>() { email }, "admin@admin.com", "Confirmation mail", body + baseUrl + "Account/ConfirmRegistration?GUID=" + guidstring);
-
-
-
-
-
-        }
-
-        public List<Tuple<UserProfile, string>> GetStudentTeacher()
-        {
-            throw new NotImplementedException();
-            //var students = GetAllStudents();
-            //var studentsToTeachers = GetAllStudentsToTeachers();
-            //var teachers = GetAllTeachers();
-            //List<Tuple<UserProfile, string>> pairList = new List<Tuple<UserProfile, string>>();
-            //foreach (var student in students)
-            //{
-            //    pairList.Add(new Tuple<UserProfile,string>()
-            //        {
-            //            Item1 = student,
-            //            Item2 = teachers.Where(t => t.Role == )
-            //        })
-            //}
+            MailHelper.SendMail(new List<string>() { email }, "admin@admin.com", "Confirmation mail", body + baseUrl + "Account/ConfirmRegistration?GUID=" + guidstring);
         }
 
         public int CheckGuid(string guid)
         {
-            return userRepository.CheckGuid(guid);
+            return _userRepository.CheckGuid(guid);
+        }
+        public bool Login(string username, string password)
+        {
+            if (_userRepository.Login(username, password))
+                return true;
+            else
+                return false;
+                
+           
+
         }
 
 
+<<<<<<< HEAD
        
     }
 
 
+=======
+        public string GetRole(string username)
+        {
+            var role =_userRepository.GetRole(username);
+            return role;
+        }
+    }
+       
+>>>>>>> 0f5ea88e3e131d14d59be58900ad971d11287566
 }

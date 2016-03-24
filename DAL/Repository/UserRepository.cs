@@ -67,18 +67,31 @@ namespace TeamA.Repository
 
         public bool Login(string username, string password)
         {
+
+           
+
            try
             {
                 using (SqlConnection con = new SqlConnection(cs))
                 {
-                    SqlCommand cmd = new SqlCommand("spLogin");
+                    SqlCommand cmd = new SqlCommand("spLogin",con);
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", password);
+                    con.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    List<int> loginlist = new List<int>();
+                    while (rdr.Read())
+                    {
+                        
+                       int g;
+                           g = (int) rdr["ReturnCode"];
+                          loginlist.Add(g);
+                    }
 
-                    int number = Convert.ToInt32( cmd.ExecuteReader());
+                    int number = loginlist[0];
                     if(number==1)
                     {
                         return true;
@@ -130,5 +143,54 @@ namespace TeamA.Repository
                 return (int)cmd.ExecuteScalar();
             }
         }
+
+        public string ResetPassword(string username)
+        {
+            Random rndm = new Random();
+            string password = rndm.Next(100000, 999999).ToString();
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("spResetPassword", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                return password;
+            }
+
+
+        }
+<<<<<<< HEAD
+        public string GetRole(string username){
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                string role;
+                SqlCommand cmd = new SqlCommand("spGetRole", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                List<string> readrolelist = new List<string>();
+
+                while (rdr.Read())
+                {
+                    string r;
+                    r = rdr["RoleName"].ToString();
+                    readrolelist.Add(r);
+                }
+                role = readrolelist[0];
+
+                return role;
+            }
+
+
+        }    
+
+=======
+>>>>>>> 4efeaa4f353af0eb2623c5ed96e2c1624038a654
     }
 }
