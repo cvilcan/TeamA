@@ -27,12 +27,16 @@
         @Html.Display("_layout.cshtml")
         <form role="form">           
             <div class="form-group">
-                <label for="usr">Problem Description</label>
-                <input type="text" class="form-control" id="usr">
+                <label for="Name">Problem name</label>
+                <input name="Name" type="text" class="form-control" id="Name">
+            </div>
+            <div class="form-group">
+                <label for="Description">Problem Description</label>
+                <input type="text" class="form-control" id="Description" name="Description">
             </div>
             <div class="form-group">
                 <label for="dt">Deadline</label>
-                <input type="text" class="form-control" id="datetimepicker4">
+                <input name="Deadline" type="text" class="form-control" id="datetimepicker4">
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $('#datetimepicker4').datetimepicker();
