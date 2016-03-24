@@ -26,9 +26,9 @@ namespace TeamA.Controllers
 
         public ActionResult GetStudentCompletedHomework(int studentID)
         {
-            // var studentCompletedHomework= _studentService.GetStudentCompletedHomework(studentID);
+            var studentCompletedHomework = _studentService.GetStudentCompletedHomework(studentID);
 
-            return View();
+            return View(studentCompletedHomework);
         }
 
 
