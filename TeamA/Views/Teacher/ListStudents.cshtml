@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TeamA.Models.StudentVM>
+
+@{
+    ViewBag.Title = "ListStudents";
+}
+
+<h2>ListStudents</h2>
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+
+
+<div class="container">
+    <div class="well">
+        <table class="table table-striped">
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentEmail)
+                </th>
+                
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentEmail)
+                    </td>
+                   
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

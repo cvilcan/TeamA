@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Models</RootNamespace>
-    <AssemblyName>Models</AssemblyName>
+    <AssemblyName>AccessModels</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\HomeworkFile.cs" />
+    <Compile Include="Models\StudentHomeworkDetails.cs" />
     <Compile Include="Models\StudentsToTeachers.cs" />
     <Compile Include="Models\StudentToHomework.cs" />
     <Compile Include="Models\UserProfile.cs" />

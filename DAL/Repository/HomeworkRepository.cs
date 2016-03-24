@@ -29,5 +29,59 @@ namespace DAL.Repository
                 return (int)cmd.ExecuteScalar();
             }
         }
+
+        public List<Homework> GetOneTeacherHomework(string username)
+        {
+            try {
+
+                List<Homework> teacherHomeworkList = new List<Homework>();
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+
+                
+
+                SqlCommand cmd = new SqlCommand("spGetOneTeacherHomework", con);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@usernameTeacher", username);
+              
+                con.Open();
+
+                    SqlDataReader rdr =cmd.ExecuteReader();
+               
+                    while(rdr.Read())
+                    {
+                        Homework teacherHomework = new Homework();
+
+                        teacherHomework.HomeworkID = Convert.ToInt32(rdr["HomeworkId"]);
+                        teacherHomework.HomeworkName = rdr["HomeWorkName"].ToString();
+                        teacherHomework.TeacherUserID = Convert.ToInt32(rdr["TeacherUserId"]);
+                        teacherHomework.Description = rdr["Description"].ToString();
+                        teacherHomework.Deadline = Convert.ToDateTime(rdr["Deadline"]);
+
+                        teacherHomeworkList.Add(teacherHomework);
+                        
+                    }
+
+                    
+            }
+
+            return teacherHomeworkList;
+            }
+            catch (SqlException)
+            {
+                return new List<Homework>();
+            }
+            catch(Exception)
+            {
+                return new List<Homework>();
+            }
+
+
+
+        }
+
+
     }
 }

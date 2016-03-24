@@ -14,7 +14,7 @@ namespace BusinessLayer
     public class UserService
     {
         private UserRepository _userRepository = new UserRepository();
-        
+        private StudentService _studentService = new StudentService();
 
         public IEnumerable<UserProfile> GetAllUsers()
         {
@@ -22,7 +22,6 @@ namespace BusinessLayer
             {
                 IEnumerable<UserProfile> users = _userRepository.GetAllUsers();
                 return users;
-
             }
             catch (SqlException e)
             {
@@ -45,12 +44,10 @@ namespace BusinessLayer
             return teachers;
         }
 
-
         public Tuple<int, string, string> GetUser(string username)
         {
             var a = GetAllUsers();
             var user = a.Where(q => q.Username == username).SingleOrDefault();
-
             return new Tuple<int, string, string>(user.ID, user.Username, user.Email);
         }
 
@@ -58,16 +55,11 @@ namespace BusinessLayer
         {
             _userRepository.CreateStudentUser(username, email, password, teacherID);
             var guidstring = _userRepository.GetGuid(username);
-
             var request = HttpContext.Current.Request;
             var appUrl = HttpRuntime.AppDomainAppVirtualPath;
-
             if (appUrl != "/") appUrl += "/";
-
             var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
-
             string body = "Click the link to confirm the mail:\n";
-
             MailHelper.SendMail(new List<string>() { email }, "admin@admin.com", "Confirmation mail", body + baseUrl + "Account/ConfirmRegistration?GUID=" + guidstring);
         }
 
@@ -75,16 +67,15 @@ namespace BusinessLayer
         {
             return _userRepository.CheckGuid(guid);
         }
+
         public bool Login(string username, string password)
         {
             if (_userRepository.Login(username, password))
                 return true;
             else
                 return false;
-                
-           
-
         }
+<<<<<<< HEAD
 
 
         public bool IsInRole(string username, string givenRole)
@@ -96,9 +87,21 @@ namespace BusinessLayer
         }
         public string GetRole(string username)
         {
+=======
+        public string GetRole(string username)
+        {
+>>>>>>> bad22156075210e676c8083fc39221c8506b438f
             var role = _userRepository.GetRole(username);
             return role;
         }
+        public IEnumerable<Tuple<string, string, string>> GetStudentsByTeacher(string username)
+        {
+            var students = GetAllStudents();
+            var teacher = GetUser(username);
+            var studentsToTeachers = _studentService.GetStudentTeacher(username);
+
+            return studentsToTeachers;
+
+        }
     }
-       
 }
