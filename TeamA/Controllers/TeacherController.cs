@@ -40,9 +40,9 @@ namespace TeamA.Controllers
             foreach (var item in a)
                 L.Add(new StudentVM()
                 {
-                    StudentName = item.Username,
+                    Username = item.Username,
                     StudentID = item.ID,
-                    StudentEmail = item.Email
+                   Email = item.Email
                 });
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
