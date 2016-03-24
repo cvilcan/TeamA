@@ -13,6 +13,7 @@ namespace BusinessLayer
     public class AdminService
     {
         private AdminRepository adminRepository = new AdminRepository();
+        private UserService userSerivce = new UserService();
 
         public AdminService(AdminRepository adminRepository)
         {
@@ -26,20 +27,19 @@ namespace BusinessLayer
 
              try
             {
-                UserProfile up = new UserProfile(); 
                 MailHelper mp = new MailHelper();
                  Random rndm = new Random();
                  string password = rndm.Next(100000, 999999).ToString();
                 List<string> list = new List<string>() { email };
-                MailHelper.SendMail(list, "admin@admin.com", "Registration Details", password);
-                Directory.CreateDirectory(basePath + username + '_' + Convert.ToString(up.ID));
+                //MailHelper.SendMail(list, "admin@admin.com", "Registration Details", password);
 
+                UserProfile up = new UserProfile(); 
                 up.Email = email;
                 up.Username = username;
                 up.Password = password;
                 adminRepository.addTeachersFromAdmin(up);
 
-
+                Directory.CreateDirectory(basePath + username + '_' + Convert.ToString(userSerivce.GetUser(username).Item1));
             }
              catch (SqlException e)
              {

@@ -91,12 +91,7 @@ namespace TeamA.Repository
                           loginlist.Add(g);
                     }
 
-<<<<<<< HEAD
                     int number = loginlist[0];
-                    
-=======
-                    int number = Convert.ToInt32( cmd.ExecuteReader());
->>>>>>> 74a98cb4588eb521e5e009a8168410f1013872e9
                     if(number==1)
                     {
                         return true;
@@ -169,6 +164,7 @@ namespace TeamA.Repository
 
 
         }
+<<<<<<< HEAD
         public string GetRole(string username){
             using (SqlConnection con = new SqlConnection(cs))
             {
@@ -194,5 +190,7 @@ namespace TeamA.Repository
 
         }    
 
+=======
+>>>>>>> 4efeaa4f353af0eb2623c5ed96e2c1624038a654
     }
 }
