@@ -75,7 +75,7 @@ namespace BusinessLayer
             else
                 return false;
         }
-<<<<<<< HEAD
+
 
 
         public bool IsInRole(string username, string givenRole)
@@ -85,12 +85,10 @@ namespace BusinessLayer
                 return true;
             else return false;
         }
+       
         public string GetRole(string username)
         {
-=======
-        public string GetRole(string username)
-        {
->>>>>>> bad22156075210e676c8083fc39221c8506b438f
+
             var role = _userRepository.GetRole(username);
             return role;
         }
