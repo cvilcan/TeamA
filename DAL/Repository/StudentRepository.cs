@@ -166,7 +166,60 @@ namespace DAL.Repository
 
         }
 
+        public List<StudentHomeworkDetails> GetStudentCompletedHomework(int studentID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
 
+                    List<StudentHomeworkDetails> studentCompletedHomeworkList = new List<StudentHomeworkDetails>();
+
+                    SqlCommand cmd = new SqlCommand("spStudentHomeworkCompleted", con);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@StudentId", studentID);
+                    con.Open();
+
+
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        StudentHomeworkDetails studentCompletedHomework = new StudentHomeworkDetails();
+
+                        studentCompletedHomework.TeacherId = Convert.ToInt32(rdr["TeacherUserId"]);
+                        studentCompletedHomework.TeacherName = rdr["TeacherUserId"].ToString();
+                        studentCompletedHomework.StudentGrade = Convert.ToInt32(rdr["StudentGrade"]);
+                        studentCompletedHomework.HomeworkId = Convert.ToInt32(rdr["HomeworkId"]);
+                        studentCompletedHomework.HomeWorkName = rdr["HomeWorkName"].ToString();
+                        studentCompletedHomework.Description = rdr["Description"].ToString();
+                        studentCompletedHomework.Deadline = Convert.ToDateTime(rdr["Deadline"]);
+
+                        studentCompletedHomeworkList.Add(studentCompletedHomework);
+                    }
+
+                    return studentCompletedHomeworkList;
+
+
+                }
+            }
+            catch (SqlException)
+            {
+
+
+                return null;
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+
+
+        }
 
     }
 }

@@ -24,6 +24,14 @@ namespace TeamA.Controllers
             return View();
         }
 
+        public ActionResult GetStudentCompletedHomework(int studentID)
+        {
+            // var studentCompletedHomework= _studentService.GetStudentCompletedHomework(studentID);
+
+            return View();
+        }
+
+
 
     }
 }
