@@ -342,12 +342,9 @@
     <Content Include="Views\Admin\CreateTeacher.cshtml">
       <SubType>Code</SubType>
     </Content>
-<<<<<<< HEAD
     <Content Include="Views\Teacher\ListStudents.cshtml" />
-=======
     <Content Include="Views\Admin\ViewAllStudents.cshtml" />
     <Content Include="Views\Admin\ViewAllTeachers.cshtml" />
->>>>>>> 0f5ea88e3e131d14d59be58900ad971d11287566
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
