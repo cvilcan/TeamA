@@ -56,5 +56,17 @@ namespace TeamA.Controllers
             _adminService.ResetPasswordSendMail(username);
             return new EmptyResult();
         }
+
+        public ActionResult GetOneTeacherHomework(string username)
+        {
+
+            homeworkService.GetOneTeacherHomework(username);
+
+
+            return View();
+        }
+
+
+
     }
 }
