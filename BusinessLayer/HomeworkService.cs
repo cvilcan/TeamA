@@ -33,7 +33,7 @@ namespace BusinessLayer
             return homeworkID;
         }
 
-        public IEnumerable<StudentHomeworkDetails> GetOneTeacherHomework(string username)
+        public IEnumerable<Homework> GetOneTeacherHomework(string username)
         {
             var teacherHomework = hwRepository.GetOneTeacherHomework(username);
 
