@@ -84,20 +84,19 @@ namespace BusinessLayer
 
 
 
-        }
-
 
         public string GetRole(string username)
         {
             var role = _userRepository.GetRole(username);
             return role;
         }
-
-
+    
+       
     }
-}
 
 
 
        
 
+
+}
