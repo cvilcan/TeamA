@@ -12,10 +12,10 @@ namespace BusinessLayer
     {
         private StudentRepository _studentRepository = new StudentRepository();
 
-        public void AddStudentHomework(string usernName, int homeworkID, string fileName)
+        public void AddStudentHomework(string usernName, int homeworkID, string fileName,string basePath)
         {
             _studentRepository.AddStudentHomework(usernName, fileName, homeworkID);
-            Directory.CreateDirectory(System.Configuration.ConfigurationManager.AppSettings["UploadPath"] + @"/ProfName(pe baza homeworkid)_profID(idem)/StudentName(username)_StudentID(il iei)/Filename_uploadID(return de la sp)");
+            Directory.CreateDirectory(basePath + @"/ProfName(pe baza homeworkid)_profID(idem)/StudentName(username)_StudentID(il iei)/Filename_uploadID(return de la sp)");
         }
 
         public IEnumerable<Tuple<string, string, string>> GetStudentTeacher(string teacherName)
