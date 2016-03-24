@@ -21,7 +21,7 @@
                 <thead>
                     <tr class="success">
                         <th>@Html.DisplayNameFor(model => model.HomeworkName)</th>
-                        <th>@Html.DisplayNameFor(model => model.TeacherUserID)</th>
+                        @*<th>@Html.HiddenFor(model => model.TeacherUserID)</th>*@
                         <th>@Html.DisplayNameFor(model => model.Description)</th>
                         <th>@Html.DisplayNameFor(model => model.Deadline)</th>                    
                     </tr>
@@ -33,9 +33,9 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.HomeworkName)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TeacherUserID)
-                            </td>
+                            @*<td>
+                                @Html.HiddenFor(modelItem => item.TeacherUserID)
+                            </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
@@ -47,6 +47,10 @@
                     }
                 </tbody>
             </table>
+            <div>
+                @Html.ActionLink("Back to Index", "Index", "Teacher")
+
+            </div>
         </div>
     </div>
 
