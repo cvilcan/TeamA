@@ -91,12 +91,7 @@ namespace TeamA.Repository
                           loginlist.Add(g);
                     }
 
-<<<<<<< HEAD
                     int number = loginlist[0];
-                    
-=======
-                    int number = Convert.ToInt32( cmd.ExecuteReader());
->>>>>>> 74a98cb4588eb521e5e009a8168410f1013872e9
                     if(number==1)
                     {
                         return true;
@@ -169,13 +164,5 @@ namespace TeamA.Repository
 
 
         }
-<<<<<<< HEAD
-       
-    
-    }
-
-=======
->>>>>>> 74a98cb4588eb521e5e009a8168410f1013872e9
-
     }
 }
