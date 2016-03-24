@@ -77,13 +77,20 @@ namespace BusinessLayer
         }
         public bool Login(string username, string password)
         {
-            if (userRepository.Login(username, password))
+            if (_userRepository.Login(username, password))
                 return true;
             else
                 return false;
                 
            
 
+        }
+
+
+        public string GetRole(string username)
+        {
+            var role =_userRepository.GetRole(username);
+            return role;
         }
     }
        
