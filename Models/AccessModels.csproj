@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="Models\Homework.cs" />
     <Compile Include="Models\HomeworkFile.cs" />
-    <Compile Include="Models\StudentPendingHomeworkDetails.cs" />
+    <Compile Include="Models\StudentHomeworkDetails.cs" />
     <Compile Include="Models\StudentsToTeachers.cs" />
     <Compile Include="Models\StudentToHomework.cs" />
     <Compile Include="Models\UserProfile.cs" />
