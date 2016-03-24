@@ -62,7 +62,7 @@ namespace TeamA.Controllers
         public ActionResult GetOneTeacherHomework(string username)
         {
 
-           var teacherHomeworks=  homeworkService.GetOneTeacherHomework(username);
+           var teacherHomeworks= homeworkService.GetOneTeacherHomework(username);
 
 
            return View(teacherHomeworks);

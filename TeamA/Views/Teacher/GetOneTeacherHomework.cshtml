@@ -7,13 +7,10 @@
 <h2>GetOneTeacherHomework</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateHomework","Teacher")
 </p>
-<table>
+<table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.HomeworkID)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.HomeworkName)
         </th>
@@ -32,9 +29,6 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.HomeworkID)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.HomeworkName)
         </td>
         <td>
@@ -46,11 +40,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Deadline)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.HomeworkID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.HomeworkID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.HomeworkID })
-        </td>
+        
     </tr>
 }
 

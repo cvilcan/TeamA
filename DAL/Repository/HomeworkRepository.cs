@@ -32,11 +32,13 @@ namespace DAL.Repository
 
         public List<Homework> GetOneTeacherHomework(string username)
         {
-            try {  
+            try {
+
+                List<Homework> teacherHomeworkList = new List<Homework>();
             using (SqlConnection con = new SqlConnection(cs))
             {
 
-                List<Homework> teacherHomeworkList = new List<Homework>();
+                
 
                 SqlCommand cmd = new SqlCommand("spGetOneTeacherHomework", con);
 
@@ -53,8 +55,8 @@ namespace DAL.Repository
                         Homework teacherHomework = new Homework();
 
                         teacherHomework.HomeworkID = Convert.ToInt32(rdr["HomeworkId"]);
-                        teacherHomework.TeacherUserID = Convert.ToInt32(rdr["TeacherId"]);
                         teacherHomework.HomeworkName = rdr["HomeWorkName"].ToString();
+                        teacherHomework.TeacherUserID = Convert.ToInt32(rdr["TeacherUserId"]);
                         teacherHomework.Description = rdr["Description"].ToString();
                         teacherHomework.Deadline = Convert.ToDateTime(rdr["Deadline"]);
 
@@ -62,16 +64,18 @@ namespace DAL.Repository
                         
                     }
 
-                    return teacherHomeworkList;
+                    
             }
+
+            return teacherHomeworkList;
             }
             catch (SqlException)
             {
-                return null;
+                return new List<Homework>();
             }
             catch(Exception)
             {
-                return null;
+                return new List<Homework>();
             }
 
 
