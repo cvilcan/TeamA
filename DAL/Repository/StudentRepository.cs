@@ -1,5 +1,4 @@
 ﻿using AccessModels.Models;
-using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -112,14 +111,14 @@ namespace DAL.Repository
 
         }
 
-        public List<StudentPendingHomeworkDetails> GetStudentPendingHomeworkDetails(int studentID)
+        public List<StudentHomeworkDetails> GetStudentPendingHomework(int studentID)
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(cs))
                 {
 
-                    List<StudentPendingHomeworkDetails> studentPendingHomeworkList = new List<StudentPendingHomeworkDetails>();
+                    List<StudentHomeworkDetails> studentPendingHomeworkList = new List<StudentHomeworkDetails>();
 
                     SqlCommand cmd = new SqlCommand("spStudentHomeworkPending", con);
 
@@ -133,7 +132,7 @@ namespace DAL.Repository
 
                    while(rdr.Read())
                    {
-                       StudentPendingHomeworkDetails studentPendingHomework = new StudentPendingHomeworkDetails();
+                       StudentHomeworkDetails studentPendingHomework = new StudentHomeworkDetails();
 
                        studentPendingHomework.TeacherId=Convert.ToInt32(rdr["TeacherUserId"]);
                        studentPendingHomework.TeacherName=rdr["TeacherUserId"].ToString();

@@ -1,5 +1,5 @@
-﻿using DAL.Repository;
-using Models.Models;
+﻿using AccessModels.Models;
+using DAL.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,9 +31,9 @@ namespace BusinessLayer
         }
 
 
-        public IEnumerable<StudentPendingHomeworkDetails> GetStudentPendingHomeworkDetails(int studentID)
+        public IEnumerable<StudentHomeworkDetails> GetStudentPendingHomework(int studentID)
         {
-                List<StudentPendingHomeworkDetails> studentPendingHomeworkList = _studentRepository.GetStudentPendingHomeworkDetails(studentID);
+                List<StudentHomeworkDetails> studentPendingHomeworkList = _studentRepository.GetStudentPendingHomework(studentID);
 
                 return studentPendingHomeworkList;
 
@@ -43,4 +43,7 @@ namespace BusinessLayer
 
 
     }
+
+
+
 }
