@@ -87,9 +87,16 @@ namespace BusinessLayer
         }
 
 
-        public string GetRole(string username)
+        public bool IsInRole(string username, string givenRole)
         {
             var role =_userRepository.GetRole(username);
+            if (role == givenRole)
+                return true;
+            else return false;
+        }
+        public string GetRole(string username)
+        {
+            var role = _userRepository.GetRole(username);
             return role;
         }
     }
