@@ -135,7 +135,7 @@ namespace DAL.Repository
                        StudentHomeworkDetails studentPendingHomework = new StudentHomeworkDetails();
 
                        studentPendingHomework.TeacherId=Convert.ToInt32(rdr["TeacherUserId"]);
-                       studentPendingHomework.TeacherName=rdr["TeacherUserId"].ToString();
+                       studentPendingHomework.TeacherName=rdr["TeacherName"].ToString();
                        studentPendingHomework.StudentGrade=Convert.ToInt32(rdr["StudentGrade"]);
                        studentPendingHomework.HomeworkId=Convert.ToInt32(rdr["HomeworkId"]);
                        studentPendingHomework.HomeWorkName=rdr["HomeWorkName"].ToString();
@@ -190,7 +190,7 @@ namespace DAL.Repository
                         StudentHomeworkDetails studentCompletedHomework = new StudentHomeworkDetails();
 
                         studentCompletedHomework.TeacherId = Convert.ToInt32(rdr["TeacherUserId"]);
-                        studentCompletedHomework.TeacherName = rdr["TeacherUserId"].ToString();
+                        studentCompletedHomework.TeacherName = rdr["TeacherName"].ToString();
                         studentCompletedHomework.StudentGrade = Convert.ToInt32(rdr["StudentGrade"]);
                         studentCompletedHomework.HomeworkId = Convert.ToInt32(rdr["HomeworkId"]);
                         studentCompletedHomework.HomeWorkName = rdr["HomeWorkName"].ToString();
