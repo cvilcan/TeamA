@@ -40,13 +40,7 @@ namespace DAL.Repository
             catch (SqlException)
             {
 
-
             }
-         
-
-            
-
-
         }
 
         public IEnumerable<Tuple<string, string, string>> GetStudentsToTeachers()
@@ -74,41 +68,25 @@ namespace DAL.Repository
         //Needed to set the path for the student homework file 
         public Tuple<int, string, int, string> GetStudentUploadParameters(string username, int homeworkID)
         {
-
             try
             {
                 using (SqlConnection con = new SqlConnection(cs))
-                {
-                   
-
+                {                  
                     SqlCommand cmd = new SqlCommand("spGetStudentUploadPath", con);
-
                     cmd.CommandType = CommandType.StoredProcedure;
-
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
                   
                     con.Open();
-
-                    SqlDataReader rdr = cmd.ExecuteReader();
-                  
+                    SqlDataReader rdr = cmd.ExecuteReader();                  
                     var uploadParams = new Tuple<int,string,int,string>(Convert.ToInt32(rdr["TeacherId"]),rdr["TeacherName"].ToString(),Convert.ToInt32(rdr["StudentId"]),rdr["StudentName"].ToString());
-
-
                     return uploadParams;
                 }
             }
             catch (SqlException)
-            {
-               
-               
+            {                              
                 return null ;
-
-            }
-         
-
-
-
+            }        
         }
 
         public List<StudentHomeworkDetails> GetStudentPendingHomework(int studentID)
@@ -127,7 +105,6 @@ namespace DAL.Repository
                     cmd.Parameters.AddWithValue("@StudentId", studentID);
                     con.Open();
 
-
                     SqlDataReader rdr = cmd.ExecuteReader();
 
                    while(rdr.Read())
@@ -144,10 +121,7 @@ namespace DAL.Repository
 
                        studentPendingHomeworkList.Add(studentPendingHomework);
                    }
-
                    return studentPendingHomeworkList;
-
-
                 }
             }
             catch (SqlException)
@@ -201,16 +175,11 @@ namespace DAL.Repository
                     }
 
                     return studentCompletedHomeworkList;
-
-
                 }
             }
             catch (SqlException)
             {
-
-
                 return null;
-
             }
             catch (Exception)
             {

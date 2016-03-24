@@ -37,6 +37,8 @@ namespace TeamA.Controllers
 
         public ActionResult ListStudents()
         {
+             List<StudentVM> L = new List<StudentVM>();
+
             var a = userService.GetAllStudents();
             foreach (var item in a)
                 L.Add(new StudentVM()
