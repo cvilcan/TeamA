@@ -39,7 +39,12 @@ namespace BusinessLayer
 
         }
 
+        public IEnumerable<StudentHomeworkDetails> GetStudentCompletedHomework(int studentID)
+        {
+            List<StudentHomeworkDetails> studentCompletedHomeworkList = _studentRepository.GetStudentCompletedHomework(studentID);
 
+            return studentCompletedHomeworkList;
+        }
 
 
     }
