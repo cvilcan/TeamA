@@ -13,6 +13,7 @@ namespace TeamA.Controllers
 
         public ActionResult Index()
         {
+            //var studList = _studentService.GetStudentTeacher();
             return View();
         }
 

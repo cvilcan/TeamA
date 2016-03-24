@@ -130,5 +130,27 @@ namespace TeamA.Repository
                 return (int)cmd.ExecuteScalar();
             }
         }
+
+        public string ResetPassword(string username)
+        {
+            Random rndm = new Random();
+            string password = rndm.Next(100000, 999999).ToString();
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("spResetPassword", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                return password;
+            }
+
+
+        }
+
     }
 }
