@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using AccessModels.Models;
 using DAL.Repository;
 using System.Data.SqlClient;
-using BusinessLayer.Mail;
 using System.IO;
+using Helpers.Mail;
 namespace BusinessLayer
 {
     public class AdminService
@@ -22,7 +22,7 @@ namespace BusinessLayer
         {
 
         }
-        public void addTeachersFromAdmin(string username,string email) {
+        public void addTeachersFromAdmin(string username,string email, string basePath) {
 
              try
             {
@@ -32,7 +32,7 @@ namespace BusinessLayer
                  string password = rndm.Next(100000, 999999).ToString();
                 List<string> list = new List<string>() { email };
                 MailHelper.SendMail(list, "admin@admin.com", "Registration Details", password);
-                //Directory.CreateDirectory(@"~/Uploads/" + username + '_' + Convert.ToString(up.ID));
+                Directory.CreateDirectory(basePath + username + '_' + Convert.ToString(up.ID));
 
                 up.Email = email;
                 up.Username = username;

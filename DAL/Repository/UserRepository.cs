@@ -56,20 +56,14 @@ namespace TeamA.Repository
                     cmd.Parameters.AddWithValue("@teacherId", teacherID);
                     con.Open();
                     cmd.ExecuteNonQuery();
-
                 }
             }
-
             catch (SqlException)
             {
 
 
             }
-
-
-
         }
-
 
         public bool Login(string username, string password)
         {
@@ -97,8 +91,12 @@ namespace TeamA.Repository
                           loginlist.Add(g);
                     }
 
+<<<<<<< HEAD
                     int number = loginlist[0];
                     
+=======
+                    int number = Convert.ToInt32( cmd.ExecuteReader());
+>>>>>>> 74a98cb4588eb521e5e009a8168410f1013872e9
                     if(number==1)
                     {
                         return true;
@@ -107,21 +105,13 @@ namespace TeamA.Repository
                     {
                         return false;
                     }
-
-                    
                 }
             }
             catch(SqlException )
-           {
-               return false;
-           }
-            catch(Exception)
-           {
-               return false;
-           }
-
+            {
+                return false;
+            }
         }
-
 
         public string GetGuid(string username)
         {
@@ -140,39 +130,52 @@ namespace TeamA.Repository
                    g =rdr["HashConfirmationCode"].ToString();
                     readguidlist.Add(g);
                 }
+                guid=readguidlist[0];
 
-                
-                  
-                   guid=readguidlist[0];
-                                    
-
-                    
-                
                 return guid;
             }
         }
 
-        public void CheckGuid(string guid)
+        public int CheckGuid(string guid)
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
-                
                 SqlCommand cmd = new SqlCommand("spCheckGuid", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@guid", guid);
                 con.Open();
+
+                return (int)cmd.ExecuteScalar();
+            }
+        }
+
+        public string ResetPassword(string username)
+        {
+            Random rndm = new Random();
+            string password = rndm.Next(100000, 999999).ToString();
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("spResetPassword", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
+                con.Open();
+
                 cmd.ExecuteNonQuery();
 
-
+                return password;
             }
 
 
         }
+<<<<<<< HEAD
        
     
     }
 
+=======
+>>>>>>> 74a98cb4588eb521e5e009a8168410f1013872e9
 
     }
-
-    
+}

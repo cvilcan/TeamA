@@ -43,19 +43,36 @@ namespace TeamA.Controllers
 
         public ActionResult Register()
         {
-            return View();
+            TeacherListVM vm = new TeacherListVM()
+            {
+                TeacherNameList = userService.GetAllTeachers().Select(x => x.Username).ToList()
+
+            };
+
+            return View(vm);
         }
 
 
         [HttpPost]
         public ActionResult Register(AccountVM vm)
         {
+            if (ModelState.IsValid)
+            {
+                userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherId);
+            }
+            TeacherListVM listVM = new TeacherListVM()
+            {
+                TeacherNameList = userService.GetAllTeachers().Select(x => x.Username).ToList()
 
-            userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherId);
-
-            return View();
+            };
+            return View(listVM);
         }
 
-
+        public ActionResult ConfirmRegistration(string GUID)
+        {
+            if (userService.CheckGuid(GUID) == 1)
+                return View("RegistrationConfirmed");
+            else return View("Error");
+        }
     }
 }

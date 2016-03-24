@@ -26,8 +26,6 @@ namespace DAL.Repository
                                 con);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-
-
                     string encryptedPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(up.Password, "SHA1");
                     cmd.Parameters.AddWithValue("@teacherName", up.Username);
                     cmd.Parameters.AddWithValue("@password", encryptedPassword);
