@@ -21,10 +21,27 @@ namespace TeamA.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Login(AccountVM vm)
         {
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                if (userService.Login(vm.UserName, vm.Password))
+                {
+                    Session["SessionUser"] = vm.UserName;
+                    Session["SessionID"] = userService.GetUser(vm.UserName).Item1;
+
+                    var cookie = new HttpCookie("CookieUser");
+                    cookie.Value = vm.UserName;
+                    Response.Cookies.Add(cookie);
+
+
+
+                    return RedirectToAction("Register");
+                }
+            }
+            return View("Index");
         }
 
         public ActionResult Register()

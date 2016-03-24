@@ -18,7 +18,7 @@ namespace BusinessLayer
         private UserService userService = new UserService();
 
 
-        public int CreateHomework(int TeacherUserID, string name, string description, DateTime deadline)
+        public int CreateHomework(int TeacherUserID, string name, string description, DateTime deadline, string basePath)
         {
             var teachers = userService.GetAllTeachers();
             UserProfile teacher = teachers.Where(t => t.ID == TeacherUserID).FirstOrDefault();
@@ -26,7 +26,7 @@ namespace BusinessLayer
 
             if (teacher != null)
             {
-                Directory.CreateDirectory(@"~/Uploads/" + teacher.Username + '_' + Convert.ToString(teacher.ID) + '/' + name + '_' + Convert.ToString(homeworkID));
+                Directory.CreateDirectory(basePath + teacher.Username + '_' + Convert.ToString(teacher.ID) + '/' + name + '_' + Convert.ToString(homeworkID));
             }
             else { }
 
