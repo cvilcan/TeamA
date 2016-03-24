@@ -19,11 +19,19 @@
         <div class="container">
             <h2>Welcome!</h2>
             
-            <ul class="nav nav-tabs">
-                <li>@Html.ActionLink("Home", "Index", "Admin", new { data_toggle = "pill" })</li>
-                <li>@Html.ActionLink("View All Teachers", "ViewAllTeachers", "Admin", new  { data_toggle="pill" })</li>
-                <li>@Html.ActionLink("View All Students", "ViewAllStudents", "Admin", new { data_toggle = "pill" })</li>                        
-            </ul>            
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-tabs">
+                        <li>@Html.ActionLink("Home", "Index", "Admin", new { data_toggle = "pill" })</li>
+                        <li>@Html.ActionLink("View All Teachers", "ViewAllTeachers", "Admin", new { data_toggle = "pill" })</li>
+                        <li>@Html.ActionLink("View All Students", "ViewAllStudents", "Admin", new { data_toggle = "pill" })</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+            
         </div>
   
 
@@ -36,15 +44,6 @@
                 </div>
             </div>
 
-            @*<div id="body">
-
-                <section class="content-wrapper main-content clear-fix">
-
-<<<<<<< HEAD
-
-=======
-                </section>
-            </div>*@
             <footer>
                 <div class="content-wrapper">
                     <div class="float-left">
@@ -53,6 +52,5 @@
                 </div>
             </footer>
         </div>
->>>>>>> 74a98cb4588eb521e5e009a8168410f1013872e9
     </body>
 </html>

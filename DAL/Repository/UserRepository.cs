@@ -164,5 +164,29 @@ namespace TeamA.Repository
 
 
         }
-    }
+
+        public string GetRole(string username){
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                string role;
+                SqlCommand cmd = new SqlCommand("spGetRole", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                List<string> readrolelist = new List<string>();
+
+                while (rdr.Read())
+                {
+                    string r;
+                    r = rdr["RoleName"].ToString();
+                    readrolelist.Add(r);
+                }
+                role = readrolelist[0];
+
+                return role;
+            }
+
+
+        }        }
 }

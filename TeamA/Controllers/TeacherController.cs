@@ -12,8 +12,7 @@ namespace TeamA.Controllers
     public class TeacherController : Controller
     {
         private HomeworkService homeworkService = new HomeworkService();
-        //
-        // GET: /Teacher/
+        private UserService userService = new UserService();
 
         public ActionResult Index()
         {
@@ -31,6 +30,23 @@ namespace TeamA.Controllers
             homeworkService.CreateHomework(22, vm.Name, vm.Description, vm.Deadline, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
 
             return RedirectToAction("Index");
+        }
+
+        public List<StudentVM> L = new List<StudentVM>();
+
+        public ActionResult ListStudents()
+        {
+            var a = userService.GetAllStudents();
+            foreach (var item in a)
+                L.Add(new StudentVM()
+                {
+                    StudentName = item.Username,
+                    StudentID = item.ID,
+                    StudentEmail = item.Email
+                });
+            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+
+            return View(L);
         }
 
     }
