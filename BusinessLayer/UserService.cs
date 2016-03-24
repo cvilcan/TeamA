@@ -7,6 +7,7 @@ using TeamA.Repository;
 using AccessModels.Models;
 using System.Data.SqlClient;
 using System.Web;
+using Helpers.Mail;
 using DAL.Repository;
 namespace BusinessLayer
 {
@@ -67,7 +68,7 @@ namespace BusinessLayer
 
             string body = "Click the link to confirm the mail:\n";
 
-            Mail.MailHelper.SendMail(new List<string>() { email }, "admin@admin.com", "Confirmation mail", body + baseUrl + "Account/ConfirmRegistration?GUID=" + guidstring);
+            MailHelper.SendMail(new List<string>() { email }, "admin@admin.com", "Confirmation mail", body + baseUrl + "Account/ConfirmRegistration?GUID=" + guidstring);
         }
 
         public int CheckGuid(string guid)

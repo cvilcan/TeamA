@@ -27,7 +27,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
-           // homeworkService.CreateHomework(vm.Description, vm.Deadline, vm.TeacherID);
+            homeworkService.CreateHomework(18, vm.Name, vm.Description, vm.Deadline);
 
             return RedirectToAction("Index");
         }
