@@ -1,4 +1,5 @@
 ﻿using AccessModels.Models;
+using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,9 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Data;
-using System.Configuration;
+
 
 namespace DAL.Repository
 {
@@ -73,6 +72,7 @@ namespace DAL.Repository
             }
         }
 
+        //Needed to set the path for the student homework file 
         public Tuple<int, string, int, string> GetStudentUploadParameters(string username, int homeworkID)
         {
 
@@ -111,6 +111,62 @@ namespace DAL.Repository
 
 
         }
+
+        public List<StudentPendingHomeworkDetails> GetStudentPendingHomeworkDetails(int studentID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+
+                    List<StudentPendingHomeworkDetails> studentPendingHomeworkList = new List<StudentPendingHomeworkDetails>();
+
+                    SqlCommand cmd = new SqlCommand("spStudentHomeworkPending", con);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@StudentId", studentID);
+                    con.Open();
+
+
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                   while(rdr.Read())
+                   {
+                       StudentPendingHomeworkDetails studentPendingHomework = new StudentPendingHomeworkDetails();
+
+                       studentPendingHomework.TeacherId=Convert.ToInt32(rdr["TeacherUserId"]);
+                       studentPendingHomework.TeacherName=rdr["TeacherUserId"].ToString();
+                       studentPendingHomework.StudentGrade=Convert.ToInt32(rdr["StudentGrade"]);
+                       studentPendingHomework.HomeworkId=Convert.ToInt32(rdr["HomeworkId"]);
+                       studentPendingHomework.HomeWorkName=rdr["HomeWorkName"].ToString();
+                       studentPendingHomework.Description=rdr["Description"].ToString();
+                       studentPendingHomework.Deadline=Convert.ToDateTime(rdr["Deadline"]);
+
+                       studentPendingHomeworkList.Add(studentPendingHomework);
+                   }
+
+                   return studentPendingHomeworkList;
+
+
+                }
+            }
+            catch (SqlException)
+            {
+
+
+                return null;
+
+            }
+         catch (Exception)
+            {
+                return null;
+            }
+
+
+
+        }
+
 
 
     }

@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using AccessModels.Models;
+using System.Web.Security;
 
 namespace TeamA.Repository
 {
@@ -67,9 +68,6 @@ namespace TeamA.Repository
 
         public bool Login(string username, string password)
         {
-
-           
-
            try
             {
                 using (SqlConnection con = new SqlConnection(cs))
@@ -148,21 +146,20 @@ namespace TeamA.Repository
         {
             Random rndm = new Random();
             string password = rndm.Next(100000, 999999).ToString();
+            string hasedPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
 
             using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("spResetPassword", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@password", hasedPassword);
                 con.Open();
 
                 cmd.ExecuteNonQuery();
 
                 return password;
             }
-
-
         }
 
         public string GetRole(string username){
