@@ -135,7 +135,7 @@ namespace DAL.Repository
                        StudentHomeworkDetails studentPendingHomework = new StudentHomeworkDetails();
 
                        studentPendingHomework.TeacherId=Convert.ToInt32(rdr["TeacherUserId"]);
-                       studentPendingHomework.TeacherName=rdr["TeacherUserId"].ToString();
+                       studentPendingHomework.TeacherName=rdr["TeacherName"].ToString();
                        studentPendingHomework.StudentGrade=Convert.ToInt32(rdr["StudentGrade"]);
                        studentPendingHomework.HomeworkId=Convert.ToInt32(rdr["HomeworkId"]);
                        studentPendingHomework.HomeWorkName=rdr["HomeWorkName"].ToString();
