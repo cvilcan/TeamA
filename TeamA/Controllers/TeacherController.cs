@@ -27,7 +27,7 @@ namespace TeamA.Controllers
         {
             return View(new HomeworkVM());
         }
-      
+
         [CustomAuthorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
@@ -103,5 +103,12 @@ namespace TeamA.Controllers
 
 
 
+
+        public ActionResult DownloadAsPDF(string path)
+        {
+            userService.SeeInPDF(path);
+            EmptyResult result = new EmptyResult();
+            return View(result);
+        }
     }
 }
