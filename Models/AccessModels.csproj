@@ -45,10 +45,12 @@
     <Compile Include="Models\StudentHomeworkDetails.cs" />
     <Compile Include="Models\StudentsToTeachers.cs" />
     <Compile Include="Models\StudentToHomework.cs" />
+    <Compile Include="Models\StudentUploadPath.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

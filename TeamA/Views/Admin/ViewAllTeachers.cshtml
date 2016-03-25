@@ -22,6 +22,8 @@
                             <tr class="success">
                                 <th>@Html.DisplayNameFor(model => model.Username)</th>
                                 <th>@Html.DisplayNameFor(model => model.Email)</th>
+                                <th>@Html.DisplayNameFor(model => model.IsConfirmed)</th>
+
                                 <th>Reset Password</th>
                             </tr>
                         </thead>
@@ -33,6 +35,7 @@
                                         @Html.DisplayFor(modelItem => item.Username)
                                     </td>
                                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.IsConfirmed)</td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-xs resetButton" onclick="">Reset</button>
                                     </td>

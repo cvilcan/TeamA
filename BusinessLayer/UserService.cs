@@ -9,12 +9,19 @@ using System.Data.SqlClient;
 using System.Web;
 using Helpers.Mail;
 using DAL.Repository;
+using ServiceHelpers;
+using System.IO;
+using PdfSharp.Pdf;
+using PdfSharp;
+
+
 namespace BusinessLayer
 {
     public class UserService
     {
         private UserRepository _userRepository = new UserRepository();
         private StudentService _studentService = new StudentService();
+        
 
         public IEnumerable<UserProfile> GetAllUsers()
         {
@@ -76,8 +83,6 @@ namespace BusinessLayer
                 return false;
         }
 
-
-
         public bool IsInRole(string username, string givenRole)
         {
             var role =_userRepository.GetRole(username);
@@ -92,6 +97,7 @@ namespace BusinessLayer
             var role = _userRepository.GetRole(username);
             return role;
         }
+
         public IEnumerable<Tuple<string, string, string>> GetStudentsByTeacher(string username)
         {
             var students = GetAllStudents();
@@ -102,5 +108,11 @@ namespace BusinessLayer
 
         }
 
+
+        public PdfDocument SeeInPDF(string path)
+        {
+            ConvertText2Pdf txt2pdf = new ConvertText2Pdf();
+            return txt2pdf.Convert(path);
+        }
     }
 }

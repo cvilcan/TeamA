@@ -30,6 +30,7 @@ namespace DAL.Repository
                     cmd.Parameters.AddWithValue("@teacherName", up.Username);
                     cmd.Parameters.AddWithValue("@password", encryptedPassword);
                     cmd.Parameters.AddWithValue("@email", up.Email);
+                   
                     con.Open();
 
                     cmd.ExecuteNonQuery();

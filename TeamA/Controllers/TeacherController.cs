@@ -18,6 +18,8 @@ namespace TeamA.Controllers
         private HomeworkService homeworkService = new HomeworkService();
         private UserService userService = new UserService();
         private FileSystemService fileSystemService = new FileSystemService();
+        List<StudentVM> newList = new List<StudentVM>();
+
         public ActionResult Index()
         {
             return View();
@@ -28,24 +30,20 @@ namespace TeamA.Controllers
         {
             return View(new HomeworkVM());
         }
-      
+
         [CustomAuthorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
             homeworkService.CreateHomework(22, vm.Name, vm.Description, vm.Deadline, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
-
             return RedirectToAction("Index");
         }
-
        
         public ActionResult ListStudents()
-        {
-             List<StudentVM> L = new List<StudentVM>();
-
+        {           
             var a = userService.GetAllStudents();
             foreach (var item in a)
-                L.Add(new StudentVM()
+                newList.Add(new StudentVM()
                 {
                     StudentName = item.Username,
                     StudentID = item.ID,
@@ -53,7 +51,21 @@ namespace TeamA.Controllers
                 });
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
-            return View(L);
+            return View(newList);
+        }
+
+        [HttpPost]
+        public ActionResult GeneratePDF()
+        {
+            var a = userService.GetAllStudents();
+            foreach (var item in a)
+                newList.Add(new StudentVM()
+                {
+                    StudentName = item.Username,
+                    StudentID = item.ID,
+                    StudentEmail = item.Email
+                });
+            return new Rotativa.ViewAsPdf("Presenter", newList);
         }
 
         public ActionResult ViewStudentUploads(string path)
@@ -73,36 +85,48 @@ namespace TeamA.Controllers
                 {
                     fileText = fileSystemService.GetFileText(realPath);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }
-                return View((object)fileText);
+                return View("ViewStudentHomework",(object)fileText);
+            }
+        }
+
+        public ActionResult GetOneTeacherHomework(string username)
+        {
+           var teacherHomeworks= homeworkService.GetOneTeacherHomework(username);
+           return View(teacherHomeworks);
+        }
+
+        [HttpPost]
+        public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade = null, string comment = null)
+        {
+            try {                 
+                 if( grade <=10 && grade >=1)
+                    {                
+                        homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                        ViewBag.Grade = "Valid Grade";
+                    }
+                else
+                    {
+                        ViewBag.Grade = "Please Enter a valid grade between 1 and 10";
+
+                    }
+                return RedirectToAction("ViewStudentHomework");
+               }
+            catch
+            {
+                return RedirectToAction("Error");
             }
         }
 
 
-        public ActionResult GetOneTeacherHomework(string username)
+        public ActionResult DownloadAsPDF(string path)
         {
-
-           var teacherHomeworks= homeworkService.GetOneTeacherHomework(username);
-
-
-           return View(teacherHomeworks);
+            userService.SeeInPDF(path);
+            EmptyResult result = new EmptyResult();
+            return View(result);
         }
-
-
-        public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade, string comment)
-        {
-
-            homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-
-            return RedirectToAction("ViewStudentHomework");
-
-
-        }
-
-
-
     }
 }

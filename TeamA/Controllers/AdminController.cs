@@ -21,9 +21,7 @@ namespace TeamA.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult CreateTeacher()
+        }        public ActionResult CreateTeacher()
         {
             return View();
         }
@@ -44,14 +42,14 @@ namespace TeamA.Controllers
             {
                 VMList.Add(new AccountVM()
                 {
-                    UserName=item.Username,
-                    Email=item.Email,
-                    //TeacherId=item.
-                    
+                    UserName= item.Username,
+                    Email = item.Email,
+                    //IsConfirmed=item.IsConfirmed                                                       
                 });
             }
             return View(VMList);
         }
+
         public ActionResult ViewAllTeachers()
         {
             var lista = userService.GetAllTeachers().ToList();
@@ -62,6 +60,7 @@ namespace TeamA.Controllers
                     {
                         Username = item.Username,
                         Email = item.Email
+                        //IsConfirmed=item.IsConfirmed
                     });
             }
             return View(VMList.ToList());

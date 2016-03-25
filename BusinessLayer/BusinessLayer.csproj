@@ -37,6 +37,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp, Version=1.31.1789.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Helpers\PDFAssemblies\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.31.1789.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Helpers\PDFAssemblies\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -45,7 +53,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -53,6 +60,7 @@
     <Compile Include="AdminService.cs" />
     <Compile Include="FileSystemService.cs" />
     <Compile Include="HomeworkService.cs" />
+    <Compile Include="Mail\MailHelper.cs" />
     <Compile Include="Models\AccountVM.cs" />
     <Compile Include="Models\ExplorerModeVMl.cs" />
     <Compile Include="Models\HomeworkVM.cs" />
