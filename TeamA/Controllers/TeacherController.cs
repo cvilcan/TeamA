@@ -96,7 +96,7 @@ namespace TeamA.Controllers
 
             homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
 
-            return RedirectToAction();
+            return RedirectToAction("ViewStudentHomework");
 
 
         }
