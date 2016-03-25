@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using TeamA.Models;
 using AccessModels.Models;
 using System.Configuration;
+using BusinessLayer.Models;
 using TeamA.Authorize;
 
 namespace TeamA.Controllers
@@ -66,7 +67,12 @@ namespace TeamA.Controllers
             return View();
         }
 
-
+        [HttpPost]
+        public ActionResult SendMailWithPassword(string username)
+        {
+            adminService.ResetPasswordSendMail(username);
+            return new EmptyResult();
+        }
     }
 }
 

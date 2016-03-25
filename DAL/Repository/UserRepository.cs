@@ -76,6 +76,7 @@ namespace TeamA.Repository
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
+                    //password = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", password);
                     con.Open();
@@ -166,10 +167,7 @@ namespace TeamA.Repository
                 return password;
             }
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> bad22156075210e676c8083fc39221c8506b438f
         public string GetRole(string username){
             using (SqlConnection con = new SqlConnection(cs))
             {

@@ -134,11 +134,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountVM.cs" />
-    <Compile Include="Models\HomeworkVM.cs" />
-    <Compile Include="Models\StudentVM.cs" />
-    <Compile Include="Models\TeacherListVM.cs" />
-    <Compile Include="Models\TeacherVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -319,6 +314,7 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Uploads\gheorghe_22\bunica_5\as.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -350,9 +346,14 @@
     <Content Include="Views\Student\GetStudentPendingHomework.cshtml" />
     <Content Include="Views\Student\GetStudentCompletedHomework.cshtml" />
     <Content Include="Views\Teacher\GetOneTeacherHomework.cshtml" />
+    <Content Include="Views\Teacher\ViewStudentHomework.cshtml" />
+    <Content Include="Views\Teacher\ViewStudentUploads.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\vasile_23\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

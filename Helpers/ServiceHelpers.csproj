@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C1B1E163-0CE6-4892-9AD7-41CB5B70DC6B}</ProjectGuid>
+    <ProjectGuid>{A04AEEC8-532A-4449-9C24-3392A3CA7D9B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Models</RootNamespace>
-    <AssemblyName>AccessModels</AssemblyName>
+    <RootNamespace>ServiceHelpers</RootNamespace>
+    <AssemblyName>ServiceHelpers</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,15 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ExplorerModel.cs" />
-    <Compile Include="Models\Homework.cs" />
-    <Compile Include="Models\HomeworkFile.cs" />
-    <Compile Include="Models\StudentHomeworkDetails.cs" />
-    <Compile Include="Models\StudentsToTeachers.cs" />
-    <Compile Include="Models\StudentToHomework.cs" />
-    <Compile Include="Models\UserProfile.cs" />
-    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="FileSystemManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\AccessModels.csproj">
+      <Project>{c1b1e163-0ce6-4892-9ad7-41cb5b70dc6b}</Project>
+      <Name>AccessModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

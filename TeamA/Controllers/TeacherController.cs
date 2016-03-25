@@ -1,7 +1,9 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,9 +16,7 @@ namespace TeamA.Controllers
     {
         private HomeworkService homeworkService = new HomeworkService();
         private UserService userService = new UserService();
-        private AdminService _adminService = new AdminService();
-        public List<StudentVM> L = new List<StudentVM>();
-
+        private FileSystemService fileSystemService = new FileSystemService();
         public ActionResult Index()
         {
             return View();
@@ -55,11 +55,29 @@ namespace TeamA.Controllers
             return View(L);
         }
 
-        [HttpPost]
-        public ActionResult SendMailWithPassword(string username)
+        public ActionResult ViewStudentUploads(string path)
         {
-            _adminService.ResetPasswordSendMail(username);
-            return new EmptyResult();
+            string realPath;
+            if (path == null)
+                return View("Error");
+            realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + path);
+            var ex = fileSystemService.GetExplorerModel(realPath, Request.Url);
+
+            if (!ex.isFile)
+                return View(ex);
+            else
+            {
+                string fileText = "";
+                try
+                {
+                    fileText = fileSystemService.GetFileText(realPath);
+                }
+                catch (Exception e)
+                {
+
+                }
+                return View((object)fileText);
+            }
         }
 
 

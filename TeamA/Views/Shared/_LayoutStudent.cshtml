@@ -9,40 +9,41 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-            </div>
-            <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
-                <nav>
-                    <ul id="menu">
-                        <li>@Html.ActionLink("Home", "Index", "StudentController")</li>
-                        <li>@Html.ActionLink("View Finished Homework", "FinishedHomework", "StudentController")</li>
-                        <li>@Html.ActionLink("Pending Homework", "GetStudentPendingHomework", "StudentController")</li>
-                        
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <div id="body">
-        <section class="content-wrapper main-content clear-fix">
-            @RenderBody()
-        </section>
-    </div>
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-            </div>
-        </div>
-    </footer>
+    <div class="container">
+        <h2>Welcome!</h2>
 
-    @Scripts.Render("~/bundles/jquery")
-   
+        <div class="row">
+            <div class="col-md-10">
+                <ul class="nav nav-tabs">
+                    <li>@Html.ActionLink("Home", "Index", "Student", new { data_toggle = "pill" })</li>
+                    <li>@Html.ActionLink("View all finished homework", "ViewAllFinishedHomework", "Student", new { data_toggle = "pill" })</li>
+                    <li>@Html.ActionLink("View All pending homework", "ViewAllPendingHomework", "Student", new { data_toggle = "pill" })</li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @RenderSection("featured", required: false)
+                @RenderBody()
+            </div>
+        </div>
+
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
