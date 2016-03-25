@@ -18,7 +18,6 @@
             <table class="table">
                 <thead>
                     <tr class="success">
-                        @*<th>@Html.DisplayNameFor(model => model.TeacherId)</th>*@
                         <th>@Html.DisplayNameFor(model => model.TeacherName)</th>
                         <th>@Html.DisplayNameFor(model => model.StudentGrade)</th>
                         <th>@Html.DisplayNameFor(model => model.HomeworkId)</th>
@@ -31,9 +30,8 @@
                     @foreach (var item in Model)
                     {
                         <tr class="info">
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.TeacherId)
-                            </td>*@
+                            @Html.HiddenFor(modelItem => item.TeacherId)
+                            @Html.HiddenFor(modelItem => item.UploadId)
                             <td>
                                 @Html.DisplayFor(modelItem => item.TeacherName)
                             </td>

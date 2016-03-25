@@ -75,7 +75,7 @@ namespace TeamA.Controllers
                 {
 
                 }
-                return View((object)fileText);
+                return View("ViewStudentHomework", (object)fileText);
             }
         }
 
