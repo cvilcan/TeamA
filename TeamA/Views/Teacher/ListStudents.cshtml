@@ -17,38 +17,42 @@
 
 
 <div class="container">
-    <div class="well">
-        <table class="table table-striped">
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="span6 pull-left">
+                <table class="table table-striped">
 
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.StudentName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StudentID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StudentEmail)
-                </th>
-                
-            </tr>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentEmail)
+                        </th>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StudentName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StudentID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StudentEmail)
-                    </td>
-                   
-                </tr>
-            }
+                    </tr>
 
-        </table>
-    </div>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentEmail)
+                            </td>
+
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+</div>
 </div>
