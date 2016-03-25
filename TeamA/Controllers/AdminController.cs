@@ -8,9 +8,11 @@ using System.Data.SqlClient;
 using TeamA.Models;
 using AccessModels.Models;
 using System.Configuration;
+using TeamA.Authorize;
 
 namespace TeamA.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private AdminService adminService = new AdminService();

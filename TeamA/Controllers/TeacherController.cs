@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeamA.Authorize;
 using TeamA.Models;
 
 namespace TeamA.Controllers
@@ -21,11 +22,12 @@ namespace TeamA.Controllers
             return View();
         }
 
+        [CustomAuthorize(Roles = "Teacher")]
         public ActionResult CreateHomework()
         {
             return View(new HomeworkVM());
         }
-
+         [CustomAuthorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {

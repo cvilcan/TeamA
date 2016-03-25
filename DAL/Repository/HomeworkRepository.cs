@@ -82,6 +82,11 @@ namespace DAL.Repository
 
         }
 
+        public void InsertCommentAndGrade()
+        {
+            //  Must read from db   spInsertCommentAndGrade
+        }
+
 
     }
 }
