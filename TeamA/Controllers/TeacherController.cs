@@ -87,5 +87,12 @@ namespace TeamA.Controllers
 
            return View(teacherHomeworks);
         }
+
+        public ActionResult DownloadAsPDF(string path)
+        {
+            userService.SeeInPDF(path);
+            EmptyResult result = new EmptyResult();
+            return View(result);
+        }
     }
 }
