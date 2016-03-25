@@ -77,11 +77,11 @@ namespace TeamA.Controllers
                 {
                     fileText = fileSystemService.GetFileText(realPath);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }
-                return View((object)fileText);
+                return View("ViewStudentHomework",(object)fileText);
             }
         }
 
@@ -91,11 +91,29 @@ namespace TeamA.Controllers
            return View(teacherHomeworks);
         }
 
-        public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade, string comment)
+        [HttpPost]
+        public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade = null, string comment = null)
         {
-            homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-            return RedirectToAction("ViewStudentHomework");
+            try {                 if( grade <=10 && grade >=1)
+                { 
+                
+                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                ViewBag.Grade = "Valid Grade";
+                }
+                else
+                {
+                    ViewBag.Grade = "Please Enter a valid grade between 1 and 10";
+
+                }
+                return RedirectToAction("ViewStudentHomework");
+                }
+            catch
+            {
+                return RedirectToAction("Error");
+            }
+
         }
+
 
         public ActionResult DownloadAsPDF(string path)
         {

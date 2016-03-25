@@ -82,9 +82,9 @@ namespace DAL.Repository
 
         }
 
-        public void InsertCommentOrGradeOrStatus(int uploadID, int? grade, string comment )
+        public void InsertCommentOrGradeOrStatus(int uploadID, int? grade=null, string comment=null )
         {
-            //  Must read from db   spInsertCommentAndGrade
+            
            try {
 
                 
