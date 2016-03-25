@@ -39,9 +39,9 @@ namespace TeamA.Controllers
             {
                 VMList.Add(new AccountVM()
                 {
-                    UserName=item.Username,
-                    Email=item.Email,
-                    
+                    UserName= item.Username,
+                    Email = item.Email,
+                    IsConfirmed=item.IsConfirmed
                     
                     
                     
