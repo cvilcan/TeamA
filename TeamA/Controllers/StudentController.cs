@@ -30,7 +30,13 @@ namespace TeamA.Controllers
 
             return View(studentCompletedHomework);
         }
+        public ActionResult InsertStudentToHomework(string userName,int homeworkID,string fileName,string basePath)
+        {
+            _studentService.InsertStudentToHomework(userName, homeworkID, fileName, basePath);
 
+
+            return View();
+        }
 
 
     }
