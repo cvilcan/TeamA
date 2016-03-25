@@ -65,7 +65,7 @@ namespace TeamA.Controllers
         {
             if (ModelState.IsValid)
             {
-                userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherId,vm.IsConfirmed);
+                userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherId);
             }
             TeacherListVM listVM = new TeacherListVM()
             {

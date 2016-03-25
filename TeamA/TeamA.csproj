@@ -377,6 +377,8 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Teacher\_ListStudents.cshtml" />
+    <Content Include="Views\Shared\Presenter.cshtml" />
+    <Content Include="Views\Shared\_PDFLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
