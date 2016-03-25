@@ -18,11 +18,11 @@ namespace BusinessLayer
             _studentRepository.InsertStudentToHomework(userName, fileName, homeworkID);
 
 
-             List<StudentUploadPath>  uploadParams = _studentRepository.GetStudentUploadParameters(usernName, homeworkID);
+             List<StudentUploadPath>  uploadParams = _studentRepository.GetStudentUploadParameters(userName, homeworkID);
 
            
              Directory.CreateDirectory(basePath + "/" + uploadParams[0].TeacherId + "_" + uploadParams[0].TeacherName + 
-                 "/" + uploadParams[0].HomeWorkName + homeworkID + "/" + usernName + "_" + uploadParams[0].StudentId + "/" + fileName + "_" + uploadParams[0].UploadID);
+                 "/" + uploadParams[0].HomeWorkName + homeworkID + "/" + userName + "_" + uploadParams[0].StudentId + "/" + fileName + "_" + uploadParams[0].UploadID);
         }
 
         public IEnumerable<Tuple<string, string, string>> GetStudentTeacher(string teacherName)
