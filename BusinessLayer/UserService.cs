@@ -53,7 +53,7 @@ namespace BusinessLayer
 
         public void CreateStudentUser(string username, string password, string email, int? teacherID)
         {
-            _userRepository.CreateStudentUser(username, email, password, teacherID);
+            _userRepository.CreateStudentUser(username, email, password, teacherID, 0);
             var guidstring = _userRepository.GetGuid(username);
             var request = HttpContext.Current.Request;
             var appUrl = HttpRuntime.AppDomainAppVirtualPath;
