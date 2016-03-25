@@ -11,8 +11,10 @@ using Helpers.Mail;
 using DAL.Repository;
 using ServiceHelpers;
 using System.IO;
-using PdfSharp.Pdf;
-using PdfSharp;
+//using PdfSharp.Pdf;
+//using PdfSharp;
+
+
 namespace BusinessLayer
 {
     public class UserService

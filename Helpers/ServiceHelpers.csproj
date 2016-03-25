@@ -35,18 +35,23 @@
     </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel">
       <HintPath>C:\Users\alina.craciun\Desktop\GDI+\MigraDoc.DocumentObjectModel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MigraDoc.Rendering">
       <HintPath>C:\Users\alina.craciun\Desktop\GDI+\MigraDoc.Rendering.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MigraDoc.RtfRendering">
       <HintPath>C:\Users\alina.craciun\Desktop\GDI+\MigraDoc.RtfRendering.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PdfSharp">
       <HintPath>C:\Users\alina.craciun\Desktop\GDI+\PdfSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PdfSharp.Charting">
       <HintPath>C:\Users\alina.craciun\Desktop\GDI+\PdfSharp.Charting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -71,6 +76,13 @@
       <Project>{c1b1e163-0ce6-4892-9ad7-41cb5b70dc6b}</Project>
       <Name>AccessModels</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MigraDoc.DocumentObjectModel.dll" />
+    <Content Include="MigraDoc.Rendering.dll" />
+    <Content Include="MigraDoc.RtfRendering.dll" />
+    <Content Include="PdfSharp.Charting.dll" />
+    <Content Include="PdfSharp.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
