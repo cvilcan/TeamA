@@ -27,7 +27,8 @@ namespace TeamA.Controllers
         {
             return View(new HomeworkVM());
         }
-         [CustomAuthorize(Roles = "Teacher")]
+      
+        [CustomAuthorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
@@ -61,6 +62,7 @@ namespace TeamA.Controllers
             return new EmptyResult();
         }
 
+
         public ActionResult GetOneTeacherHomework(string username)
         {
 
@@ -68,6 +70,17 @@ namespace TeamA.Controllers
 
 
            return View(teacherHomeworks);
+        }
+
+
+        public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade, string comment)
+        {
+
+            homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+
+            return RedirectToAction();
+
+
         }
 
 
