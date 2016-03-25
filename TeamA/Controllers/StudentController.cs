@@ -6,7 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace TeamA.Controllers
-{
+{   
+
+
     public class StudentController : Controller
     {
         private StudentService _studentService = new StudentService();

@@ -12,6 +12,7 @@ using TeamA.Models;
 
 namespace TeamA.Controllers
 {
+     [CustomAuthorize(Roles = "Teacher")]
     public class TeacherController : Controller
     {
         private HomeworkService homeworkService = new HomeworkService();

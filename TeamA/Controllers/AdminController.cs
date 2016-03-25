@@ -18,6 +18,11 @@ namespace TeamA.Controllers
     {
         private AdminService adminService = new AdminService();
         UserService userService = new UserService();
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult CreateTeacher()
         {
             return View();
