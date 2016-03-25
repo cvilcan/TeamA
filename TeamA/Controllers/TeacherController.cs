@@ -1,7 +1,10 @@
-﻿using BusinessLayer;
+﻿using AutoMapper;
+using BusinessLayer;
+using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +16,7 @@ namespace TeamA.Controllers
     {
         private HomeworkService homeworkService = new HomeworkService();
         private UserService userService = new UserService();
+        private FileSystemService fileSystemService = new FileSystemService();
 
         public ActionResult Index()
         {
@@ -47,6 +51,29 @@ namespace TeamA.Controllers
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
             return View(L);
+        }
+
+        public ActionResult ViewStudentUploads(string path)
+        {
+            string realPath;
+            realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + path);
+            var ex = fileSystemService.GetExplorerModel(realPath, Request.Url);
+
+            if (!ex.isFile)
+                return View(ex);
+            else
+            {
+                string fileText = "";
+                try
+                {
+                    fileText = fileSystemService.GetFileText(realPath);
+                }
+                catch (Exception e)
+                {
+
+                }
+                return View((object)fileText);
+            }
         }
 
     }

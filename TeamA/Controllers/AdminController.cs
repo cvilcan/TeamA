@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using TeamA.Models;
 using AccessModels.Models;
 using System.Configuration;
+using BusinessLayer.Models;
 
 namespace TeamA.Controllers
 {

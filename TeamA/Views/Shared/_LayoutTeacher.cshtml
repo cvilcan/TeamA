@@ -6,41 +6,50 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/Scripts/jquery.datetimepicker.full.js")
+    @Styles.Render("~/Content/jquery.datetimepicker.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/BootstrapJS")
 </head>
 <body>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-            </div>
-            <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
-                <nav>
-                    <ul id="menu">
-                        <li>@Html.ActionLink("Home", "Index", "TeacherController")</li>
-                        <li>@Html.ActionLink("View All Students", "AllHomework", "TeacherController")</li>
-                        <li>@Html.ActionLink("View All Uploads", "AllUploads", "TeacherController")</li>
-                        <li>@Html.ActionLink("Reports", "Reports", "TeacherController")</li>
+        <div class="container">
+            <h2>Welcome!</h2>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <ul class="nav nav-tabs">
+                        <li>@Html.ActionLink("Home", "Index", "Teacher")</li>
+                        <li>@Html.ActionLink("View All Students", "ListStudents", "Teacher")</li>
+                        <li>@Html.ActionLink("View all homework", "ViewAllHomework", "Teacher")</li>
+                        <li>@Html.ActionLink("View student uploads", "ViewStudentUploads", "Teacher", new { path = Session["SessionUser"] })</li>
                     </ul>
-                </nav>
+                </div>
+                <div class="col-md-2">
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
+
         </div>
-    </header>
-    <div id="body">
-        <section class="content-wrapper main-content clear-fix">
-            @RenderBody()
-        </section>
-    </div>
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+        <div class="container">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @RenderSection("featured", required: false)
+                    @RenderBody()
+                </div>
             </div>
+
+            <footer>
+                <div class="content-wrapper">
+                    <div class="float-left">
+                        <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    </div>
+                </div>
+            </footer>
         </div>
-    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)

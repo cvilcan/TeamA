@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TeamA.Models
+namespace BusinessLayer.Models
 {
     public class TeacherListVM
     {

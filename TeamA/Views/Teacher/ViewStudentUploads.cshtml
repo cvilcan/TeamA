@@ -1,0 +1,87 @@
+﻿@model BusinessLayer.Models.ExplorerModelVM
+
+@{
+    ViewBag.Title = "ViewStudentUploads";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+}
+
+@{
+    ViewBag.Title = "Folder Explorer";
+}
+@{Uri uri = Request.Url;}
+
+@*Show the current directory name using page URL. *@
+<h2>@Server.UrlDecode(uri.Segments.Last())</h2>
+
+@*If we were in root folder then don't show the up one level image. *@
+@if (uri.AbsolutePath.ToLower() != "/Teacher/")
+{
+    @*Making a URL to going up one level. *@
+    string[] upPath = Request.RawUrl.Split('/');
+    string newPath = "";
+    for (int i = 2; i < upPath.Length - 1; i++)
+    {
+        newPath += upPath[i];
+        if (i < upPath.Length - 2)
+        {
+            newPath += '/';
+        }
+    }
+    <a title="Parent"
+       href="@newPath">
+        <img src="@Url.Content("~/Content/images/up.png")" alt="Up" style="width: 20px; height: 20px; border: none" />
+    </a>
+        
+}
+
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            File size
+        </th>
+        <th>
+            Last accessed
+        </th>
+    </tr>
+    @*Listing the directories *@
+    @foreach (BusinessLayer.Models.DirModel dir in Model.dirModelList)
+    {
+    <tr>
+        <td>
+            <img src="@Url.Content("~/Content/images/folder.png")" alt="Folder Logo" align="top" style="width: 20px;
+                height: 20px; border: none" />
+        </td>
+        <td class="dirNameDiv">
+            <a href="@(Request.RawUrl + '/' + dir.DirName)" title="@dir.DirName">@dir.DirName</a>
+        </td>
+        <td>
+        </td>
+        <td>
+            @dir.DirAccessed
+        </td>
+    </tr>
+    }
+    @*Listing the files *@
+    @foreach (BusinessLayer.Models.FileModel file in Model.fileModelList)
+{
+    <tr>
+        <td>
+            <a href="@(Request.RawUrl + '/' + file.FileName)"
+               title="@file.FileName" target="_blank">
+                @file.FileName
+            </a>
+        </td>
+        <td>
+            @file.FileSizeText
+        </td>
+        <td>
+            @file.FileAccessed
+        </td>
+    </tr>
+}
+</table>

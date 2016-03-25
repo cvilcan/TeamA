@@ -8,6 +8,7 @@ using DAL.Repository;
 using System.Data.SqlClient;
 using System.IO;
 using Helpers.Mail;
+using Helpers.Mail;
 namespace BusinessLayer
 {
     public class AdminService

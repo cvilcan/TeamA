@@ -1,0 +1,10 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "ViewStudentHomework";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+}
+
+<h2>ViewStudentHomework</h2>
+
+@Html.TextArea("fileText", Model, 50, 200, null)
