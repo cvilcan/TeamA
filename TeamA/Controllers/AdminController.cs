@@ -26,7 +26,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateTeacher(TeacherVM tcr)
         {
-            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
+            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email,Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
 
             return View();
         }
@@ -41,7 +41,11 @@ namespace TeamA.Controllers
                 {
                     UserName=item.Username,
                     Email=item.Email,
-                    //TeacherId=item.
+                    
+                    
+                    
+                    
+                    
                     
                 });
             }
@@ -56,7 +60,8 @@ namespace TeamA.Controllers
                 VMList.Add(new TeacherVM()
                     {
                         Username = item.Username,
-                        Email = item.Email
+                        Email = item.Email,
+                        IsConfirmed=item.IsConfirmed
                     });
             }
             return View(VMList.ToList());
