@@ -37,21 +37,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="MigraDoc.DocumentObjectModel">
-      <HintPath>C:\Users\alina.craciun\Desktop\GDI+\MigraDoc.DocumentObjectModel.dll</HintPath>
-    </Reference>
-    <Reference Include="MigraDoc.Rendering">
-      <HintPath>C:\Users\alina.craciun\Desktop\GDI+\MigraDoc.Rendering.dll</HintPath>
-    </Reference>
-    <Reference Include="MigraDoc.RtfRendering">
-      <HintPath>C:\Users\alina.craciun\Desktop\GDI+\MigraDoc.RtfRendering.dll</HintPath>
-    </Reference>
     <Reference Include="PdfSharp, Version=1.31.1789.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\alina.craciun\Desktop\GDI+\PdfSharp.dll</HintPath>
+      <HintPath>..\Helpers\PDFAssemblies\PdfSharp.dll</HintPath>
     </Reference>
-    <Reference Include="PdfSharp.Charting">
-      <HintPath>C:\Users\alina.craciun\Desktop\GDI+\PdfSharp.Charting.dll</HintPath>
+    <Reference Include="PdfSharp.Charting, Version=1.31.1789.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Helpers\PDFAssemblies\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -61,7 +53,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
