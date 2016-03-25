@@ -67,7 +67,12 @@ namespace TeamA.Controllers
             return View();
         }
 
-
+        [HttpPost]
+        public ActionResult SendMailWithPassword(string username)
+        {
+            adminService.ResetPasswordSendMail(username);
+            return new EmptyResult();
+        }
     }
 }
 

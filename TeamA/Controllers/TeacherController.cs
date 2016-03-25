@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BusinessLayer;
+﻿using BusinessLayer;
 using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -58,6 +57,8 @@ namespace TeamA.Controllers
         public ActionResult ViewStudentUploads(string path)
         {
             string realPath;
+            if (path == null)
+                return View("Error");
             realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + path);
             var ex = fileSystemService.GetExplorerModel(realPath, Request.Url);
 
@@ -78,13 +79,6 @@ namespace TeamA.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult SendMailWithPassword(string username)
-        {
-            _adminService.ResetPasswordSendMail(username);
-            return new EmptyResult();
-        }
-
         public ActionResult GetOneTeacherHomework(string username)
         {
 
@@ -93,8 +87,5 @@ namespace TeamA.Controllers
 
            return View(teacherHomeworks);
         }
-
-
-
     }
 }
