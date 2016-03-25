@@ -58,10 +58,9 @@ namespace BusinessLayer
             return new Tuple<int, string, string,int>(user.ID, user.Username, user.Email,user.IsConfirmed);
         }
 
-        public void CreateStudentUser(string username, string password, string email, int? teacherID)
+        public void CreateStudentUser(string username, string password, string email, int? teacherID,int isConfirmed)
         {
-            _userRepository.CreateStudentUser(username, email, password, teacherID, 0);
-            var guidstring = _userRepository.GetGuid(username);
+            _userRepository.CreateStudentUser(username, email, password, teacherID, 0);            var guidstring = _userRepository.GetGuid(username);
             var request = HttpContext.Current.Request;
             var appUrl = HttpRuntime.AppDomainAppVirtualPath;
             if (appUrl != "/") appUrl += "/";

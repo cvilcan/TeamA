@@ -17,6 +17,8 @@ namespace TeamA.Controllers
         private HomeworkService homeworkService = new HomeworkService();
         private UserService userService = new UserService();
         private FileSystemService fileSystemService = new FileSystemService();
+        List<StudentVM> L = new List<StudentVM>();
+
         public ActionResult Index()
         {
             return View();
@@ -33,14 +35,12 @@ namespace TeamA.Controllers
         public ActionResult CreateHomework(HomeworkVM vm)
         {
             homeworkService.CreateHomework(22, vm.Name, vm.Description, vm.Deadline, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
-
             return RedirectToAction("Index");
         }
-
        
         public ActionResult ListStudents()
         {
-             List<StudentVM> L = new List<StudentVM>();
+            //List<StudentVM> L = new List<StudentVM>();
 
             var a = userService.GetAllStudents();
             foreach (var item in a)
@@ -53,6 +53,11 @@ namespace TeamA.Controllers
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
             return View(L);
+        }
+
+        public ActionResult GeneratePDF()
+        {
+            return new Rotativa.ActionAsPdf("ListStudents");
         }
 
         public ActionResult ViewStudentUploads(string path)
@@ -80,24 +85,16 @@ namespace TeamA.Controllers
             }
         }
 
-
         public ActionResult GetOneTeacherHomework(string username)
         {
-
            var teacherHomeworks= homeworkService.GetOneTeacherHomework(username);
-
-
            return View(teacherHomeworks);
         }
 
         [HttpPost]
         public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade = null, string comment = null)
         {
-            try { 
-                
-
-
-                if( grade <=10 && grade >=1)
+            try {                 if( grade <=10 && grade >=1)
                 { 
                 
                 homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
@@ -108,8 +105,6 @@ namespace TeamA.Controllers
                     ViewBag.Grade = "Please Enter a valid grade between 1 and 10";
 
                 }
-
-
                 return RedirectToAction("ViewStudentHomework");
                 }
             catch
@@ -118,8 +113,6 @@ namespace TeamA.Controllers
             }
 
         }
-
-
 
 
         public ActionResult DownloadAsPDF(string path)
