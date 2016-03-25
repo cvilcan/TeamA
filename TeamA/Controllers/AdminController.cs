@@ -9,9 +9,11 @@ using TeamA.Models;
 using AccessModels.Models;
 using System.Configuration;
 using BusinessLayer.Models;
+using TeamA.Authorize;
 
 namespace TeamA.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private AdminService adminService = new AdminService();

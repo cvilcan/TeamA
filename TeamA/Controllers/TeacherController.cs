@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeamA.Authorize;
 using TeamA.Models;
 
 namespace TeamA.Controllers
@@ -17,17 +18,17 @@ namespace TeamA.Controllers
         private HomeworkService homeworkService = new HomeworkService();
         private UserService userService = new UserService();
         private FileSystemService fileSystemService = new FileSystemService();
-
         public ActionResult Index()
         {
             return View();
         }
 
+        [CustomAuthorize(Roles = "Teacher")]
         public ActionResult CreateHomework()
         {
             return View(new HomeworkVM());
         }
-
+         [CustomAuthorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
@@ -36,10 +37,11 @@ namespace TeamA.Controllers
             return RedirectToAction("Index");
         }
 
-        public List<StudentVM> L = new List<StudentVM>();
-
+       
         public ActionResult ListStudents()
         {
+             List<StudentVM> L = new List<StudentVM>();
+
             var a = userService.GetAllStudents();
             foreach (var item in a)
                 L.Add(new StudentVM()
@@ -75,6 +77,24 @@ namespace TeamA.Controllers
                 return View((object)fileText);
             }
         }
+
+        [HttpPost]
+        public ActionResult SendMailWithPassword(string username)
+        {
+            _adminService.ResetPasswordSendMail(username);
+            return new EmptyResult();
+        }
+
+        public ActionResult GetOneTeacherHomework(string username)
+        {
+
+           var teacherHomeworks= homeworkService.GetOneTeacherHomework(username);
+
+
+           return View(teacherHomeworks);
+        }
+
+
 
     }
 }

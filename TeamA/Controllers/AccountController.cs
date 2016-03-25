@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeamA.Authorize;
 using TeamA.Models;
 
 namespace TeamA.Controllers
 {
+    
     public class AccountController : Controller
     {
         UserService userService = new UserService();
@@ -26,8 +28,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult Login(AccountVM vm)
         {
-            if (ModelState.IsValid)
-            {
+            
                 if (userService.Login(vm.UserName, vm.Password))
                 {
                     Session["SessionUser"] = vm.UserName;
@@ -41,8 +42,10 @@ namespace TeamA.Controllers
 
                     return RedirectToAction("Register");
                 }
-            }
-            return View("Index");
+            
+            
+                return View("Index");
+            
         }
 
         public ActionResult Register()

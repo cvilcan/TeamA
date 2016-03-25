@@ -1,4 +1,5 @@
-﻿using DAL.Repository;
+﻿using AccessModels.Models;
+using DAL.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +20,7 @@ namespace BusinessLayer
 
             Tuple<int, string, int, string> uploadParams = _studentRepository.GetStudentUploadParameters(usernName, homeworkID);
 
-            Directory.CreateDirectory(basePath + @"/" + uploadParams.Item2 + "_" + uploadParams.Item1 + "/"+usernName+"_"+uploadParams.Item3+"/"+fileName+"_"+uploadParams.Item4);
+            Directory.CreateDirectory(basePath + "/" + uploadParams.Item2 + "_" + uploadParams.Item1 + "/"+usernName+"_"+uploadParams.Item3+"/"+fileName+"_"+uploadParams.Item4);
         }
 
         public IEnumerable<Tuple<string, string, string>> GetStudentTeacher(string teacherName)
@@ -30,7 +31,24 @@ namespace BusinessLayer
         }
 
 
+        public IEnumerable<StudentHomeworkDetails> GetStudentPendingHomework(int studentID)
+        {
+                List<StudentHomeworkDetails> studentPendingHomeworkList = _studentRepository.GetStudentPendingHomework(studentID);
+
+                return studentPendingHomeworkList;
+
+        }
+
+        public IEnumerable<StudentHomeworkDetails> GetStudentCompletedHomework(int studentID)
+        {
+            List<StudentHomeworkDetails> studentCompletedHomeworkList = _studentRepository.GetStudentCompletedHomework(studentID);
+
+            return studentCompletedHomeworkList;
+        }
 
 
     }
+
+
+
 }

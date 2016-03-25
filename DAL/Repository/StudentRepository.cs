@@ -7,9 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Data;
-using System.Configuration;
+
 
 namespace DAL.Repository
 {
@@ -42,13 +40,7 @@ namespace DAL.Repository
             catch (SqlException)
             {
 
-
             }
-         
-
-            
-
-
         }
 
         public IEnumerable<Tuple<string, string, string>> GetStudentsToTeachers()
@@ -73,45 +65,132 @@ namespace DAL.Repository
             }
         }
 
+        //Needed to set the path for the student homework file 
         public Tuple<int, string, int, string> GetStudentUploadParameters(string username, int homeworkID)
         {
-
             try
             {
                 using (SqlConnection con = new SqlConnection(cs))
-                {
-                   
-
+                {                  
                     SqlCommand cmd = new SqlCommand("spGetStudentUploadPath", con);
-
                     cmd.CommandType = CommandType.StoredProcedure;
-
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
                   
                     con.Open();
-
-                    SqlDataReader rdr = cmd.ExecuteReader();
-                  
+                    SqlDataReader rdr = cmd.ExecuteReader();                  
                     var uploadParams = new Tuple<int,string,int,string>(Convert.ToInt32(rdr["TeacherId"]),rdr["TeacherName"].ToString(),Convert.ToInt32(rdr["StudentId"]),rdr["StudentName"].ToString());
-
-
                     return uploadParams;
                 }
             }
             catch (SqlException)
-            {
-               
-               
+            {                              
                 return null ;
+            }        
+        }
+
+        public List<StudentHomeworkDetails> GetStudentPendingHomework(int studentID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+
+                    List<StudentHomeworkDetails> studentPendingHomeworkList = new List<StudentHomeworkDetails>();
+
+                    SqlCommand cmd = new SqlCommand("spStudentHomeworkPending", con);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@StudentId", studentID);
+                    con.Open();
+
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                   while(rdr.Read())
+                   {
+                       StudentHomeworkDetails studentPendingHomework = new StudentHomeworkDetails();
+
+                       studentPendingHomework.TeacherId=Convert.ToInt32(rdr["TeacherUserId"]);
+                       studentPendingHomework.TeacherName=rdr["TeacherName"].ToString();
+                       studentPendingHomework.StudentGrade=Convert.ToInt32(rdr["StudentGrade"]);
+                       studentPendingHomework.HomeworkId=Convert.ToInt32(rdr["HomeworkId"]);
+                       studentPendingHomework.HomeWorkName=rdr["HomeWorkName"].ToString();
+                       studentPendingHomework.Description=rdr["Description"].ToString();
+                       studentPendingHomework.Deadline=Convert.ToDateTime(rdr["Deadline"]);
+                       studentPendingHomework.UploadId = Convert.ToInt32(rdr["UploadID"]);
+
+                       studentPendingHomeworkList.Add(studentPendingHomework);
+                   }
+                   return studentPendingHomeworkList;
+                }
+            }
+            catch (SqlException)
+            {
+
+
+                return null;
 
             }
-         
+         catch (Exception)
+            {
+                return null;
+            }
 
 
 
         }
 
+        public List<StudentHomeworkDetails> GetStudentCompletedHomework(int studentID)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+
+                    List<StudentHomeworkDetails> studentCompletedHomeworkList = new List<StudentHomeworkDetails>();
+
+                    SqlCommand cmd = new SqlCommand("spStudentHomeworkCompleted", con);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@StudentId", studentID);
+                    con.Open();
+
+
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        StudentHomeworkDetails studentCompletedHomework = new StudentHomeworkDetails();
+
+                        studentCompletedHomework.TeacherId = Convert.ToInt32(rdr["TeacherUserId"]);
+                        studentCompletedHomework.TeacherName = rdr["TeacherName"].ToString();
+                        studentCompletedHomework.StudentGrade = Convert.ToInt32(rdr["StudentGrade"]);
+                        studentCompletedHomework.HomeworkId = Convert.ToInt32(rdr["HomeworkId"]);
+                        studentCompletedHomework.HomeWorkName = rdr["HomeWorkName"].ToString();
+                        studentCompletedHomework.Description = rdr["Description"].ToString();
+                        studentCompletedHomework.Deadline = Convert.ToDateTime(rdr["Deadline"]);
+                        studentCompletedHomework.UploadId = Convert.ToInt32(rdr["UploadID"]);
+
+                        studentCompletedHomeworkList.Add(studentCompletedHomework);
+                    }
+
+                    return studentCompletedHomeworkList;
+                }
+            }
+            catch (SqlException)
+            {
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+
+
+        }
 
     }
 }

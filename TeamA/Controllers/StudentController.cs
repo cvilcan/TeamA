@@ -11,11 +11,27 @@ namespace TeamA.Controllers
     {
         private StudentService _studentService = new StudentService();
 
-        public ActionResult Index()
+        public ActionResult Index(string teacherName)
         {
-            //var studList = _studentService.GetStudentTeacher();
+            //var studList = _studentService.GetStudentTeacher(teacherName);
             return View();
         }
+
+        public ActionResult GetStudentPendingHomework(int studentID)
+        {
+            var studentPendingHomework = _studentService.GetStudentPendingHomework(studentID);
+
+              return View(studentPendingHomework);
+        }
+
+        public ActionResult GetStudentCompletedHomework(int studentID)
+        {
+            var studentCompletedHomework = _studentService.GetStudentCompletedHomework(studentID);
+
+            return View(studentCompletedHomework);
+        }
+
+
 
     }
 }
