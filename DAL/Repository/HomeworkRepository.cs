@@ -82,46 +82,36 @@ namespace DAL.Repository
 
         }
 
-        public void InsertCommentOrGradeOrStatus(int uploadID, int? grade, string comment )
+        public void InsertCommentOrGradeOrStatus(int uploadID, int? grade=null, string comment=null )
         {
-            //  Must read from db   spInsertCommentAndGrade
+            
            try {
 
                 
-            using (SqlConnection con = new SqlConnection(cs))
-            {               
+                using (SqlConnection con = new SqlConnection(cs))
+                {               
 
-                SqlCommand cmd = new SqlCommand("spInsertCommentAndGrade", con);
+                    SqlCommand cmd = new SqlCommand("spInsertCommentAndGrade", con);
 
-                cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@uploadId", uploadID);
-                cmd.Parameters.AddWithValue("@Grade", grade);
-                cmd.Parameters.AddWithValue("@Comment", comment);
+                    cmd.Parameters.AddWithValue("@uploadId", uploadID);
+                    cmd.Parameters.AddWithValue("@Grade", grade);
+                    cmd.Parameters.AddWithValue("@Comment", comment);
               
-                con.Open();
+                    con.Open();
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                  
                     
-            }
-
-        
+                }
             }
             catch (SqlException)
             {
               
             }
-            catch(Exception)
-            {
-         
-            }
-          
-        }
-
 
         }
-
 
     }
-
+}
