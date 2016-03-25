@@ -9,12 +9,17 @@ using System.Data.SqlClient;
 using System.Web;
 using Helpers.Mail;
 using DAL.Repository;
+using ServiceHelpers;
+using System.IO;
+using PdfSharp.Pdf;
+using PdfSharp;
 namespace BusinessLayer
 {
     public class UserService
     {
         private UserRepository _userRepository = new UserRepository();
         private StudentService _studentService = new StudentService();
+        
 
         public IEnumerable<UserProfile> GetAllUsers()
         {
@@ -44,16 +49,16 @@ namespace BusinessLayer
             return teachers;
         }
 
-        public Tuple<int, string, string> GetUser(string username)
+        public Tuple<int, string, string,int> GetUser(string username)
         {
             var a = GetAllUsers();
             var user = a.Where(q => q.Username == username).SingleOrDefault();
-            return new Tuple<int, string, string>(user.ID, user.Username, user.Email);
+            return new Tuple<int, string, string,int>(user.ID, user.Username, user.Email,user.IsConfirmed);
         }
 
         public void CreateStudentUser(string username, string password, string email, int? teacherID)
         {
-            _userRepository.CreateStudentUser(username, email, password, teacherID);
+            _userRepository.CreateStudentUser(username, email, password, teacherID, 0);
             var guidstring = _userRepository.GetGuid(username);
             var request = HttpContext.Current.Request;
             var appUrl = HttpRuntime.AppDomainAppVirtualPath;
@@ -76,8 +81,6 @@ namespace BusinessLayer
                 return false;
         }
 
-
-
         public bool IsInRole(string username, string givenRole)
         {
             var role =_userRepository.GetRole(username);
@@ -92,6 +95,7 @@ namespace BusinessLayer
             var role = _userRepository.GetRole(username);
             return role;
         }
+
         public IEnumerable<Tuple<string, string, string>> GetStudentsByTeacher(string username)
         {
             var students = GetAllStudents();
@@ -100,6 +104,12 @@ namespace BusinessLayer
 
             return studentsToTeachers;
 
+        }
+
+        public PdfDocument SeeInPDF(string path)
+        {
+            ConvertText2Pdf txt2pdf = new ConvertText2Pdf();
+            return txt2pdf.Convert(path);
         }
     }
 }

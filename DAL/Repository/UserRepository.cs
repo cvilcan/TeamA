@@ -33,6 +33,7 @@ namespace TeamA.Repository
                     u.Password = rdr["Password"].ToString();
                     u.Email = rdr["Email"].ToString();
                     u.RoleName = rdr["RoleName"].ToString();
+                    u.IsConfirmed = Convert.ToInt32(rdr["IsConfirmed"]);
 
                     userList.Add(u);
                 }
@@ -41,7 +42,7 @@ namespace TeamA.Repository
         }
 
 
-        public void CreateStudentUser(string userName, string email, string password,int? teacherID)
+        public void CreateStudentUser(string userName, string email, string password,int? teacherID,int isConfirmed)
         {
             try
             {
@@ -55,6 +56,8 @@ namespace TeamA.Repository
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@teacherId", teacherID);
+                    cmd.Parameters.AddWithValue("@isConfirmed", isConfirmed);
+
                     con.Open();
                     cmd.ExecuteNonQuery();
                 }
