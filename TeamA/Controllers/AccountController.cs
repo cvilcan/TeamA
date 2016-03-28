@@ -75,10 +75,10 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult Register(AccountVM vm)
         {
-            if (ModelState.IsValid)
-            {
-                userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherId);
-            }
+            //if (ModelState.IsValid)
+            //{
+            ////    userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
+            ////}
             TeacherListVM listVM = new TeacherListVM()
             {
                 TeacherNameList = userService.GetAllTeachers().Select(x => x.Username).ToList()

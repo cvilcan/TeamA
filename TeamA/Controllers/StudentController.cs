@@ -76,7 +76,7 @@ namespace TeamA.Controllers
                         {
                             fileText = _fileSystemService.GetFileText(realPath);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
 
                         }
