@@ -14,7 +14,7 @@ using TeamA.Authorize;
 
 namespace TeamA.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    //[CustomAuthorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private AdminService adminService = new AdminService();
