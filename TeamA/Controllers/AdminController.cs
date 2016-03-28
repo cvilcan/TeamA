@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.SqlClient;
 using TeamA.Models;
-using AccessModels.Models;
+//using AccessModels.Models;
 using System.Configuration;
 using BusinessLayer.Models;
 using TeamA.Authorize;

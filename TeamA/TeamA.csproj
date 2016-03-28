@@ -135,6 +135,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Uploads\ghita_18\temaGhita_1\Student1_6\asd\HtmlPage1.html" />
+    <Content Include="Uploads\ghita_18\temaGhita_1\Student1_6\file_1.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -346,10 +348,13 @@
     <Content Include="Views\Student\GetStudentPendingHomework.cshtml" />
     <Content Include="Views\Student\GetStudentCompletedHomework.cshtml" />
     <Content Include="Views\Teacher\GetOneTeacherHomework.cshtml" />
-    <Content Include="Views\Teacher\ViewStudentHomework.cshtml" />
     <Content Include="Views\Teacher\ViewStudentUploads.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Shared\_FolderBrowser.cshtml" />
+    <Content Include="Views\Student\ViewHomeworkDetails.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\ViewHomeworkUploads.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,52 @@
+﻿@model BusinessLayer.Models.StudentHomeworkDetailsVM
+
+@{
+    ViewBag.Title = "ViewHomeworkDetails";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+
+<h2>ViewHomeworkDetails</h2>
+
+<fieldset>
+    <legend>StudentHomeworkDetails</legend>
+    @Html.HiddenFor(model => model.Details.TeacherId)
+    @Html.HiddenFor(model => model.Details.UploadId)
+    @Html.DisplayFor(model => model.Details.HomeworkId)
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Details.TeacherName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Details.TeacherName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Details.StudentGrade)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Details.StudentGrade)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Details.HomeWorkName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Details.HomeWorkName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Details.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Details.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Details.Deadline)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Details.Deadline)
+    </div>
+</fieldset>
+
+@Html.Partial("_FolderBrowser", Model.FolderStructure)

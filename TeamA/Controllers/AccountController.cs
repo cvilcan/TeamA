@@ -79,7 +79,7 @@ namespace TeamA.Controllers
         {
             if (userService.CheckGuid(GUID) == 1)
                 return View("RegistrationConfirmed");
-            else return View("Error");
+            else return View("Error", "Invalid confirmation link!");
         }
     }
 }

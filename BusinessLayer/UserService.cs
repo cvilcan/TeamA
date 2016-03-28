@@ -96,7 +96,7 @@ namespace BusinessLayer
         {
             var students = GetAllStudents();
             var teacher = GetUser(username);
-            var studentsToTeachers = _studentService.GetStudentTeacher(username);
+            var studentsToTeachers = _studentService.GetStudentsBelongingToTeacher(username);
 
             return studentsToTeachers;
 

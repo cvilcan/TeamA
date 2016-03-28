@@ -23,11 +23,18 @@ namespace BusinessLayer
             Directory.CreateDirectory(basePath + "/" + uploadParams.Item2 + "_" + uploadParams.Item1 + "/"+usernName+"_"+uploadParams.Item3+"/"+fileName+"_"+uploadParams.Item4);
         }
 
-        public IEnumerable<Tuple<string, string, string>> GetStudentTeacher(string teacherName)
+        public IEnumerable<Tuple<string, string, string>> GetStudentsBelongingToTeacher(string teacherName)
         {
             var studentsToTeachers = _studentRepository.GetStudentsToTeachers();
             var studentsFromSameTeacher = studentsToTeachers.Where(x => x.Item3 == teacherName);
             return studentsFromSameTeacher.ToList();
+        }
+
+        public IEnumerable<Tuple<string, string, string>> GetTeachersBelongingToStudent(string studentName)
+        {
+            var studentsToTeachers = _studentRepository.GetStudentsToTeachers();
+            var teachersOfStudent = studentsToTeachers.Where(x => x.Item1 == studentName);
+            return teachersOfStudent;
         }
 
 

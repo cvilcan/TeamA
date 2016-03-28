@@ -55,12 +55,18 @@ namespace TeamA.Controllers
             return View(L);
         }
 
-        public ActionResult ViewStudentUploads(string path)
+        public ActionResult ViewStudentUploads(string teacherFolder, string homeworkFolder, string studentFolder, string path)
         {
             string realPath;
-            if (path == null)
-                return View("Error");
-            realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + path);
+            if ((Request.QueryString["teacherFolder"] != Session["SessionUser"] + "_" + Session["SessionID"]) || (Request.QueryString["teacherFolder"] == null))
+                return View("Error", "You do not have the right to access this folder!");
+            realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/");
+            if (homeworkFolder != null)
+                realPath += homeworkFolder + "/";
+            if (studentFolder != null)
+                realPath += studentFolder + "/";
+            if (path != null)
+                realPath += path;
             var ex = fileSystemService.GetExplorerModel(realPath, Request.Url);
 
             if (!ex.isFile)
