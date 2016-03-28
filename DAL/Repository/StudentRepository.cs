@@ -18,28 +18,21 @@ namespace DAL.Repository
 
         public void InsertStudentToHomework(string username, string fileName, int homeworkID)
         {
-            try
+            using (SqlConnection con = new SqlConnection(cs))
             {
-                using (SqlConnection con = new SqlConnection(cs))
-                {
-                    var uploadDate = DateTime.Now;
+                var uploadDate = DateTime.Now;
 
-                    SqlCommand cmd = new SqlCommand("spInsertStudentToHomework", con);
+                SqlCommand cmd = new SqlCommand("spInsertStudentToHomework", con);
 
-                    cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@filename", fileName);
-                    cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
-                    cmd.Parameters.AddWithValue("@uploadDate", uploadDate);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@filename", fileName);
+                cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
+                cmd.Parameters.AddWithValue("@uploadDate", uploadDate);
 
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (SqlException)
-            {
-
+                con.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -67,39 +60,32 @@ namespace DAL.Repository
         //Needed to set the path for the student homework file 
         public List<StudentUploadPath> GetStudentUploadParameters(string username, int homeworkID)
         {
-            try
+            using (SqlConnection con = new SqlConnection(cs))
             {
-                using (SqlConnection con = new SqlConnection(cs))
-                {
-                    List<StudentUploadPath> studentPathList = new List<StudentUploadPath>();
-                    SqlCommand cmd = new SqlCommand("spGetStudentUploadPath", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
+                List<StudentUploadPath> studentPathList = new List<StudentUploadPath>();
+                SqlCommand cmd = new SqlCommand("spGetStudentUploadPath", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
                   
-                    con.Open();
-                    SqlDataReader rdr = cmd.ExecuteReader();   
-                  while(rdr.Read())
-                  {
-                      StudentUploadPath studentPath = new StudentUploadPath();
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();   
+                while(rdr.Read())
+                {
+                    StudentUploadPath studentPath = new StudentUploadPath();
 
-                      studentPath.TeacherId = Convert.ToInt32(rdr["TeacherId"]);
-                      studentPath.TeacherName = rdr["TeacherName"].ToString();
-                      studentPath.StudentId = Convert.ToInt32(rdr["StudentId"]);
-                      studentPath.UploadID = Convert.ToInt32(rdr["UploadID"]);
-                      studentPath.HomeWorkName = rdr["HomeWorkName"].ToString();
+                    studentPath.TeacherId = Convert.ToInt32(rdr["TeacherId"]);
+                    studentPath.TeacherName = rdr["TeacherName"].ToString();
+                    studentPath.StudentId = Convert.ToInt32(rdr["StudentId"]);
+                    studentPath.UploadID = Convert.ToInt32(rdr["UploadID"]);
+                    studentPath.HomeWorkName = rdr["HomeWorkName"].ToString();
 
-                      studentPathList.Add(studentPath);
+                    studentPathList.Add(studentPath);
 
-                  }
-
-                  return studentPathList;
                 }
-            }
-            catch (SqlException)
-            {                              
-                return null ;
-            }        
+
+                return studentPathList;
+            }    
         }
 
         public List<StudentHomeworkDetails> GetStudentPendingHomework(int studentID)
