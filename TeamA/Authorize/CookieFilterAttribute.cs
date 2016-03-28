@@ -12,8 +12,6 @@ namespace TeamA.Attributes
     public class CookieFilterAttribute : ActionFilterAttribute
 
     {
-
-
         private BusinessLayer.UserService _userService = new BusinessLayer.UserService();
 
         public override void OnActionExecuting(ActionExecutingContext filterContext )
@@ -28,18 +26,11 @@ namespace TeamA.Attributes
                 if (_userService.Login(username, password))
                      HttpContext.Current.Session["SessionUser"] = username;
                        HttpContext.Current.Session["SessionUserId"] =_userService.GetUser(username).Item1;
-                    
-                     
-
             }
             else
-            {
-               
+            {               
             }
             base.OnActionExecuting(filterContext);
-        }
-
-
-       
+        }      
     }
 }

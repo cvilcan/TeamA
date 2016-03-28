@@ -12,7 +12,7 @@ using TeamA.Models;
 
 namespace TeamA.Controllers
 {
-     [CustomAuthorize(Roles = "Teacher")]
+    // [CustomAuthorize(Roles = "Teacher")]
     public class TeacherController : Controller
     {
         private HomeworkService homeworkService = new HomeworkService();
@@ -37,7 +37,8 @@ namespace TeamA.Controllers
             homeworkService.CreateHomework(22, vm.Name, vm.Description, vm.Deadline, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
             return RedirectToAction("Index");
         }
-       
+
+        [CustomAuthorize(Roles = "Teacher")]
         public ActionResult ListStudents()
         {
             List<StudentVM> L = new List<StudentVM>();
@@ -55,7 +56,7 @@ namespace TeamA.Controllers
         }
 
 
-        [HttpPost]
+       // [CustomAuthorize(Roles = "Teacher")]
         public ActionResult GeneratePDF()
         {
             List<StudentVM> L = new List<StudentVM>();
