@@ -18,7 +18,6 @@ namespace TeamA.Controllers
         private HomeworkService homeworkService = new HomeworkService();
         private UserService userService = new UserService();
         private FileSystemService fileSystemService = new FileSystemService();
-        List<StudentVM> newList = new List<StudentVM>();
 
         public ActionResult Index()
         {
@@ -40,10 +39,11 @@ namespace TeamA.Controllers
         }
        
         public ActionResult ListStudents()
-
+        {
+            List<StudentVM> L = new List<StudentVM>();
             var a = userService.GetAllStudents();
             foreach (var item in a)
-                newList.Add(new StudentVM()
+                L.Add(new StudentVM()
                 {
                     StudentName = item.Username,
                     StudentID = item.ID,
@@ -58,15 +58,16 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult GeneratePDF()
         {
+            List<StudentVM> L = new List<StudentVM>();
             var a = userService.GetAllStudents();
             foreach (var item in a)
-                newList.Add(new StudentVM()
+                L.Add(new StudentVM()
                 {
                     StudentName = item.Username,
                     StudentID = item.ID,
                     StudentEmail = item.Email
                 });
-            return new Rotativa.ViewAsPdf("Presenter", newList);
+            return new Rotativa.ViewAsPdf("Presenter", L);
         }
 
         public ActionResult ViewStudentUploads(string teacherFolder, string homeworkFolder, string studentFolder, string path)
@@ -128,7 +129,6 @@ namespace TeamA.Controllers
             {
                 return RedirectToAction("Error");
             }
-			return RedirectToAction("ViewStudentHomework");
         }
 
         public ActionResult DownloadAsPDF(string path)

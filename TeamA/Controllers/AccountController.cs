@@ -66,7 +66,6 @@ namespace TeamA.Controllers
             TeacherListVM vm = new TeacherListVM()
             {
                 TeacherNameList = userService.GetAllTeachers().Select(x => x.Username).ToList()
-
             };
 
             return View(vm);
