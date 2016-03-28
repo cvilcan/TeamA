@@ -11,7 +11,7 @@ namespace DAL.Repository
 {
     public class AdminRepository
     {
-        
+
 
         public void addTeachersFromAdmin(UserProfile up)
         {

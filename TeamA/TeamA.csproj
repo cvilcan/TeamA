@@ -52,6 +52,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Helpers\PDFAssemblies\MigraDoc.RtfRendering.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
+    <Reference Include="Rotativa">
+=======
     <Reference Include="PdfSharp, Version=1.31.1789.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\alina.craciun\Desktop\GDI+\PdfSharp.dll</HintPath>
@@ -62,6 +65,7 @@
     </Reference>
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+>>>>>>> 8b5ab627fefcbdbbb1c0231a945a8f9603783561
       <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -316,7 +320,9 @@
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="App_Browsers\qt.browser">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -382,12 +388,21 @@
     <Content Include="Views\Teacher\_ListStudents.cshtml" />
     <Content Include="Views\Shared\Presenter.cshtml" />
     <Content Include="Views\Shared\_PDFLayout.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\ViewHomeworkDetails.cshtml" />
+    <Content Include="Views\Student\ViewHomeworkUploads.cshtml" />
+    <Content Include="Views\Shared\_FolderBrowser.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+=======
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_FolderBrowser.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\ViewHomeworkDetails.cshtml" />
     <Content Include="Views\Student\ViewHomeworkUploads.cshtml" />
+>>>>>>> b469b0d5e584fab7e59a1c8d61fbcf4ac7193130
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
