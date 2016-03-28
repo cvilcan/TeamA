@@ -27,7 +27,9 @@ namespace TeamA
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             Check check = new Check();
-            check.Tim();
+            var t = new Thread(check.Tim);
+            t.Start();
+            
         
         
         }
