@@ -14,7 +14,7 @@ using TeamA.Authorize;
 
 namespace TeamA.Controllers
 {
-    //[CustomAuthorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private AdminService adminService = new AdminService();
@@ -37,7 +37,6 @@ namespace TeamA.Controllers
             adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, ConfigurationManager.AppSettings["BasePath"]);
             //Response.Write();
            
-
             ViewBag.Success = "";
             return View();
                 }
