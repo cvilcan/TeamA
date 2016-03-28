@@ -25,9 +25,6 @@ namespace TeamA
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            Check check = new Check();
-            check.Tim();
         
         
         }
