@@ -36,11 +36,7 @@ namespace TeamA.Controllers
             try { 
             adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, ConfigurationManager.AppSettings["BasePath"]);
             //Response.Write();
-<<<<<<< .mine
 
-=======
-           
->>>>>>> .theirs
             ViewBag.Success = "";
             return View();
                 }
