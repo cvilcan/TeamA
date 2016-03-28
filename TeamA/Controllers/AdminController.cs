@@ -14,7 +14,7 @@ using TeamA.Authorize;
 
 namespace TeamA.Controllers
 {
-    //[CustomAuthorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private AdminService adminService = new AdminService();
@@ -35,9 +35,14 @@ namespace TeamA.Controllers
             string str="";
             try { 
             adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, ConfigurationManager.AppSettings["BasePath"]);
+            //Response.Write();
+<<<<<<< .mine
 
-            ViewBag.Success = "";
+=======
            
+>>>>>>> .theirs
+            ViewBag.Success = "";
+            return View();
                 }
             catch(SqlException ex)
             {
@@ -51,6 +56,7 @@ namespace TeamA.Controllers
                 str += "\n" + "Server:" + ex.Server.ToString();
                
             }
+                
             finally
             {
 
@@ -58,7 +64,7 @@ namespace TeamA.Controllers
                Response.Write(str);
               
             }
-            return View();
+            return View("Error", (object)"Invalid input for Teacher");
 
 
         }

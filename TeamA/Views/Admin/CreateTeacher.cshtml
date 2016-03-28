@@ -2,8 +2,10 @@
 @using BusinessLayer;
 @{
     ViewBag.Title = "CreateTeacher";
-    ViewBag.errorMessage = AdminService.errorTeacher;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    
+  
 
    
     @*<meta charset="utf-8">
@@ -63,7 +65,8 @@
  
         </div>
            </div>
-    <p>@ViewBag.errorMessage</p>
+    
+    
 }
 
 <div>
