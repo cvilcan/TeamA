@@ -392,6 +392,7 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\ViewHomeworkDetails.cshtml" />
     <Content Include="Views\Student\ViewHomeworkUploads.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
