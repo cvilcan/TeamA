@@ -9,7 +9,7 @@ namespace BusinessLayer.Timer
     public class Check
     {
         private HomeworkService hwService = new HomeworkService();
-        public int Tim()
+        public void Tim()
         {
             while (true)
             {
