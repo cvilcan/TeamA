@@ -28,6 +28,8 @@ namespace BusinessLayer
 
         }
 
+
+
         public void addTeachersFromAdmin(string username,string email, string basePath) {
 
              try
@@ -41,7 +43,7 @@ namespace BusinessLayer
                 up.Email = email;
                 up.Username = username;
                 up.Password = password;
-            
+
                 
                 
                 adminRepository.addTeachersFromAdmin(up);
@@ -50,7 +52,10 @@ namespace BusinessLayer
             }
              catch (SqlException e)
              {
-                 Console.WriteLine("admin service" + e);
+                 //Console.WriteLine("admin service" + e);
+                 e.Message.ToString();
+
+
              }
         }
 

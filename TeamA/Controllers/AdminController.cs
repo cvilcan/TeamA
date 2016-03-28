@@ -11,9 +11,10 @@ using System.Configuration;
 using BusinessLayer.Models;
 using TeamA.Authorize;
 
+
 namespace TeamA.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    //[CustomAuthorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private AdminService adminService = new AdminService();
@@ -31,9 +32,37 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateTeacher(TeacherVM tcr)
         {
+            string str="";
+            try { 
             adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, ConfigurationManager.AppSettings["BasePath"]);
+            //Response.Write();
+            var resutl = AdminService.errorTeacher;
 
+            ViewBag.Success = "";
+           
+                }
+            catch(SqlException ex)
+            {
+               
+                str = "Source:" + ex.Source;
+                str += "\n" + "Number:" + ex.Number.ToString();
+                str += "\n" + "Message:" + ex.Message;
+                str += "\n" + "Class:" + ex.Class.ToString();
+                str += "\n" + "Procedure:" + ex.Procedure.ToString();
+                str += "\n" + "Line Number:" + ex.LineNumber.ToString();
+                str += "\n" + "Server:" + ex.Server.ToString();
+               
+            }
+            finally
+            {
+
+
+               Response.Write(str);
+              
+            }
             return View();
+
+
         }
 
         public ActionResult ViewAllStudents()
