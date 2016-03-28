@@ -11,13 +11,16 @@ using System.Configuration;
 using BusinessLayer.Models;
 using TeamA.Authorize;
 
+
 namespace TeamA.Controllers
 {
     [CustomAuthorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private AdminService adminService = new AdminService();
-        UserService userService = new UserService();
+        private UserService userService = new UserService();
+        private StudentService studentService = new StudentService();
+
         public ActionResult Index()
         {
             return View();
@@ -29,10 +32,34 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateTeacher(TeacherVM tcr)
         {
-            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
+            string str="";
+            try { 
+            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, ConfigurationManager.AppSettings["BasePath"]);
             //Response.Write();
             var resutl = AdminService.errorTeacher;
 
+            ViewBag.Success = "";
+           
+                }
+            catch(SqlException ex)
+            {
+               
+                str = "Source:" + ex.Source;
+                str += "\n" + "Number:" + ex.Number.ToString();
+                str += "\n" + "Message:" + ex.Message;
+                str += "\n" + "Class:" + ex.Class.ToString();
+                str += "\n" + "Procedure:" + ex.Procedure.ToString();
+                str += "\n" + "Line Number:" + ex.LineNumber.ToString();
+                str += "\n" + "Server:" + ex.Server.ToString();
+               
+            }
+            finally
+            {
+
+
+               Response.Write(str);
+              
+            }
             return View();
 
 
@@ -48,7 +75,7 @@ namespace TeamA.Controllers
                 {
                     UserName= item.Username,
                     Email = item.Email,
-                    //IsConfirmed=item.IsConfirmed                                                       
+                    IsConfirmed=item.IsConfirmed
                 });
             }
             return View(VMList);

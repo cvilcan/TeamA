@@ -46,7 +46,7 @@ namespace DAL.Repository
             //    str += "\n" + "Line Number:" + ex.LineNumber.ToString();
             //    str += "\n" + "Server:" + ex.Server.ToString();
 
-                           
+                
             //}
         }
 

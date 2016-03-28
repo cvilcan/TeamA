@@ -75,10 +75,10 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult Register(AccountVM vm)
         {
-            if (ModelState.IsValid)
-            {
-                userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherId);
-            }
+            //if (ModelState.IsValid)
+            //{
+            ////    userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
+            ////}
             TeacherListVM listVM = new TeacherListVM()
             {
                 TeacherNameList = userService.GetAllTeachers().Select(x => x.Username).ToList()
@@ -113,6 +113,7 @@ namespace TeamA.Controllers
             return account;
         }
 
+        [HttpPost]
         public ActionResult LogOut()
         {
             Session.Clear();
@@ -122,7 +123,7 @@ namespace TeamA.Controllers
                 myCookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(myCookie);
             }
-            return View("Register");
+            return View("Index", "Home", null);
 
         }
 

@@ -10,8 +10,7 @@ namespace BusinessLayer.Models
             public int StudentID { get; set; }
             public string StudentName { get; set; }
             public string StudentEmail { get; set; }
+            public int TeacherID { get; set; }
             public string TeacherName { get; set; }
-            
         }
-    
 }

@@ -62,10 +62,10 @@ namespace BusinessLayer
         public void ResetPasswordSendMail(string username)
         {
             string password = _userRepository.ResetPassword(username);
-            string getUserEmail = _userRepository.GetAllUsers().Where(x => x.RoleName == "Teacher" && x.Username == username).Select(x => x.Email).FirstOrDefault();
+            string getUserEmail = _userRepository.GetAllUsers().Where(x => x.Username == username).Select(x => x.Email).FirstOrDefault();
             if (getUserEmail!=null)
             {
-                //MailHelper.SendMail(new List<string> { getUserEmail }, "account@account.com", "New Password", password);
+                MailHelper.SendMail(new List<string> { getUserEmail }, "account@account.com", "New Password", password);
             }
         }
       
