@@ -17,7 +17,9 @@ namespace TeamA.Controllers
     public class AdminController : Controller
     {
         private AdminService adminService = new AdminService();
-        UserService userService = new UserService();
+        private UserService userService = new UserService();
+        private StudentService studentService = new StudentService();
+
         public ActionResult Index()
         {
             return View();
@@ -29,7 +31,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateTeacher(TeacherVM tcr)
         {
-            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
+            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, ConfigurationManager.AppSettings["BasePath"]);
 
             return View();
         }
@@ -44,7 +46,7 @@ namespace TeamA.Controllers
                 {
                     UserName= item.Username,
                     Email = item.Email,
-                    //IsConfirmed=item.IsConfirmed                                                       
+                    IsConfirmed=item.IsConfirmed
                 });
             }
             return View(VMList);
