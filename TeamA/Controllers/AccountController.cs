@@ -112,6 +112,22 @@ namespace TeamA.Controllers
                 };
             return account;
         }
-    }
+
+        [HttpPost]
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            if (Request.Cookies["Cookie"] != null)
+            {
+                HttpCookie myCookie = new HttpCookie("Cookie");
+                myCookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(myCookie);
+            }
+            return View("Index", "Home", null);
+
+        }
+
+
+}
 
 }

@@ -105,5 +105,29 @@ namespace DAL.Repository
             {
               
             }        }
+
+        public void CheckHomeworkDeadLine()
+        {
+             try
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+
+                    SqlCommand cmd = new SqlCommand("spCheckDeadline", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    
+                	con.Open();
+                	cmd.ExecuteNonQuery();
+            	}
+             }
+            catch (SqlException)
+            {
+                         
+            
+            }       
+        }
+        
+
+
     }
 }

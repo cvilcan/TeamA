@@ -34,7 +34,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
-            homeworkService.CreateHomework(22, vm.Name, vm.Description, vm.Deadline, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
+            homeworkService.CreateHomework(vm.TeacherID, vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);
             return RedirectToAction("Index");
         }
 
@@ -76,7 +76,7 @@ namespace TeamA.Controllers
             string realPath;
             if ((Request.QueryString["teacherFolder"] != Session["SessionUser"] + "_" + Session["SessionID"]) || (Request.QueryString["teacherFolder"] == null))
                 return View("Error", "You do not have the right to access this folder!");
-            realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/");
+            realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/";
             if (homeworkFolder != null)
                 realPath += homeworkFolder + "/";
             if (studentFolder != null)

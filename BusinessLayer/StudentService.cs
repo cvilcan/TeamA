@@ -32,10 +32,10 @@ namespace BusinessLayer
             return studentsFromSameTeacher.ToList();
         }
 
-        public IEnumerable<Tuple<string, string, string>> GetTeachersBelongingToStudent(string studentName)
+        public Tuple<string, string, string> GetTeacherBelongingToStudent(string studentName)
         {
             var studentsToTeachers = _studentRepository.GetStudentsToTeachers();
-            var teachersOfStudent = studentsToTeachers.Where(x => x.Item1 == studentName);
+            var teachersOfStudent = studentsToTeachers.Where(x => x.Item1 == studentName).FirstOrDefault();
             return teachersOfStudent;
         }
 
@@ -54,6 +54,10 @@ namespace BusinessLayer
 
             return studentCompletedHomeworkList;
         }
+
+
+         
+
 
 
     }
