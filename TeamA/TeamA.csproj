@@ -342,7 +342,6 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Uploads\gheorghe_22\bunica_5\as.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -384,7 +383,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\vasile_23\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
