@@ -35,7 +35,8 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult Login(AccountVM vm,string ReturnUrl)
         {
-           
+            try
+            {
                 if (userService.Login(vm.UserName, vm.Password))
                 {
                     Session["SessionUser"] = vm.UserName;
@@ -45,19 +46,21 @@ namespace TeamA.Controllers
                     cookie.Expires = DateTime.Now.AddDays(30);
                     cookie["username"] = vm.UserName;
                     cookie["password"] = vm.Password;
-                    
-                    
+
+
                     Response.AppendCookie(cookie);
-                   string  role = userService.GetRole(vm.UserName);
+                    string role = userService.GetRole(vm.UserName);
 
 
 
 
-                    return RedirectToAction("Index",role);
+                    return RedirectToAction("Index", role);
                 }
+            }
+            catch (Exception ) { }
             
             
-                return View("Index");
+                return View("Error",(object)"Invalid credentials");
             
         }
 
@@ -75,9 +78,11 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult Register(AccountVM vm,TeacherListVM tvm)
         {
+
+
             if (ModelState.IsValid)
             {
-                userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherId);
+                userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
             }
             TeacherListVM listVM = new TeacherListVM()
             {
