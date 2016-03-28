@@ -73,7 +73,7 @@ namespace TeamA.Controllers
 
 
         [HttpPost]
-        public ActionResult Register(AccountVM vm)
+        public ActionResult Register(AccountVM vm,TeacherListVM tvm)
         {
             if (ModelState.IsValid)
             {
@@ -123,7 +123,7 @@ namespace TeamA.Controllers
                 myCookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(myCookie);
             }
-            return View("Index", "Home", null);
+            return View("~/Views/Home/Index.cshtml");
 
         }
 
