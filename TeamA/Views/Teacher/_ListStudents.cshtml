@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BusinessLayer.Models.StudentVM>
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="span6 pull-left">
+                <table class="table table-striped">
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StudentEmail)
+                        </th>
+
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentEmail)
+                            </td>
+
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

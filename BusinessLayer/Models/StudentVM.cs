@@ -11,6 +11,7 @@ namespace BusinessLayer.Models
             public string StudentName { get; set; }
             public string StudentEmail { get; set; }
             public string TeacherName { get; set; }
+            
         }
     
 }

@@ -12,11 +12,14 @@ using TeamA.Models;
 
 namespace TeamA.Controllers
 {
+     [CustomAuthorize(Roles = "Teacher")]
     public class TeacherController : Controller
     {
         private HomeworkService homeworkService = new HomeworkService();
         private UserService userService = new UserService();
         private FileSystemService fileSystemService = new FileSystemService();
+        List<StudentVM> newList = new List<StudentVM>();
+
         public ActionResult Index()
         {
             return View();
@@ -27,24 +30,20 @@ namespace TeamA.Controllers
         {
             return View(new HomeworkVM());
         }
-      
+
         [CustomAuthorize(Roles = "Teacher")]
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
             homeworkService.CreateHomework(22, vm.Name, vm.Description, vm.Deadline, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
-
             return RedirectToAction("Index");
         }
-
        
         public ActionResult ListStudents()
-        {
-             List<StudentVM> L = new List<StudentVM>();
 
             var a = userService.GetAllStudents();
             foreach (var item in a)
-                L.Add(new StudentVM()
+                newList.Add(new StudentVM()
                 {
                     StudentName = item.Username,
                     StudentID = item.ID,
@@ -53,6 +52,21 @@ namespace TeamA.Controllers
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
             return View(L);
+        }
+
+
+        [HttpPost]
+        public ActionResult GeneratePDF()
+        {
+            var a = userService.GetAllStudents();
+            foreach (var item in a)
+                newList.Add(new StudentVM()
+                {
+                    StudentName = item.Username,
+                    StudentID = item.ID,
+                    StudentEmail = item.Email
+                });
+            return new Rotativa.ViewAsPdf("Presenter", newList);
         }
 
         public ActionResult ViewStudentUploads(string teacherFolder, string homeworkFolder, string studentFolder, string path)
@@ -86,28 +100,42 @@ namespace TeamA.Controllers
             }
         }
 
-
         public ActionResult GetOneTeacherHomework(string username)
         {
-
            var teacherHomeworks= homeworkService.GetOneTeacherHomework(username);
-
-
            return View(teacherHomeworks);
         }
 
-
-        public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade, string comment)
+        [HttpPost]
+        public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade = null, string comment = null)
         {
+            try 
+			{                 
+                 if( grade <=10 && grade >=1)
+                    {                
+                        homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                        ViewBag.Grade = "Valid Grade";
+                    }
+                else
+                    {
+                        ViewBag.Grade = "Please Enter a valid grade between 1 and 10";
 
-            homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-
-            return RedirectToAction("ViewStudentHomework");
-
-
+            			homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                    }
+                return RedirectToAction("ViewStudentHomework");
+            }
+            catch
+            {
+                return RedirectToAction("Error");
+            }
+			return RedirectToAction("ViewStudentHomework");
         }
 
-
-
+        public ActionResult DownloadAsPDF(string path)
+        {
+            userService.SeeInPDF(path);
+            EmptyResult result = new EmptyResult();
+            return View(result);
+        }
     }
 }

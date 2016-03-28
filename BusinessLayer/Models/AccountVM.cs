@@ -21,5 +21,7 @@ namespace BusinessLayer.Models
                             ErrorMessage = "Email is not valid")]
         public string Email { get; set; }
         public int? TeacherId { get; set; }
+        public bool Remember { get; set; }
+        public int IsConfirmed { get; set; }
     }
 }

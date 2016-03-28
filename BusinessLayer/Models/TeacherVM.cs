@@ -18,5 +18,6 @@ namespace TeamA.Models
                            @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",
                            ErrorMessage = "Email is not valid")]
        public string Email { get; set; }
+       public int IsConfirmed { get; set; }
     }
 }

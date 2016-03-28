@@ -10,7 +10,9 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace TeamA.Controllers
-{
+{   
+
+
     public class StudentController : Controller
     {
         private StudentService _studentService = new StudentService();
@@ -26,14 +28,18 @@ namespace TeamA.Controllers
         {
             var studentPendingHomework = _studentService.GetStudentPendingHomework(studentID);
 
-              return View(studentPendingHomework);
+            return View(studentPendingHomework);
         }
 
         public ActionResult GetStudentCompletedHomework(int studentID)
         {
             var studentCompletedHomework = _studentService.GetStudentCompletedHomework(studentID);
-
             return View(studentCompletedHomework);
+        }
+        public ActionResult InsertStudentToHomework(string userName,int homeworkID,string fileName,string basePath)
+        {
+            _studentService.InsertStudentToHomework(userName, homeworkID, fileName, basePath);
+            return View();
         }
 
         [HttpPost]
@@ -75,7 +81,7 @@ namespace TeamA.Controllers
                         {
 
                         }
-                        return View("ViewStudentHomework", (object)fileText);
+                     	return View("ViewStudentHomework", (object)fileText);
                     }
                 }
             }
