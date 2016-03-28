@@ -49,6 +49,10 @@ namespace BusinessLayer
 
         }
 
-        
+        public void CheckHomeworkDeadLine()
+            
+        {
+            hwRepository.CheckHomeworkDeadLine();
+        }
     }
 }

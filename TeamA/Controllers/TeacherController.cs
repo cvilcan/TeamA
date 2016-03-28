@@ -34,8 +34,15 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
-            homeworkService.CreateHomework((int)Session["SessionID"], vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);
-            return RedirectToAction("Index");
+            try
+            {
+                homeworkService.CreateHomework(vm.TeacherID, vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return View("Error",(object)"Invalid credentials");
+            }
         }
 
         [CustomAuthorize(Roles = "Teacher")]
