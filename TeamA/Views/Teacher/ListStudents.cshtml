@@ -5,62 +5,39 @@
 }
 
 <div class="container">
-    
-        <div class="page-header">
-            <div class="row">
-                <div class="col-xs-6 text-left">
-                    <div class="previous">
-                        <h2>ListStudents</h2>
-                    </div>
+    <div class="page-header">
+        <div class="row">
+            <div class="col-xs-6 text-left">
+                <div class="previous">
+                    <h2>ListStudents</h2>
                 </div>
-                <div class="col-xs-6 text-right">
-                    <div class="previous">
-                        <button type="button" class="btn btn-primary btn-sm text-right">See in PDF</button>
-                    </div>
-                </div>
-            </div>           
-        </div>
- 
-</div>
-
-
-<div class="container">
-    <div class="row-fluid">
-        <div class="span6">
-            <div class="span6 pull-left">
-                <table class="table table-striped">
-
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.StudentName)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.StudentID)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.StudentEmail)
-                        </th>
-
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.StudentName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.StudentID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.StudentEmail)
-                            </td>
-
-                        </tr>
-                    }
-
-                </table>
             </div>
-        </div>
+            <div class="col-xs-6 text-right">
+                <div class="next">
+                    @*@Html.ActionLink("VREAU PDF!!!", "GeneratePDF", "Teacher", new { newList = Model }, null);*@
+                    <button type="button" class="btn btn-primary btn-sm text-right pdfButton">See in PDF</button>
+                </div>
+            </div>
+         </div>
+     </div>
 </div>
+
+<div>
+    @Html.Partial("_ListStudents")  
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".pdfButton").click(function () {
+            var mvcUrl = "/Teacher/GeneratePDF"
+            $.ajax({
+                url: mvcUrl,
+                type: 'POST',
+                error: function (error) {
+                    alert('error; ' + error.responseText);
+                }
+            })
+        })
+    })
+</script>
+

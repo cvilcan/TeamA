@@ -55,7 +55,6 @@ namespace DAL.Repository
                 while (rdr.Read())
                 {
                     UserProfile u = new UserProfile();
-                    u.ID = Convert.ToInt32(rdr["ID"]);
                     u.Username = rdr["Student"].ToString();
                     u.Email = rdr["StudentEmail"].ToString();
                     u.RoleName = rdr["Username"].ToString();

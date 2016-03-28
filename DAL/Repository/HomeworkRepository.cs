@@ -85,34 +85,26 @@ namespace DAL.Repository
         public void InsertCommentOrGradeOrStatus(int uploadID, int? grade=null, string comment=null )
         {
             
-           try {
-
-                
+            try
+            {
                 using (SqlConnection con = new SqlConnection(cs))
-                {               
+                {
 
                     SqlCommand cmd = new SqlCommand("spInsertCommentAndGrade", con);
-
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@uploadId", uploadID);
                     cmd.Parameters.AddWithValue("@Grade", grade);
                     cmd.Parameters.AddWithValue("@Comment", comment);
-              
-                    con.Open();
 
-                    cmd.ExecuteNonQuery();
-                 
-                    
-                }
-            }
+                	con.Open();
+                	cmd.ExecuteNonQuery();
+            	}
+             }
             catch (SqlException)
             {
               
-            }
-
-        }
-
+            }        }
 
 
 

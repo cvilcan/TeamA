@@ -64,6 +64,7 @@
     <Compile Include="Models\AccountVM.cs" />
     <Compile Include="Models\ExplorerModeVMl.cs" />
     <Compile Include="Models\HomeworkVM.cs" />
+    <Compile Include="Models\StudentHomeworkDetailsVM.cs" />
     <Compile Include="Models\StudentVM.cs" />
     <Compile Include="Models\TeacherListVM.cs" />
     <Compile Include="Models\TeacherVM.cs" />

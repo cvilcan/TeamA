@@ -149,9 +149,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Authorize\CookieFilterAttribute.cs" />
     <Compile Include="Authorize\CustomAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
@@ -376,6 +378,9 @@
     <Content Include="Views\Teacher\ViewStudentUploads.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Teacher\_ListStudents.cshtml" />
+    <Content Include="Views\Shared\Presenter.cshtml" />
+    <Content Include="Views\Shared\_PDFLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
