@@ -57,6 +57,25 @@ namespace DAL.Repository
             }
         }
 
+        public IEnumerable<Tuple<int, string, string>> GetStudentsBelongingToTeacher(int teacherID)
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                List<Tuple<int, string, string>> studentList = new List<Tuple<int, string, string>>();
+                SqlCommand cmd = new SqlCommand("spGetStudentsBelongingToTeacher", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@teacherID", teacherID);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    studentList.Add(new Tuple<int, string, string>(Convert.ToInt32(rdr["ID"]), rdr["Username"].ToString(), rdr["Email"].ToString()));
+                }
+                return studentList;
+            }
+        }
+
         //Needed to set the path for the student homework file 
         public List<StudentUploadPath> GetStudentUploadParameters(string username, int homeworkID)
         {

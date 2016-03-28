@@ -12,6 +12,7 @@ namespace BusinessLayer
     public class StudentService
     {
         private StudentRepository _studentRepository = new StudentRepository();
+        private UserService _userService = new UserService();
 
         public void InsertStudentToHomework(string userName, int homeworkID, string fileName, string basePath)
         {
@@ -30,6 +31,15 @@ namespace BusinessLayer
             var studentsToTeachers = _studentRepository.GetStudentsToTeachers();
             var studentsFromSameTeacher = studentsToTeachers.Where(x => x.Item3 == teacherName);
             return studentsFromSameTeacher.ToList();
+        }
+
+        //Returns ID, Username, Email
+        public IEnumerable<Tuple<int, string, string>> GetStudentsOfTeacher(string teacherName)
+        {
+            var teacher = _userService.GetUser(teacherName);
+            var students = _studentRepository.GetStudentsBelongingToTeacher(teacher.Item1);
+
+            return students;
         }
 
         public Tuple<string, string, string> GetTeacherBelongingToStudent(string studentName)

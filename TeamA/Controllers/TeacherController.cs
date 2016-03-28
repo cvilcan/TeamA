@@ -34,7 +34,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
-            homeworkService.CreateHomework(vm.TeacherID, vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);
+            homeworkService.CreateHomework((int)Session["SessionID"], vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);
             return RedirectToAction("Index");
         }
 
