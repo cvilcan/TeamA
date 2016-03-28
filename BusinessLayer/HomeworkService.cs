@@ -40,6 +40,14 @@ namespace BusinessLayer
             return teacherHomework;
         }
 
+
+        public void InsertCommentOrGradeOrStatus(int uploadId, int? grade, string comment)
+        {
+
+            hwRepository.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+
+        }
+
         
     }
 }
