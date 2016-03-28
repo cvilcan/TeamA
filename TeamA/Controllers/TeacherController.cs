@@ -12,12 +12,12 @@ using TeamA.Models;
 
 namespace TeamA.Controllers
 {
+     [CustomAuthorize(Roles = "Teacher")]
     public class TeacherController : Controller
     {
         private HomeworkService homeworkService = new HomeworkService();
         private UserService userService = new UserService();
         private FileSystemService fileSystemService = new FileSystemService();
-        List<StudentVM> newList = new List<StudentVM>();
 
         public ActionResult Index()
         {
@@ -39,10 +39,11 @@ namespace TeamA.Controllers
         }
        
         public ActionResult ListStudents()
-        {           
+        {
+            List<StudentVM> L = new List<StudentVM>();
             var a = userService.GetAllStudents();
             foreach (var item in a)
-                newList.Add(new StudentVM()
+                L.Add(new StudentVM()
                 {
                     StudentName = item.Username,
                     StudentID = item.ID,
@@ -50,29 +51,37 @@ namespace TeamA.Controllers
                 });
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
-            return View(newList);
+            return View(L);
         }
+
 
         [HttpPost]
         public ActionResult GeneratePDF()
         {
+            List<StudentVM> L = new List<StudentVM>();
             var a = userService.GetAllStudents();
             foreach (var item in a)
-                newList.Add(new StudentVM()
+                L.Add(new StudentVM()
                 {
                     StudentName = item.Username,
                     StudentID = item.ID,
                     StudentEmail = item.Email
                 });
-            return new Rotativa.ViewAsPdf("Presenter", newList);
+            return new Rotativa.ViewAsPdf("Presenter", L);
         }
 
-        public ActionResult ViewStudentUploads(string path)
+        public ActionResult ViewStudentUploads(string teacherFolder, string homeworkFolder, string studentFolder, string path)
         {
             string realPath;
-            if (path == null)
-                return View("Error");
-            realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + path);
+            if ((Request.QueryString["teacherFolder"] != Session["SessionUser"] + "_" + Session["SessionID"]) || (Request.QueryString["teacherFolder"] == null))
+                return View("Error", "You do not have the right to access this folder!");
+            realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/");
+            if (homeworkFolder != null)
+                realPath += homeworkFolder + "/";
+            if (studentFolder != null)
+                realPath += studentFolder + "/";
+            if (path != null)
+                realPath += path;
             var ex = fileSystemService.GetExplorerModel(realPath, Request.Url);
 
             if (!ex.isFile)
@@ -84,11 +93,11 @@ namespace TeamA.Controllers
                 {
                     fileText = fileSystemService.GetFileText(realPath);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
 
                 }
-                return View("ViewStudentHomework",(object)fileText);
+                return View("ViewStudentHomework", (object)fileText);
             }
         }
 
@@ -101,7 +110,8 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade = null, string comment = null)
         {
-            try {                 
+            try 
+			{                 
                  if( grade <=10 && grade >=1)
                     {                
                         homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
@@ -111,15 +121,15 @@ namespace TeamA.Controllers
                     {
                         ViewBag.Grade = "Please Enter a valid grade between 1 and 10";
 
+            			homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
                     }
                 return RedirectToAction("ViewStudentHomework");
-               }
+            }
             catch
             {
                 return RedirectToAction("Error");
             }
         }
-
 
         public ActionResult DownloadAsPDF(string path)
         {

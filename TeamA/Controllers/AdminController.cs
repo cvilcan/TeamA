@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.SqlClient;
 using TeamA.Models;
-using AccessModels.Models;
+//using AccessModels.Models;
 using System.Configuration;
 using BusinessLayer.Models;
 using TeamA.Authorize;
@@ -18,9 +18,10 @@ namespace TeamA.Controllers
     {
         private AdminService adminService = new AdminService();
         UserService userService = new UserService();
-
-
-        public ActionResult CreateTeacher()
+        public ActionResult Index()
+        {
+            return View();
+        }        public ActionResult CreateTeacher()
         {
             return View();
         }
@@ -28,7 +29,8 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateTeacher(TeacherVM tcr)
         {
-            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email,Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
+            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
+
             return View();
         }
 
@@ -57,7 +59,7 @@ namespace TeamA.Controllers
                 VMList.Add(new TeacherVM()
                     {
                         Username = item.Username,
-                        Email = item.Email,
+                        Email = item.Email
                         //IsConfirmed=item.IsConfirmed
                     });
             }
