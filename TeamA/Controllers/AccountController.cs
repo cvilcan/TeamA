@@ -35,7 +35,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult Login(AccountVM vm,string ReturnUrl)
         {
-            
+           
                 if (userService.Login(vm.UserName, vm.Password))
                 {
                     Session["SessionUser"] = vm.UserName;
@@ -73,12 +73,12 @@ namespace TeamA.Controllers
 
 
         [HttpPost]
-        public ActionResult Register(AccountVM vm)
+        public ActionResult Register(AccountVM vm,TeacherListVM tvm)
         {
-            //if (ModelState.IsValid)
-            //{
-            ////    userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
-            ////}
+            if (ModelState.IsValid)
+            {
+                userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherId);
+            }
             TeacherListVM listVM = new TeacherListVM()
             {
                 TeacherNameList = userService.GetAllTeachers().Select(x => x.Username).ToList()
@@ -123,7 +123,7 @@ namespace TeamA.Controllers
                 myCookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(myCookie);
             }
-            return View("Index", "Home", null);
+            return View("~/Views/Home/Index.cshtml");
 
         }
 
