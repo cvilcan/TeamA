@@ -42,17 +42,30 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MigraDoc.DocumentObjectModel, Version=1.31.3066.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\alina.craciun\Desktop\GDI+\MigraDoc.DocumentObjectModel.dll</HintPath>
+      <HintPath>..\Helpers\PDFAssemblies\MigraDoc.DocumentObjectModel.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.Rendering, Version=1.31.3066.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\alina.craciun\Desktop\GDI+\MigraDoc.Rendering.dll</HintPath>
+      <HintPath>..\Helpers\PDFAssemblies\MigraDoc.Rendering.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.RtfRendering, Version=1.31.3066.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\alina.craciun\Desktop\GDI+\MigraDoc.RtfRendering.dll</HintPath>
+      <HintPath>..\Helpers\PDFAssemblies\MigraDoc.RtfRendering.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="Rotativa">
+=======
+    <Reference Include="PdfSharp, Version=1.31.1789.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\alina.craciun\Desktop\GDI+\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.31.1789.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\alina.craciun\Desktop\GDI+\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+>>>>>>> 8b5ab627fefcbdbbb1c0231a945a8f9603783561
       <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -141,9 +154,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Authorize\CookieFilterAttribute.cs" />
     <Compile Include="Authorize\CustomAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
@@ -159,6 +174,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\folder.png" />
+    <Content Include="Content\images\up.png" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -303,6 +320,9 @@
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Browsers\qt.browser">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -330,7 +350,6 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Uploads\gheorghe_22\bunica_5\as.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -366,10 +385,28 @@
     <Content Include="Views\Teacher\ViewStudentUploads.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Teacher\_ListStudents.cshtml" />
+    <Content Include="Views\Shared\Presenter.cshtml" />
+    <Content Include="Views\Shared\_PDFLayout.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\ViewHomeworkDetails.cshtml" />
+    <Content Include="Views\Student\ViewHomeworkUploads.cshtml" />
+    <Content Include="Views\Shared\_FolderBrowser.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+=======
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_FolderBrowser.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\ViewHomeworkDetails.cshtml" />
+    <Content Include="Views\Student\ViewHomeworkUploads.cshtml" />
+>>>>>>> b469b0d5e584fab7e59a1c8d61fbcf4ac7193130
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\vasile_23\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -16,30 +16,23 @@ namespace DAL.Repository
 
         public string cs = ConfigurationManager.ConnectionStrings["TeamAConnection"].ConnectionString;
 
-        public void AddStudentHomework(string username, string fileName, int homeworkID)
+        public void InsertStudentToHomework(string username, string fileName, int homeworkID)
         {
-            try
+            using (SqlConnection con = new SqlConnection(cs))
             {
-                using (SqlConnection con = new SqlConnection(cs))
-                {
-                    var uploadDate = DateTime.Now;
+                var uploadDate = DateTime.Now;
 
-                    SqlCommand cmd = new SqlCommand("spCreateStudent", con);
+                SqlCommand cmd = new SqlCommand("spInsertStudentToHomework", con);
 
-                    cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@filename", fileName);
-                    cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
-                    cmd.Parameters.AddWithValue("@uploadDate", uploadDate);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@filename", fileName);
+                cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
+                cmd.Parameters.AddWithValue("@uploadDate", uploadDate);
 
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (SqlException)
-            {
-
+                con.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -55,7 +48,6 @@ namespace DAL.Repository
                 while (rdr.Read())
                 {
                     UserProfile u = new UserProfile();
-                    u.ID = Convert.ToInt32(rdr["ID"]);
                     u.Username = rdr["Student"].ToString();
                     u.Email = rdr["StudentEmail"].ToString();
                     u.RoleName = rdr["Username"].ToString();
@@ -66,27 +58,34 @@ namespace DAL.Repository
         }
 
         //Needed to set the path for the student homework file 
-        public Tuple<int, string, int, string> GetStudentUploadParameters(string username, int homeworkID)
+        public List<StudentUploadPath> GetStudentUploadParameters(string username, int homeworkID)
         {
-            try
+            using (SqlConnection con = new SqlConnection(cs))
             {
-                using (SqlConnection con = new SqlConnection(cs))
-                {                  
-                    SqlCommand cmd = new SqlCommand("spGetStudentUploadPath", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
+                List<StudentUploadPath> studentPathList = new List<StudentUploadPath>();
+                SqlCommand cmd = new SqlCommand("spGetStudentUploadPath", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
                   
-                    con.Open();
-                    SqlDataReader rdr = cmd.ExecuteReader();                  
-                    var uploadParams = new Tuple<int,string,int,string>(Convert.ToInt32(rdr["TeacherId"]),rdr["TeacherName"].ToString(),Convert.ToInt32(rdr["StudentId"]),rdr["StudentName"].ToString());
-                    return uploadParams;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();   
+                while(rdr.Read())
+                {
+                    StudentUploadPath studentPath = new StudentUploadPath();
+
+                    studentPath.TeacherId = Convert.ToInt32(rdr["TeacherId"]);
+                    studentPath.TeacherName = rdr["TeacherName"].ToString();
+                    studentPath.StudentId = Convert.ToInt32(rdr["StudentId"]);
+                    studentPath.UploadID = Convert.ToInt32(rdr["UploadID"]);
+                    studentPath.HomeWorkName = rdr["HomeWorkName"].ToString();
+
+                    studentPathList.Add(studentPath);
+
                 }
-            }
-            catch (SqlException)
-            {                              
-                return null ;
-            }        
+
+                return studentPathList;
+            }    
         }
 
         public List<StudentHomeworkDetails> GetStudentPendingHomework(int studentID)
@@ -192,5 +191,13 @@ namespace DAL.Repository
 
         }
 
-    }
+       
+
+
+
+        }
+
+
+
 }
+

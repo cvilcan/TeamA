@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "GetStudentPendingHomework";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
 }
 
 <div class="container">
@@ -18,42 +19,59 @@
             <table class="table">
                 <thead>
                     <tr class="success">
-                        @*<th>@Html.DisplayNameFor(model => model.TeacherId)</th>*@
                         <th>@Html.DisplayNameFor(model => model.TeacherName)</th>
                         <th>@Html.DisplayNameFor(model => model.StudentGrade)</th>
                         <th>@Html.DisplayNameFor(model => model.HomeworkId)</th>
                         <th>@Html.DisplayNameFor(model => model.HomeWorkName)</th>
                         <th>@Html.DisplayNameFor(model => model.Description)</th>
-                        <th>@Html.DisplayNameFor(model => model.Deadline)</th>                  
+                        <th>@Html.DisplayNameFor(model => model.Deadline)</th>      
+                        <th></th>            
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
+                        using (Html.BeginForm("ViewHomeworkDetails", "Student",
+                        new 
+                        { 
+                            teacherFolder = item.TeacherName + "_" + item.TeacherId, 
+                            homeworkFolder = item.HomeWorkName + "_" + item.HomeworkId,
+                            studentFolder = Session["SessionUser"] + "_" + Session["SessionID"],
+                            path = ""
+                        }, FormMethod.Post))
+                        {
                         <tr class="info">
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.TeacherId)
-                            </td>*@
                             <td>
+                                <input type="hidden" value="@item.UploadId" name="UploadId" />
+                                <input type="hidden" value="@item.TeacherId" name="TeacherId" />
+                                <input type="hidden" value="@item.TeacherName" name="TeacherName" />
                                 @Html.DisplayFor(modelItem => item.TeacherName)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.StudentGrade)
+                                <input type="hidden" value="@item.StudentGrade" name="StudentGrade" />
+                                @Html.DisplayFor(modelItem => item.StudentGrade, new { name = "StudentGrade" })
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.HomeworkId)
+                                <input type="hidden" value="@item.HomeworkId" name="HomeworkId" />
+                                @Html.DisplayFor(modelItem => item.HomeworkId, new { name = "HomeworkId" })
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.HomeWorkName)
+                                <input type="hidden" value="@item.HomeWorkName" name="HomeWorkName" />
+                                @Html.DisplayFor(modelItem => item.HomeWorkName, new { name = "HomeWorkName" })
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Description)
+                                <input type="hidden" value="@item.Description" name="Description" />
+                                @Html.DisplayFor(modelItem => item.Description, new { name = "Description" })
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Deadline)
+                                <input type="hidden" value="@item.Deadline" name="Deadline" />
+                                @Html.DisplayFor(modelItem => item.Deadline, new { name = "Deadline" })
                             </td>                           
+                            <td>
+                                <input type="submit" value="Details" />
+                            </td>
                         </tr>
-
+                        }
                     }
                 </tbody>
             </table>

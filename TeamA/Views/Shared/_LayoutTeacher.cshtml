@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title - My ASP.NET MVC Application</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
+    @*<meta name="viewport" content="width=device-width" />*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     @Styles.Render("~/Content/css")
     @Styles.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jquery")
@@ -24,7 +25,7 @@
                         <li>@Html.ActionLink("Home", "Index", "Teacher")</li>
                         <li>@Html.ActionLink("View All Students", "ListStudents", "Teacher")</li>
                         <li>@Html.ActionLink("View all homework", "ViewAllHomework", "Teacher")</li>
-                        <li>@Html.ActionLink("View student uploads", "ViewStudentUploads", "Teacher", new { path = Session["SessionUser"] }, null)</li>
+                        <li>@Html.ActionLink("View student uploads", "ViewStudentUploads", "Teacher", new { teacherFolder = (string)Session["SessionUser"] + "_" + Session["SessionID"] }, null)</li>
                     </ul>
                 </div>
                 <div class="col-md-2">

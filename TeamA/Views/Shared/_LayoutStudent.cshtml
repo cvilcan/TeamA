@@ -4,9 +4,16 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title - My ASP.NET MVC Application</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
+    @*<meta name="viewport" content="width=device-width" />*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/Scripts/jquery.datetimepicker.full.js")
+    @Styles.Render("~/Content/jquery.datetimepicker.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/BootstrapJS")
 </head>
 <body>
     <div class="container">
@@ -16,8 +23,8 @@
             <div class="col-md-10">
                 <ul class="nav nav-tabs">
                     <li>@Html.ActionLink("Home", "Index", "Student", new { data_toggle = "pill" })</li>
-                    <li>@Html.ActionLink("View all finished homework", "ViewAllFinishedHomework", "Student", new { data_toggle = "pill" })</li>
-                    <li>@Html.ActionLink("View All pending homework", "ViewAllPendingHomework", "Student", new { data_toggle = "pill" })</li>
+                    <li>@Html.ActionLink("View all finished homework", "GetStudentCompletedHomework", "Student", new { studentID = Session["SessionID"] }, null)</li>
+                    <li>@Html.ActionLink("View All pending homework", "GetStudentPendingHomework", "Student", new { studentID = Session["SessionID"] }, null )</li>
                 </ul>
             </div>
             <div class="col-md-2">

@@ -13,6 +13,8 @@ using ServiceHelpers;
 using System.IO;
 using PdfSharp.Pdf;
 using PdfSharp;
+
+
 namespace BusinessLayer
 {
     public class UserService
@@ -49,16 +51,16 @@ namespace BusinessLayer
             return teachers;
         }
 
-        public Tuple<int, string, string,int> GetUser(string username)
+        public Tuple<int, string, string> GetUser(string username)
         {
             var a = GetAllUsers();
             var user = a.Where(q => q.Username == username).SingleOrDefault();
-            return new Tuple<int, string, string,int>(user.ID, user.Username, user.Email,user.IsConfirmed);
+            return new Tuple<int, string, string>(user.ID, user.Username, user.Email);
         }
 
-        public void CreateStudentUser(string username, string password, string email, int? teacherID)
+        public void CreateStudentUser(string username, string password, string email, string teacherName)
         {
-            _userRepository.CreateStudentUser(username, email, password, teacherID, 0);
+            _userRepository.CreateStudentUser(username, email, password, teacherName);
             var guidstring = _userRepository.GetGuid(username);
             var request = HttpContext.Current.Request;
             var appUrl = HttpRuntime.AppDomainAppVirtualPath;
@@ -100,11 +102,12 @@ namespace BusinessLayer
         {
             var students = GetAllStudents();
             var teacher = GetUser(username);
-            var studentsToTeachers = _studentService.GetStudentTeacher(username);
+            var studentsToTeachers = _studentService.GetStudentsBelongingToTeacher(username);
 
             return studentsToTeachers;
 
         }
+
 
         public PdfDocument SeeInPDF(string path)
         {

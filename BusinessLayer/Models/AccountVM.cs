@@ -20,6 +20,8 @@ namespace BusinessLayer.Models
                             @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",
                             ErrorMessage = "Email is not valid")]
         public string Email { get; set; }
-        public int? TeacherId { get; set; }
+        public string TeacherName { get; set; }
+        public bool Remember { get; set; }
+        public int IsConfirmed { get; set; }
     }
 }

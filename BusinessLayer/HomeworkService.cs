@@ -41,7 +41,7 @@ namespace BusinessLayer
         }
 
 
-        public void InsertCommentOrGradeOrStatus(int uploadId, int? grade, string comment)
+        public void InsertCommentOrGradeOrStatus(int uploadId, int? grade = null, string comment = null)
         {
 
             hwRepository.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
