@@ -2,7 +2,9 @@
 
 @{
     ViewBag.Title = "ViewAllTeachers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="container">
     <div class="page-header">
@@ -46,6 +48,10 @@
                     </table>
                 </div>
             </div>
+        <div>
+    @Html.ActionLink("Back to Index", "Index", "Admin")
+
+</div>
 
 </div>
 
@@ -69,6 +75,7 @@
 
             })
         })
+
     </script>
 
 
