@@ -30,8 +30,12 @@ namespace TeamA.Controllers
         public ActionResult CreateTeacher(TeacherVM tcr)
         {
             adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
+            //Response.Write();
+            var resutl = AdminService.errorTeacher;
 
             return View();
+
+
         }
 
         public ActionResult ViewAllStudents()

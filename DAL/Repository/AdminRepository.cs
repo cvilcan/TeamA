@@ -11,13 +11,12 @@ namespace DAL.Repository
 {
     public class AdminRepository
     {
-        
+
 
         public void addTeachersFromAdmin(UserProfile up)
         {
 
-            try
-            {
+           
                 string cs = ConfigurationManager.ConnectionStrings["TeamAConnection"].ConnectionString;
 
                 using (SqlConnection con = new SqlConnection(cs))
@@ -35,20 +34,20 @@ namespace DAL.Repository
 
                     cmd.ExecuteNonQuery();
                 }
-            }
-            catch (SqlException ex)
-            {
-                string str;
-                str = "Source:" + ex.Source;
-                str += "\n" + "Number:" + ex.Number.ToString();
-                str += "\n" + "Message:" + ex.Message;
-                str += "\n" + "Class:" + ex.Class.ToString();
-                str += "\n" + "Procedure:" + ex.Procedure.ToString();
-                str += "\n" + "Line Number:" + ex.LineNumber.ToString();
-                str += "\n" + "Server:" + ex.Server.ToString();
+           
+            //catch (SqlException ex)
+            //{
+            //    string str;
+            //    str = "Source:" + ex.Source;
+            //    str += "\n" + "Number:" + ex.Number.ToString();
+            //    str += "\n" + "Message:" + ex.Message;
+            //    str += "\n" + "Class:" + ex.Class.ToString();
+            //    str += "\n" + "Procedure:" + ex.Procedure.ToString();
+            //    str += "\n" + "Line Number:" + ex.LineNumber.ToString();
+            //    str += "\n" + "Server:" + ex.Server.ToString();
 
-                
-            }
+                           
+            //}
         }
 
 
