@@ -106,7 +106,7 @@ namespace DAL.Repository
               
             }        }
 
-        public void CheckDeadLine()
+        public void CheckHomeworkDeadLine()
         {
              try
             {
