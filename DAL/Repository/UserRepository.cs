@@ -44,74 +44,58 @@ namespace TeamA.Repository
 
         public void CreateStudentUser(string userName, string email, string password,int? teacherID,int isConfirmed)
         {
-            try
+            using (SqlConnection con = new SqlConnection(cs))
             {
-                using (SqlConnection con = new SqlConnection(cs))
-                {
-                    SqlCommand cmd = new SqlCommand("spCreateStudent",con);
+                SqlCommand cmd = new SqlCommand("spCreateStudent",con);
 
-                    cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@username", userName);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@teacherId", teacherID);
-                    cmd.Parameters.AddWithValue("@isConfirmed", isConfirmed);
+                cmd.Parameters.AddWithValue("@username", userName);
+                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@teacherId", teacherID);
 
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (SqlException)
-            {
-
-
+                con.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 
         public bool Login(string username, string password)
         {
-           try
+            using (SqlConnection con = new SqlConnection(cs))
             {
-                using (SqlConnection con = new SqlConnection(cs))
+                SqlCommand cmd = new SqlCommand("spLogin",con);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //password = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                List<int> loginlist = new List<int>();
+                while (rdr.Read())
                 {
-                    SqlCommand cmd = new SqlCommand("spLogin",con);
-
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    //password = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    con.Open();
-                    SqlDataReader rdr = cmd.ExecuteReader();
-                    List<int> loginlist = new List<int>();
-                    while (rdr.Read())
-                    {
                         
-                       int g;
-                           g = (int) rdr["ReturnCode"];
-                          loginlist.Add(g);
-                    }
-
-
-                    int number = loginlist[0];
-                    
-
-                    
-
-                    if(number==1)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    int g;
+                        g = (int) rdr["ReturnCode"];
+                        loginlist.Add(g);
                 }
-            }
-            catch(SqlException )
-            {
-                return false;
+
+
+                int number = loginlist[0];
+                    
+
+                    
+
+                if(number==1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
