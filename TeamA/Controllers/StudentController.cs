@@ -52,20 +52,19 @@ namespace TeamA.Controllers
                 else
                 {
                     string teacherName = teacherFolder.Split('_')[0];
-                    var teacherList = _studentService.GetTeachersBelongingToStudent((string)Session["SessionUser"]).ToList();
+                    var teacherList = _studentService.GetTeacherBelongingToStudent((string)Session["SessionUser"]);
                     bool found = false;
-                    for (int i = 0; i < teacherList.Count; i++)
-                        if (teacherList[i].Item3 == teacherName)
-                            found = true;
+                    if ((teacherList != null) && (teacherList.Item3 == teacherName))
+                        found = true;
                     if ((Request.QueryString["studentFolder"] != (string)Session["SessionUser"] + "_" + Session["SessionID"]) || (studentFolder == null)
                         || (!found) || (homeworkFolder == null))
                         return View("Error", "You do not have the rights to access root folder!");
-                    string realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/" + homeworkFolder + "/" + studentFolder + "/");
+                    string realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/" + homeworkFolder + "/" + studentFolder + "/";
                     if (path != null)
                         realPath += path;
                     StudentHomeworkDetailsVM vm = new StudentHomeworkDetailsVM();
                     vm.Details = model;
-                    //string realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] +
+                    //string realPath = ConfigurationManager.AppSettings["BasePath"] +
                     //    "/" + (string)Session["SessionUser"] + "_" + Session["SessionID"] + "/");
                     vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url);
                     if (!vm.FolderStructure.isFile)
@@ -77,7 +76,7 @@ namespace TeamA.Controllers
                         {
                             fileText = _fileSystemService.GetFileText(realPath);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
 
                         }
@@ -95,20 +94,19 @@ namespace TeamA.Controllers
             else
             {
                 string teacherName = teacherFolder.Split('_')[0];
-                var teacherList = _studentService.GetTeachersBelongingToStudent((string)Session["SessionUser"]).ToList();
+                var teacherList = _studentService.GetTeacherBelongingToStudent((string)Session["SessionUser"]);
                 bool found = false;
-                for (int i = 0; i < teacherList.Count; i++)
-                    if (teacherList[i].Item3 == teacherName)
-                        found = true;
+                if ((teacherList != null) && (teacherList.Item3 == teacherName))
+                     found = true;
                 if ((Request.QueryString["studentFolder"] != (string)Session["SessionUser"] + "_" + Session["SessionID"]) || (studentFolder == null)
                     || (!found) || (homeworkFolder == null))
                     return View("Error", "You do not have the rights to access root folder!");
-                string realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/" + homeworkFolder + "/" + studentFolder + "/");
+                string realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/" + homeworkFolder + "/" + studentFolder + "/";
                 if (path != null)
                     realPath += path;
                 StudentHomeworkDetailsVM vm = new StudentHomeworkDetailsVM();
                 vm.Details = new StudentHomeworkDetails();
-                //string realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] +
+                //string realPath = ConfigurationManager.AppSettings["BasePath"] +
                 //    "/" + (string)Session["SessionUser"] + "_" + Session["SessionID"] + "/");
                 vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url);
                 if (!vm.FolderStructure.isFile)

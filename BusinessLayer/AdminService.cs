@@ -28,6 +28,8 @@ namespace BusinessLayer
 
         }
 
+
+
         public void addTeachersFromAdmin(string username,string email, string basePath) {
 
              try
@@ -41,7 +43,7 @@ namespace BusinessLayer
                 up.Email = email;
                 up.Username = username;
                 up.Password = password;
-            
+
                 
                 
                 adminRepository.addTeachersFromAdmin(up);
@@ -50,17 +52,20 @@ namespace BusinessLayer
             }
              catch (SqlException e)
              {
-                 Console.WriteLine("admin service" + e);
+                 //Console.WriteLine("admin service" + e);
+                 e.Message.ToString();
+
+
              }
         }
 
         public void ResetPasswordSendMail(string username)
         {
             string password = _userRepository.ResetPassword(username);
-            string getUserEmail = _userRepository.GetAllUsers().Where(x => x.RoleName == "Teacher" && x.Username == username).Select(x => x.Email).FirstOrDefault();
+            string getUserEmail = _userRepository.GetAllUsers().Where(x => x.Username == username).Select(x => x.Email).FirstOrDefault();
             if (getUserEmail!=null)
             {
-                //MailHelper.SendMail(new List<string> { getUserEmail }, "account@account.com", "New Password", password);
+                MailHelper.SendMail(new List<string> { getUserEmail }, "account@account.com", "New Password", password);
             }
         }
       

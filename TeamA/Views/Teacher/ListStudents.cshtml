@@ -15,7 +15,7 @@
             <div class="col-xs-6 text-right">
                 <div class="next">
                     @*@Html.ActionLink("VREAU PDF!!!", "GeneratePDF", "Teacher", new { newList = Model }, null);*@
-                    <button type="button" class="btn btn-primary btn-sm text-right pdfButton">See in PDF</button>
+                    <button type="button" class="btn btn-primary btn-sm text-right pdfButton" onclick="">See in PDF</button>
                 </div>
             </div>
          </div>
@@ -27,17 +27,11 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".pdfButton").click(function () {
-            var mvcUrl = "/Teacher/GeneratePDF"
-            $.ajax({
-                url: mvcUrl,
-                type: 'POST',
-                error: function (error) {
-                    alert('error; ' + error.responseText);
-                }
-            })
-        })
-    })
+
+    $(".pdfButton").click(function () {
+        location.href = '/Teacher/GeneratePDF';        
+    });
+
+    
 </script>
 

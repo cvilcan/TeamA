@@ -5,15 +5,6 @@
 }
 
 <div class="container">
-    <div class="page-header">
-        <h1>All Students</h1>
-    </div>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-</div>
-
-<div class="container">
     <table class="table">
         <thead>
             <tr class="success">
@@ -33,7 +24,10 @@
                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
                     <td>@Html.DisplayFor(modelItem => item.IsConfirmed)</td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-xs">Reset</button>
+                        @using (Html.BeginForm("SendMailWithPassword", "Admin", new { username = item.UserName }, FormMethod.Post))
+                        {
+                            <input type="submit" name="name" class="btn-default" value="Reset" />
+                        }               
                     </td>
                 </tr>
 

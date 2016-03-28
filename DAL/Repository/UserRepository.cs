@@ -42,7 +42,7 @@ namespace TeamA.Repository
         }
 
 
-        public void CreateStudentUser(string userName, string email, string password,int? teacherID,int isConfirmed)
+        public void CreateStudentUser(string userName, string email, string password, string teacherName)
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
@@ -53,7 +53,7 @@ namespace TeamA.Repository
                 cmd.Parameters.AddWithValue("@username", userName);
                 cmd.Parameters.AddWithValue("@password", password);
                 cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@teacherId", teacherID);
+                cmd.Parameters.AddWithValue("@teacherName", teacherName);
 
                 con.Open();
                 cmd.ExecuteNonQuery();

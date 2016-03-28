@@ -12,7 +12,7 @@ using TeamA.Models;
 
 namespace TeamA.Controllers
 {
-     [CustomAuthorize(Roles = "Teacher")]
+    // [CustomAuthorize(Roles = "Teacher")]
     public class TeacherController : Controller
     {
         private HomeworkService homeworkService = new HomeworkService();
@@ -34,10 +34,11 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
-            homeworkService.CreateHomework(22, vm.Name, vm.Description, vm.Deadline, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
+            homeworkService.CreateHomework(vm.TeacherID, vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);
             return RedirectToAction("Index");
         }
-       
+
+        [CustomAuthorize(Roles = "Teacher")]
         public ActionResult ListStudents()
         {
             List<StudentVM> L = new List<StudentVM>();
@@ -55,7 +56,7 @@ namespace TeamA.Controllers
         }
 
 
-        [HttpPost]
+       // [CustomAuthorize(Roles = "Teacher")]
         public ActionResult GeneratePDF()
         {
             List<StudentVM> L = new List<StudentVM>();
@@ -75,7 +76,7 @@ namespace TeamA.Controllers
             string realPath;
             if ((Request.QueryString["teacherFolder"] != Session["SessionUser"] + "_" + Session["SessionID"]) || (Request.QueryString["teacherFolder"] == null))
                 return View("Error", "You do not have the right to access this folder!");
-            realPath = Server.MapPath(ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/");
+            realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/";
             if (homeworkFolder != null)
                 realPath += homeworkFolder + "/";
             if (studentFolder != null)

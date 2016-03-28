@@ -9,7 +9,7 @@
         <h1>All Teachers</h1>
     </div>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "CreateTeacher")
     </p>
 </div>
 
@@ -54,7 +54,7 @@
         $(document).ready(function () {
             $(".resetButton").click(function () {
                 var Username = $(this).closest("tr").children(".userNameDiv")[0].innerText;
-                var mvcURL = "/Teacher/SendMailWithPassword"
+                var mvcURL = "/Admin/SendMailWithPassword"
                 $.ajax({
                     url: mvcURL,
                     data: { username: Username },
@@ -63,7 +63,7 @@
                         alert("Succesfull reset! Yay!");
                     },
                     error: function (error) {
-                        alert('error; ' + error.responseText);
+                        alert('error; ');
                         }
                 })
 
