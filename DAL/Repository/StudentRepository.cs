@@ -186,8 +186,6 @@ namespace DAL.Repository
                         studentCompletedHomework.Deadline = Convert.ToDateTime(rdr["Deadline"]);
                         studentCompletedHomework.Comment = rdr["Comment"].ToString();
                         studentCompletedHomework.Status = rdr["Status"].ToString();
-                        studentCompletedHomework.UploadDate = Convert.ToDateTime(rdr["UploadDate"]);
-                        studentCompletedHomework.StudentGrade = Convert.ToInt32(rdr["UploadID"]);
 
                         studentCompletedHomeworkList.Add(studentCompletedHomework);
                     }

@@ -25,7 +25,7 @@
                         <li>@Html.ActionLink("Home", "Index", "Teacher")</li>
                         <li>@Html.ActionLink("View All Students", "ListStudents", "Teacher")</li>
                         <li>@Html.ActionLink("View all homework", "ViewAllHomework", "Teacher")</li>
-                        <li>@Html.ActionLink("View student uploads", "ViewStudentUploads", "Teacher", new { teacherFolder = (string)Session["SessionUser"] + "_" + Session["SessionID"] }, null)</li>
+                        <li>@Html.ActionLink("View student uploads", "ViewStudentUploads", "Teacher", new { teacherFolder = (string)Session["SessionUser"] + "_" + Session["SessionUserId"] }, null)</li>
                     </ul>
                 </div>
                 <div class="col-md-2">

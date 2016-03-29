@@ -39,7 +39,7 @@ namespace TeamA.Controllers
                 userService.Login(vm.UserName, vm.Password);
                 
                 Session["SessionUser"] = vm.UserName;
-                Session["SessionID"] = userService.GetUser(vm.UserName).Item1;
+                Session["SessionUserId"] = userService.GetUser(vm.UserName).Item1;
 
 
                 

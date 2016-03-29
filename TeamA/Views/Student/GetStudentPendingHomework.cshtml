@@ -49,7 +49,7 @@
                                         id = item.HomeworkId,
                                         teacherFolder = item.TeacherName + "_" + item.TeacherId,
                                         homeworkFolder = item.HomeWorkName + "_" + item.HomeworkId,
-                                        studentFolder = Session["SessionUser"] + "_" + Session["SessionID"],
+                                        studentFolder = Session["SessionUser"] + "_" + Session["SessionUserId"],
                                         path = Request.QueryString["path"]
                                     })
                             </td>
