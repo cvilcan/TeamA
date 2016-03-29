@@ -81,21 +81,24 @@ namespace TeamA.Controllers
 
             if (ModelState.IsValid)
             {
-                userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
-                Login(vm, "");
+                try
+                {
+                    userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
+                    return RedirectToAction("MessageView", (object)"A confirmation message has benn sent. Please confirm!")
+                }
+                catch (Exception e)
+                {
+                    return RedirectToAction("Error", (object)"An error has ocurred.");
+                }
             }
-            TeacherListVM listVM = new TeacherListVM()
-            {
-                TeacherNameList = userService.GetAllTeachers().Select(x => x.Username).ToList()
-
-            };
-            return View(listVM);
+            else
+                return RedirectToAction("Error", (object)"An error has ocurred.");
         }
 
         public ActionResult ConfirmRegistration(string GUID)
         {
             if (userService.CheckGuid(GUID) == 1)
-                return View("RegistrationConfirmed");
+                return View("MessageView", "Registration confirmed! Enjoy!");
             else return View("Error", "Invalid confirmation link!");
         }
 
