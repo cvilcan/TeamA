@@ -22,40 +22,60 @@
 </head>
 <body>
     <div class="container">
-        <h2>Welcome!</h2>
+        <h2>Welcome home !</h2>
 
-        @*<div class="row">
-            <div class="col-md-10">
-                <ul class="nav nav-tabs">
-                    <li>@Html.ActionLink("Home", "Index", "Admin")</li>
-                    <li>@Html.ActionLink("View All Teachers", "ViewAllTeachers", "Admin")</li>
-                    <li>@Html.ActionLink("View All Students", "ViewAllStudents", "Admin")</li>
-                </ul>
-            </div>*@
-            <div class="col-md-2">
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="span6 pull-right">
+                        <div class="btn-group">
 
-    </div>
+    <button type="button" class="btn btn-default">
+        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+    </button>
 
 
-    <div class="container">
 
-        <div class="panel panel-default">
-            <div class="panel-body">
-                @RenderSection("featured", required: false)
-                @RenderBody()
-            </div>
-        </div>
+    <button type="button" class="btn btn-default">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</button>
 
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+</div>
+
+                        @*<div class="row">
+                            <div class="col-md-10">
+                                <ul class="nav nav-tabs">
+                                    <li>@Html.ActionLink("Home", "Index", "Admin")</li>
+                                    <li>@Html.ActionLink("View All Teachers", "ViewAllTeachers", "Admin")</li>
+                                    <li>@Html.ActionLink("View All Students", "ViewAllStudents", "Admin")</li>
+                                </ul>
+                            </div>*@
+                        @*<div class="col-md-2">
+                            @Html.Partial("_LoginPartial")
+                        </div>*@
+                    </div>
+                    </div>
                 </div>
-            </div>
-        </footer>
-    </div>
+        </div>
+
+
+
+
+                    <div class="container">
+
+                        
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            @RenderSection("featured", required: false)
+                                            @RenderBody()
+                                        </div>
+                                    </div>
+
+                                    <footer>
+                                        <div class="content-wrapper">
+                                            <div class="float-left">
+                                                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                                            </div>
+                                        </div>
+                                    </footer>
+                                </div>
+                       
 </body>
 </html>

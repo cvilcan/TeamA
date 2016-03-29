@@ -126,5 +126,16 @@ namespace TeamA.Controllers
                 }
             }
         }
+
+
+        //De implementat in View
+        public ActionResult ViewStudentPendingHomeworkUploads(string userName, int homeworkId) 
+        {
+            List<StudentHomeworkDetails> studentPendingHomeworkUpload = _studentService.GetPendingHomeworkUpload(userName, homeworkId);
+
+            return View(studentPendingHomeworkUpload);
+        }
+
+
     }
 }
