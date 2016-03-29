@@ -42,6 +42,10 @@ namespace TeamA.Controllers
                 Session["SessionUser"] = vm.UserName;
                 Session["SessionID"] = userService.GetUser(vm.UserName).Item1;
 
+
+                
+
+                if (vm.Remember){
                 var cookie = new HttpCookie("Cookie");
                 cookie.Expires = DateTime.Now.AddDays(30);
                 cookie["username"] = vm.UserName;
@@ -49,6 +53,7 @@ namespace TeamA.Controllers
 
 
                 Response.AppendCookie(cookie);
+            }
                 string role = userService.GetRole(vm.UserName);
 
                 if ((ReturnUrl == "") || (ReturnUrl == null))
