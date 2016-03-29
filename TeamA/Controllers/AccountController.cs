@@ -19,11 +19,10 @@ namespace TeamA.Controllers
 
 
         UserService userService = new UserService();
-
+        
         public ActionResult Index()
         {
-
-          
+            
           return View();
         }
 
@@ -42,6 +41,10 @@ namespace TeamA.Controllers
                 Session["SessionUser"] = vm.UserName;
                 Session["SessionID"] = userService.GetUser(vm.UserName).Item1;
 
+
+                
+
+                if (vm.Remember){
                 var cookie = new HttpCookie("Cookie");
                 cookie.Expires = DateTime.Now.AddDays(30);
                 cookie["username"] = vm.UserName;
@@ -49,6 +52,7 @@ namespace TeamA.Controllers
 
 
                 Response.AppendCookie(cookie);
+            }
                 string role = userService.GetRole(vm.UserName);
 
                 if ((ReturnUrl == "") || (ReturnUrl == null))
@@ -84,15 +88,15 @@ namespace TeamA.Controllers
                 try
                 {
                     userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
-                    return RedirectToAction("MessageView", (object)"A confirmation message has benn sent. Please confirm!");
+                    return View("MessageView", (object)"A confirmation message has benn sent. Please confirm!");
                 }
-                catch (Exception e)
+                catch (Exception e) 
                 {
-                    return RedirectToAction("Error", (object)"An error has ocurred.");
+                    return View("MessageView", (object)"An error has ocurred.");
                 }
             }
             else
-                return RedirectToAction("Error", (object)"An error has ocurred.");
+                return View("MessageView", (object)"An error has ocurred.");
         }
 
         public ActionResult ConfirmRegistration(string GUID)

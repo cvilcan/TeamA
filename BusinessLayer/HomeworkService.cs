@@ -8,6 +8,7 @@ using TeamA.Repository;
 using AccessModels.Models;
 using System.Data.SqlClient;
 using System.IO;
+using BusinessLayer.Mail;
 
 namespace BusinessLayer
 {
@@ -25,9 +26,16 @@ namespace BusinessLayer
             UserProfile teacher = teachers.Where(t => t.ID == TeacherUserID).FirstOrDefault();
             int homeworkID = hwRepository.CreateHomework(TeacherUserID, name, description, deadline);
 
+            string getStudEmail = userService.GetAllStudents().Select(x => x.Email).FirstOrDefault();
+            
+
             if (teacher != null)
             {
                 Directory.CreateDirectory(basePath + teacher.Username + '_' + Convert.ToString(teacher.ID) + '/' + name + '_' + Convert.ToString(homeworkID));
+                if (getStudEmail != null)
+                {
+                    MailHelper.SendMail(new List<string> { getStudEmail }, "account@account.com", "New Homework" + deadline, description);
+                }
             }
             else { }
 
@@ -68,5 +76,21 @@ namespace BusinessLayer
                 TeacherId = model.TeacherId
             };
         }
-    }
+
+          public List<StudentToHomework> GetStudentsAvgGradeByTeacher(string userName)
+        {
+             List<StudentToHomework>  studentAvgGradeByTeacher = hwRepository.GetStudentsAvgGradeByTeacher(userName);
+       
+              return studentAvgGradeByTeacher;
+         }
+        public List<StudentToHomework> GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
+        {
+             List<StudentToHomework> studentGradeByTeacherAndHomework =hwRepository.GetStudentsGradeByTeacherAndHomework(userName,homeworkID);
+
+            return studentGradeByTeacherAndHomework;
+        }
+
+
 }
+    }
+
