@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Mail;
 using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,8 @@ namespace TeamA.Controllers
         {
             try
             {
-                homeworkService.CreateHomework(vm.TeacherID, vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);
+                homeworkService.CreateHomework(vm.TeacherID, vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);                
+                
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -101,7 +103,7 @@ namespace TeamA.Controllers
                 {
                     fileText = fileSystemService.GetFileText(realPath);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }
@@ -145,5 +147,7 @@ namespace TeamA.Controllers
             EmptyResult result = new EmptyResult();
             return View(result);
         }
+
+        
     }
 }
