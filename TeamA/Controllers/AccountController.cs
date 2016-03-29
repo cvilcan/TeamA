@@ -19,11 +19,10 @@ namespace TeamA.Controllers
 
 
         UserService userService = new UserService();
-
+        
         public ActionResult Index()
         {
-
-          
+            
           return View();
         }
 
@@ -40,7 +39,7 @@ namespace TeamA.Controllers
                 userService.Login(vm.UserName, vm.Password);
                 
                 Session["SessionUser"] = vm.UserName;
-                Session["SessionID"] = userService.GetUser(vm.UserName).Item1;
+                Session["SessionUserId"] = userService.GetUser(vm.UserName).Item1;
 
 
                 
@@ -89,15 +88,15 @@ namespace TeamA.Controllers
                 try
                 {
                     userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
-                    return RedirectToAction("MessageView", (object)"A confirmation message has benn sent. Please confirm!");
+                    return View("MessageView", (object)"A confirmation message has benn sent. Please confirm!");
                 }
-                catch (Exception e)
+                catch (Exception e) 
                 {
-                    return RedirectToAction("Error", (object)"An error has ocurred.");
+                    return View("MessageView", (object)"An error has ocurred.");
                 }
             }
             else
-                return RedirectToAction("Error", (object)"An error has ocurred.");
+                return View("MessageView", (object)"An error has ocurred.");
         }
 
         public ActionResult ConfirmRegistration(string GUID)

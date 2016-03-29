@@ -23,8 +23,8 @@
             <div class="col-md-10">
                 <ul class="nav nav-tabs">
                     <li>@Html.ActionLink("Home", "Index", "Student", new { data_toggle = "pill" })</li>
-                    <li>@Html.ActionLink("View all finished homework", "GetStudentCompletedHomework", "Student", new { studentID = Session["SessionID"] }, null)</li>
-                    <li>@Html.ActionLink("View All pending homework", "GetStudentPendingHomework", "Student", new { studentID = Session["SessionID"] }, null )</li>
+                    <li>@Html.ActionLink("View all finished homework", "GetStudentCompletedHomework", "Student", new { studentID = Session["SessionUserId"] }, null)</li>
+                    <li>@Html.ActionLink("View All pending homework", "GetStudentPendingHomework", "Student", new { studentID = Session["SessionUserId"] }, null )</li>
                 </ul>
             </div>
             <div class="col-md-2">

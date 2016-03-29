@@ -9,12 +9,14 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeamA.Attributes;
 using TeamA.Authorize;
 using TeamA.Models;
 
 namespace TeamA.Controllers
 {
-    // [CustomAuthorize(Roles = "Teacher")]
+    [CookieFilter]
+    [CustomAuthorize(Roles = "Teacher")]
     public class TeacherController : Controller
     {
         private HomeworkService homeworkService = new HomeworkService();
@@ -84,7 +86,7 @@ namespace TeamA.Controllers
         public ActionResult ViewStudentUploads(string teacherFolder, string homeworkFolder, string studentFolder, string path)
         {
             string realPath;
-            if ((Request.QueryString["teacherFolder"] != Session["SessionUser"] + "_" + Session["SessionID"]) || (Request.QueryString["teacherFolder"] == null))
+            if ((Request.QueryString["teacherFolder"] != Session["SessionUser"] + "_" + Session["SessionUserId"]) || (Request.QueryString["teacherFolder"] == null))
                 return View("Error", "You do not have the right to access this folder!");
             realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/";
             if (homeworkFolder != null)

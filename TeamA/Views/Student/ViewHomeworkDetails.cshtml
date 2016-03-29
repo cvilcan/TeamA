@@ -1,4 +1,4 @@
-﻿@model BusinessLayer.Models.StudentHomeworkDetailsVM
+﻿@model BusinessLayer.Models.StudentHomeworkBroswerDetailsVM
 
 @{
     ViewBag.Title = "ViewHomeworkDetails";
@@ -10,8 +10,7 @@
 <fieldset>
     <legend>StudentHomeworkDetails</legend>
     @Html.HiddenFor(model => model.Details.TeacherId)
-    @Html.HiddenFor(model => model.Details.UploadId)
-    @Html.DisplayFor(model => model.Details.HomeworkId)
+    @Html.HiddenFor(model => model.Details.HomeworkId)
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Details.TeacherName)
@@ -51,4 +50,12 @@
 
 @Html.Partial("_FolderBrowser", Model.FolderStructure)
 
-<input type="file" />
+Upload files
+@using (Html.BeginForm("UploadHomework", "Student", 
+    new { teacherFolder = Request.QueryString["teacherFolder"], homeworkFolder = Request.QueryString["homeworkFolder"], studentFolder = Request.QueryString["studentFolder"], path = Request.QueryString["path"]}, 
+    FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="homeworkFile"/>
+    <input type="hidden" name="homeworkID" value="@Model.Details.HomeworkId" />
+    <button type="submit" class="btn-default">Upload</button>
+}
