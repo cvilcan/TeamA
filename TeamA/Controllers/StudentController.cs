@@ -132,7 +132,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult UploadHomework(HttpPostedFileBase homeworkFile, int homeworkID)
         {
-            if (homeworkFile.ContentLength < 0)
+            if ((homeworkFile != null) && (homeworkFile.ContentLength < 0))
                 return View("Error", (object)"Empty file!");
             else
             {
