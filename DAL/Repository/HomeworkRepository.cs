@@ -126,8 +126,76 @@ namespace DAL.Repository
             
             }       
         }
-        
-     
 
+        public List<StudentToHomework> GetStudentsAvgGradeByTeacher(string userName)
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                List<StudentToHomework> studentAvgGradeByTeacherList = new List<StudentToHomework>();
+
+                SqlCommand cmd = new SqlCommand("spGetStudentsAvgGradeByTeacher", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@teachername", userName);
+
+                con.Open();
+                 SqlDataReader rdr =cmd.ExecuteReader();
+
+                while(rdr.Read())
+                {
+                    StudentToHomework studentAvgGradeByTeacher = new StudentToHomework();
+
+                    studentAvgGradeByTeacher.StudentName = rdr["Username"].ToString();
+                    studentAvgGradeByTeacher.StudentUserID = Convert.ToInt32(rdr["StudentID"]);
+                    studentAvgGradeByTeacher.Status = rdr["Status"].ToString();
+                    studentAvgGradeByTeacher.Comment = rdr["Comment"].ToString();
+                    studentAvgGradeByTeacher.UploadDate = Convert.ToDateTime(rdr["UploadDate"]);
+                    studentAvgGradeByTeacher.UploadID = Convert.ToInt32(rdr["UploadId"]);
+                    studentAvgGradeByTeacher.Grade = Convert.ToInt32(rdr["AvgGrade"]);
+       
+                    studentAvgGradeByTeacherList.Add(studentAvgGradeByTeacher);
+
+
+                }
+                return studentAvgGradeByTeacherList;
+
+
+            }
+        }
+
+        public List<StudentToHomework> GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
+        {
+            List<StudentToHomework> studentAvgGradeByTeacherAndHomeworkList = new List<StudentToHomework>();
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("spGetStudentsGradeByTeacherAndHomework", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@teachername", userName);
+                cmd.Parameters.AddWithValue("@homeworkId", homeworkID);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    StudentToHomework studentAvgGradeByTeacherAndHomework = new StudentToHomework();
+
+                    studentAvgGradeByTeacherAndHomework.StudentName = rdr["StudentName"].ToString();
+                    studentAvgGradeByTeacherAndHomework.StudentUserID = Convert.ToInt32(rdr["StudentID"]);
+                    studentAvgGradeByTeacherAndHomework.Status = rdr["Status"].ToString();
+                    studentAvgGradeByTeacherAndHomework.Comment = rdr["Comment"].ToString();
+                    studentAvgGradeByTeacherAndHomework.UploadDate = Convert.ToDateTime(rdr["UploadDate"]);
+                    studentAvgGradeByTeacherAndHomework.UploadID = Convert.ToInt32(rdr["UploadId"]);
+                    studentAvgGradeByTeacherAndHomework.Grade = Convert.ToInt32(rdr["Grade"]);
+
+                    studentAvgGradeByTeacherAndHomeworkList.Add(studentAvgGradeByTeacherAndHomework);
+
+
+                }
+            }
+                return studentAvgGradeByTeacherAndHomeworkList;
+
+        }
+            
     }
 }

@@ -1,4 +1,5 @@
-﻿using BusinessLayer;
+﻿using AccessModels.Models;
+using BusinessLayer;
 using BusinessLayer.Mail;
 using BusinessLayer.Models;
 using System;
@@ -153,6 +154,21 @@ namespace TeamA.Controllers
             return View(result);
         }
 
+
+        //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului
+        public ActionResult  GetStudentsAvgGradeByTeacher(string userName)
+        {
+            List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher(userName);
+
+            return View();
+        }
+        //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului si de tema 
+        public ActionResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
+        {
+            List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework(userName, homeworkID);
+
+            return View(studentGradeByTeacherAndHomework);
+        }
         
     }
 }
