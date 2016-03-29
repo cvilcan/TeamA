@@ -65,7 +65,11 @@ namespace BusinessLayer
             return studentCompletedHomeworkList;
         }
 
-
+        public List<StudentHomeworkDetails> GetCompletedHomeworkUpload(string userName, int homeworkId)
+        {
+            List<StudentHomeworkDetails> completedHomeworkUploadList = _studentRepository.GetCompletedHomeworkUpload(userName, homeworkId);
+            return completedHomeworkUploadList;
+        }
          
 
 

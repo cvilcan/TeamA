@@ -127,6 +127,13 @@ namespace TeamA.Controllers
             }
         }
 
+        //TODO view
+        public ActionResult GetCompletedHomeworkUpload(string userName, int homeworkId)
+        {
+
+            var completedHomeworkUpload = _studentService.GetCompletedHomeworkUpload(userName, homeworkId);
+            return View(completedHomeworkUpload);
+        }
 
 
     }
