@@ -70,7 +70,11 @@ namespace BusinessLayer
             List<StudentHomeworkDetails> completedHomeworkUploadList = _studentRepository.GetCompletedHomeworkUpload(userName, homeworkId);
             return completedHomeworkUploadList;
         }
-         
+        public List<StudentHomeworkDetails>  GetPendingHomeworkUpload(string userName, int homeworkId)
+        {
+            List<StudentHomeworkDetails> studentPendingHomeworkUpload = _studentRepository.GetPendingHomeworkUpload(userName, homeworkId);
+            return studentPendingHomeworkUpload;
+        }
 
 
 
