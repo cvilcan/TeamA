@@ -2,7 +2,9 @@
 
 @{
     ViewBag.Title = "ViewAllStudents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="container">
     <table class="table">
@@ -12,7 +14,9 @@
                 <th>@Html.DisplayNameFor(model => model.Email)</th>
                 <th>@Html.DisplayNameFor(model => model.IsConfirmed)</th>
                 <th>Reset Password</th>
+
             </tr>
+
         </thead>
         <tbody>
             @foreach (var item in Model)
@@ -27,12 +31,20 @@
                         @using (Html.BeginForm("SendMailWithPassword", "Admin", new { username = item.UserName }, FormMethod.Post))
                         {
                             <input type="submit" name="name" class="btn-default" value="Reset" />
-                        }               
+                        }    
+                                   
                     </td>
+
                 </tr>
+                
 
             }
         </tbody>
+
     </table>
+    <div>
+        @Html.ActionLink("Back to Index", "Index", "Admin")
+
+    </div>
 
 </div>
