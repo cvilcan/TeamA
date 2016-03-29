@@ -5,10 +5,15 @@
 @{
     ViewBag.Title = "ViewStudentHomework";
     Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+
+    string s = Request.QueryString["path"].ToString();
+    var a = s.Split('_');
+    ViewBag.UploadID = Convert.ToInt32(a[a.Length - 1]);
     
 }
 
 <h2>ViewStudentHomework</h2>
+
 @Html.TextArea("fileText", Model, 50, 100, null)
 
 
@@ -21,36 +26,38 @@
         <div align="left">
 
             <div>
-                @Html.Label("Comment")
+                @Html.Label("lblComment")
             </div>
             @Html.TextArea("comment", "", 5, 40, null)
             <input type="submit" id="button" value="Submit Comment" class="bg-success btn-default" />
         </div>
-        @Html.Hidden("uploadId");
+        @Html.Hidden("uploadId", (int)ViewBag.UploadID);
     }
 
     @using (Html.BeginForm("InsertGradeOrStatus", "Teacher", FormMethod.Post))
     {
         <div align="left">
-            @Html.Label("Grade")
+            @Html.Label("lblGrade")
 
 
             @*@Html.TextBox("grade", "", new { style = "background-color:whiteSmoke;width:40px; color:Black; font-weight:bold"})*@
-            <input type="text" name="grade" id="grade" maxlength="2" max="10" min="1" onblur="minmax(document.getElementById('grade').innerHTML)" />
+            @Html.Label("lblGrade")
+            <input type="text" name="grade" id="txtGrade" maxlength="2" max="10" min="1" onblur="minmax(document.getElementById('grade').innerHTML)" />
 
-            <input type="submit" id="button" class="bg-success btn-success" />
+            <input type="submit" id="btnGrade" class="bg-success btn-success" />
         </div>
 
-        @Html.Hidden("uploadId");
+       @Html.Hidden("uploadId", (int)ViewBag.UploadID);
 
     }
 
     @using (Html.BeginForm("InsertStatus", "Teacher", FormMethod.Post))
 {
     <div align="center">
-        <input type="submit" id="button" class="bg-success btn-danger" value="Reject Homework" />
+        @Html.Label("lblReject")
+        <input type="submit" id="btnReject" class="bg-success btn-danger" value="Reject Homework" />
     </div>
-    @Html.Hidden("uploadId");
+     @Html.Hidden("uploadId", (int)ViewBag.UploadID);
 }
 
 
@@ -59,12 +66,33 @@
 
 <script type="text/javascript">
 
-   
-    function minmax(value) {
-        if (parseInt(value) < 0 || isNaN(value))
-            return 0;
-        else if (parseInt(value) > 10)
-            return 10;
-        else return value;
-    }
+    $(document).ready();
+    //Redirects to home page on user submit if the credentials are match
+    $('#btnReject').click(
+        function () {
+                     
+
+            document.getElementById('lblReject').innerHTML.fontcolor('Green') ="Success"
+            $('#lblReject').fadeOut('10', document.getElementById('lblReject').innerHTML.fontcolor('Green') = "")
+
+        }
+
+        );
+
+    $('#btnGrade').click(function () {
+
+        if ($('#txtGrade').val != null && $('#txtGrade').val >= 1 && $('#txtGrade').val <=10)
+        {
+            document.getElementById('lblGrade').innerHTML.fontcolor('Green')= "Grade inserted successfully"
+            $('#lblGrade').fadeOut('10', document.getElementById('lblGrade').innerHTML.fontcolor('Green') = "")
+        }
+        else
+        {
+            document.getElementById('lblGrade').innerHTML.fontcolor('Red') = "Please insert a grade between 1 and 10"
+            $('#lblGrade').fadeOut('10', document.getElementById('lblGrade').innerHTML.fontcolor('Green') = "")
+
+        }
+    });
+
+
 </script>

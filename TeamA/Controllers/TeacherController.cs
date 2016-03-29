@@ -105,6 +105,7 @@ namespace TeamA.Controllers
                 try
                 {
                     fileText = fileSystemService.GetFileText(realPath);
+
                 }
                 catch (Exception)
                 {
@@ -130,15 +131,21 @@ namespace TeamA.Controllers
                  if( grade <=10 && grade >=1 && grade!=null)
                     {                
                         homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-                        ViewBag.Grade = "Valid Grade";
+
+
+
+                     
                     }
                 else
                     {
-                        ViewBag.Grade = "Please Enter a valid grade between 1 and 10";
+                  
 
             			homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
                     }
-                return RedirectToAction("ViewStudentHomework");
+
+
+
+                 return Redirect(Request.UrlReferrer.AbsoluteUri);
             }
             catch
             {
@@ -154,8 +161,14 @@ namespace TeamA.Controllers
             {
                 if (comment != null) { 
                 homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                
+               
                 }
-                return RedirectToAction("ViewStudentHomework");
+                else
+                {
+                    
+                }
+                return Redirect(Request.UrlReferrer.AbsoluteUri);
             }
             catch
             {
@@ -171,8 +184,10 @@ namespace TeamA.Controllers
             {
                               
                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-           
-                return RedirectToAction("ViewStudentHomework");
+
+               
+
+               return RedirectToAction(Request.UrlReferrer.AbsoluteUri);
             }
             catch
             {
