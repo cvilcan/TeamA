@@ -126,8 +126,34 @@ namespace DAL.Repository
             
             }       
         }
-        
-     
 
+        public StudentHomeworkDetails GetStudentHomeworkDetails(int studentID, int homeworkID)
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("spGetStudentHomeworkDetails", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@studentID", studentID);
+                cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    StudentHomeworkDetails model = new StudentHomeworkDetails()
+                    {
+                        HomeworkId = (int)rdr["HomeworkId"],
+                        HomeWorkName = (string)rdr["HomeWorkName"],
+                        StudentGrade = (int)rdr["StudentGrade"],
+                        Description = (string)rdr["Description"],
+                        Status = (string)rdr["Status"],
+                        TeacherId = (int)rdr["TeacherID"]
+                    };
+                    return model;
+                }
+                return new StudentHomeworkDetails();
+            }
+        }
     }
 }

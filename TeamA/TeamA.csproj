@@ -346,6 +346,9 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Shared\_FolderBrowser.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\ViewHomeworkDetails.cshtml" />
     <Content Include="Views\Student\ViewHomeworkUploads.cshtml" />
@@ -387,12 +390,10 @@
     <Content Include="Views\Teacher\_ListStudents.cshtml" />
     <Content Include="Views\Shared\Presenter.cshtml" />
     <Content Include="Views\Shared\_PDFLayout.cshtml" />
-    <Content Include="Views\Shared\_FolderBrowser.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_FolderBrowser.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Shared\MessageView.cshtml" />
   </ItemGroup>

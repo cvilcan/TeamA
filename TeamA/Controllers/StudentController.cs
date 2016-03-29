@@ -17,6 +17,7 @@ namespace TeamA.Controllers
     {
         private StudentService _studentService = new StudentService();
         private FileSystemService _fileSystemService = new FileSystemService();
+        private HomeworkService _homeworkService = new HomeworkService();
 
         public ActionResult Index()
         {
@@ -26,7 +27,7 @@ namespace TeamA.Controllers
 
         public ActionResult GetStudentPendingHomework(string userName)
         {
-            var studentPendingHomework = _studentService.GetStudentPendingHomework(userName);
+            var studentPendingHomework = _studentService.GetStudentPendingHomework((string)Session["SessionUser"]);
 
             return View(studentPendingHomework);
         }
@@ -36,61 +37,62 @@ namespace TeamA.Controllers
              var studentCompletedHomework = _studentService.GetStudentCompletedHomework(userName);
             return View(studentCompletedHomework);
         }
+
         public ActionResult InsertStudentToHomework(string userName,int homeworkID,string fileName,string basePath)
         {
             _studentService.InsertStudentToHomework(userName, homeworkID, fileName, basePath);
             return View();
         }
 
-        [HttpPost]
-        public ActionResult ViewHomeworkDetails(StudentHomeworkDetails model, string teacherFolder, string homeworkFolder, string studentFolder, string path)
-        {
-            if (ModelState.IsValid)
-            {
-                if (teacherFolder == null)
-                    return View("Error", "You do not have the rights to access root folder!");
-                else
-                {
-                    string teacherName = teacherFolder.Split('_')[0];
-                    var teacherList = _studentService.GetTeacherBelongingToStudent((string)Session["SessionUser"]);
-                    bool found = false;
-                    if ((teacherList != null) && (teacherList.Item3 == teacherName))
-                        found = true;
-                    if ((Request.QueryString["studentFolder"] != (string)Session["SessionUser"] + "_" + Session["SessionID"]) || (studentFolder == null)
-                        || (!found) || (homeworkFolder == null))
-                        return View("Error", "You do not have the rights to access root folder!");
-                    string realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/" + homeworkFolder + "/" + studentFolder + "/";
-                    if (path != null)
-                        realPath += path;
-                    StudentHomeworkDetailsVM vm = new StudentHomeworkDetailsVM();
-                    vm.Details = model;
-                    //string realPath = ConfigurationManager.AppSettings["BasePath"] +
-                    //    "/" + (string)Session["SessionUser"] + "_" + Session["SessionID"] + "/");
-                    vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url);
-                    if (!vm.FolderStructure.isFile)
-                        return View(vm);
-                    else
-                    {
-                        string fileText = "";
-                        try
-                        {
-                            fileText = _fileSystemService.GetFileText(realPath);
-                        }
-                        catch (Exception)
-                        {
+        //[HttpPost]
+        //public ActionResult ViewHomeworkDetails(StudentHomeworkDetailsVM model, string teacherFolder, string homeworkFolder, string studentFolder, string path)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (teacherFolder == null)
+        //            return View("Error", "You do not have the rights to access root folder!");
+        //        else
+        //        {
+        //            string teacherName = teacherFolder.Split('_')[0];
+        //            var teacherList = _studentService.GetTeacherBelongingToStudent((string)Session["SessionUser"]);
+        //            bool found = false;
+        //            if ((teacherList != null) && (teacherList.Item3 == teacherName))
+        //                found = true;
+        //            if ((Request.QueryString["studentFolder"] != (string)Session["SessionUser"] + "_" + Session["SessionID"]) || (studentFolder == null)
+        //                || (!found) || (homeworkFolder == null))
+        //                return View("Error", "You do not have the rights to access root folder!");
+        //            string realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/" + homeworkFolder + "/" + studentFolder + "/";
+        //            if (path != null)
+        //                realPath += path;
+        //            StudentHomeworkBroswerDetailsVM vm = new StudentHomeworkBroswerDetailsVM();
+        //            vm.Details = model;
+        //            //string realPath = ConfigurationManager.AppSettings["BasePath"] +
+        //            //    "/" + (string)Session["SessionUser"] + "_" + Session["SessionID"] + "/");
+        //            vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url);
+        //            if (!vm.FolderStructure.isFile)
+        //                return View(vm);
+        //            else
+        //            {
+        //                string fileText = "";
+        //                try
+        //                {
+        //                    fileText = _fileSystemService.GetFileText(realPath);
+        //                }
+        //                catch (Exception)
+        //                {
+        //                    return View("Error", (object)"An error ocurred");
+        //                }
+        //                return View("ViewStudentHomework", (object)fileText);
+        //            }
+        //        }
+        //    }
+        //    else return View("Error", "Invalid data input!");
+        //}
 
-                        }
-                     	return View("ViewStudentHomework", (object)fileText);
-                    }
-                }
-            }
-            else return View("Error", "Invalid data input!");
-        }
-
-        public ActionResult ViewHomeworkDetails(string teacherFolder, string homeworkFolder, string studentFolder, string path)
+        public ActionResult ViewHomeworkDetails(int id, string teacherFolder, string homeworkFolder, string studentFolder, string path)
         {
             if (teacherFolder == null)
-                return View("Error", "You do not have the rights to access root folder!");
+                return View("Error", (object)"You do not have the rights to access root folder!");
             else
             {
                 string teacherName = teacherFolder.Split('_')[0];
@@ -100,14 +102,13 @@ namespace TeamA.Controllers
                      found = true;
                 if ((Request.QueryString["studentFolder"] != (string)Session["SessionUser"] + "_" + Session["SessionID"]) || (studentFolder == null)
                     || (!found) || (homeworkFolder == null))
-                    return View("Error", "You do not have the rights to access root folder!");
+                    return View("Error", (object)"You do not have the rights to access this folder!");
                 string realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/" + homeworkFolder + "/" + studentFolder + "/";
                 if (path != null)
                     realPath += path;
-                StudentHomeworkDetailsVM vm = new StudentHomeworkDetailsVM();
-                vm.Details = new StudentHomeworkDetails();
-                //string realPath = ConfigurationManager.AppSettings["BasePath"] +
-                //    "/" + (string)Session["SessionUser"] + "_" + Session["SessionID"] + "/");
+                StudentHomeworkBroswerDetailsVM vm = new StudentHomeworkBroswerDetailsVM();
+                vm.Details = _homeworkService.GetStudentHomeworkDetails((int)Session["SessionID"], id);
+
                 vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url);
                 if (!vm.FolderStructure.isFile)
                     return View(vm);
@@ -120,9 +121,32 @@ namespace TeamA.Controllers
                     }
                     catch (Exception)
                     {
-
+                        return View("Error", (object)"An error ocurred");
                     }
                     return View("ViewStudentHomework", (object)fileText);
+                }
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UploadHomework(HttpPostedFileBase homeworkFile, int homeworkID)
+        {
+            if (homeworkFile.ContentLength < 0)
+                return View("Error", (object)"Empty file!");
+            else
+            {
+                try
+                {
+                    string s = ConfigurationManager.AppSettings["BasePath"] + Request["teacherFolder"] + "/" + Request["homeworkFolder"] + "/" + Request["studentFolder"];
+                    if (Request["path"] != null)
+                        s += "/" + Request["path"];
+                    int uploadID = _studentService.InsertStudentToHomework((string)Session["SessionUser"], homeworkID, homeworkFile.FileName, s);
+                    _fileSystemService.SaveFile(s, homeworkFile, uploadID);
+                    return Redirect(Request.UrlReferrer.AbsoluteUri);
+                }
+                catch (Exception e)
+                {
+                    return View("Error", (object)"Something failed with the upload...");
                 }
             }
         }
@@ -136,12 +160,12 @@ namespace TeamA.Controllers
         }
 
         //De implementat in View
-        public ActionResult ViewStudentPendingHomeworkUploads(string userName, int homeworkId) 
-        {
-            List<StudentHomeworkDetails> studentPendingHomeworkUpload = _studentService.GetPendingHomeworkUpload(userName, homeworkId);
+        //public ActionResult ViewStudentPendingHomeworkUploads(string userName, int homeworkId) 
+        //{
+        //    List<StudentHomeworkDetails> studentPendingHomeworkUpload = _studentService.GetPendingHomeworkUpload(userName, homeworkId);
 
-            return View(studentPendingHomeworkUpload);
-        }
+        //    return View(studentPendingHomeworkUpload);
+        //}
 
 
     }

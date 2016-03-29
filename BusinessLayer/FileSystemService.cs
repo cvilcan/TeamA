@@ -53,5 +53,10 @@ namespace BusinessLayer
                 return fileText;
             }
         }
+
+        public void SaveFile(string path, System.Web.HttpPostedFileBase homeworkFile, int uploadID)
+        {
+            homeworkFile.SaveAs(path + "/" + homeworkFile.FileName + "_" + Convert.ToString(uploadID));
+        }
     }
 }
