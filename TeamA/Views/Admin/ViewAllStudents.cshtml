@@ -7,6 +7,13 @@
 
 
 <div class="container">
+    <div class="page-header">
+        <h1>All Students</h1>
+    </div>
+    
+</div>
+
+<div class="container">
     <table class="table">
         <thead>
             <tr class="success">
@@ -22,7 +29,7 @@
             @foreach (var item in Model)
             {
                 <tr class="info">
-                    <td>
+                    <td class="userNameDiv">
                         @Html.DisplayFor(modelItem => item.UserName)
                     </td>
                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
@@ -30,7 +37,8 @@
                     <td>
                         @using (Html.BeginForm("SendMailWithPassword", "Admin", new { username = item.UserName }, FormMethod.Post))
                         {
-                            <input type="submit" name="name" class="btn-default" value="Reset" />
+                            <button type="button" class="btn btn-primary btn-xs resetStudButton" onclick="">Reset</button>
+                           @*<input type="submit" name="name" class="btn btn-primary btn-xs resetStudButton" value="Reset" />*@
                         }    
                                    
                     </td>
@@ -46,5 +54,25 @@
         @Html.ActionLink("Back to Index", "Index", "Admin")
 
     </div>
-
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".resetStudButton").click(function () {
+            var Username = $(this).closest("tr").children(".userNameDiv")[0].innerText;
+            var mvcURL = "/Admin/SendMailWithPassword"
+            $.ajax({
+                url: mvcURL,
+                data: { username: Username },
+                type: 'POST',
+                success: function (data, status, jqXHR) {
+                    alert("Succesfull reset! Yay!");
+                },
+                error: function (error) {
+                    alert('error; ');
+                }
+            })
+
+        })
+    })
+</script>
