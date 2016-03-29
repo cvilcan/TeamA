@@ -35,7 +35,7 @@ namespace TeamA.Controllers
 
         public ActionResult GetStudentCompletedHomework(string userName)
         {
-             var studentCompletedHomework = _studentService.GetStudentCompletedHomework(userName);
+            var studentCompletedHomework = _studentService.GetStudentCompletedHomework((string)Session["SessionUser"]);
             return View(studentCompletedHomework);
         }
 
@@ -59,7 +59,7 @@ namespace TeamA.Controllers
         //            bool found = false;
         //            if ((teacherList != null) && (teacherList.Item3 == teacherName))
         //                found = true;
-        //            if ((Request.QueryString["studentFolder"] != (string)Session["SessionUser"] + "_" + Session["SessionID"]) || (studentFolder == null)
+        //            if ((Request.QueryString["studentFolder"] != (string)Session["SessionUser"] + "_" + Session["SessionUserId"]) || (studentFolder == null)
         //                || (!found) || (homeworkFolder == null))
         //                return View("Error", "You do not have the rights to access root folder!");
         //            string realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/" + homeworkFolder + "/" + studentFolder + "/";
@@ -68,7 +68,7 @@ namespace TeamA.Controllers
         //            StudentHomeworkBroswerDetailsVM vm = new StudentHomeworkBroswerDetailsVM();
         //            vm.Details = model;
         //            //string realPath = ConfigurationManager.AppSettings["BasePath"] +
-        //            //    "/" + (string)Session["SessionUser"] + "_" + Session["SessionID"] + "/");
+        //            //    "/" + (string)Session["SessionUser"] + "_" + Session["SessionUserId"] + "/");
         //            vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url);
         //            if (!vm.FolderStructure.isFile)
         //                return View(vm);
@@ -101,14 +101,14 @@ namespace TeamA.Controllers
                 bool found = false;
                 if ((teacherList != null) && (teacherList.Item3 == teacherName))
                      found = true;
-                if ((Request.QueryString["studentFolder"] != (string)Session["SessionUser"] + "_" + Session["SessionID"]) || (studentFolder == null)
+                if ((Request.QueryString["studentFolder"] != (string)Session["SessionUser"] + "_" + Session["SessionUserId"]) || (studentFolder == null)
                     || (!found) || (homeworkFolder == null))
                     return View("Error", (object)"You do not have the rights to access this folder!");
                 string realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/" + homeworkFolder + "/" + studentFolder + "/";
                 if (path != null)
                     realPath += path;
                 StudentHomeworkBroswerDetailsVM vm = new StudentHomeworkBroswerDetailsVM();
-                vm.Details = _homeworkService.GetStudentHomeworkDetails((int)Session["SessionID"], id);
+                vm.Details = _homeworkService.GetStudentHomeworkDetails((int)Session["SessionUserId"], id);
 
                 vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url);
                 if (!vm.FolderStructure.isFile)
@@ -132,7 +132,7 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult UploadHomework(HttpPostedFileBase homeworkFile, int homeworkID)
         {
-            if (homeworkFile.ContentLength < 0)
+            if ((homeworkFile != null) && (homeworkFile.ContentLength < 0))
                 return View("Error", (object)"Empty file!");
             else
             {
