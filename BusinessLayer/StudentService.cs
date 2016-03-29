@@ -40,17 +40,17 @@ namespace BusinessLayer
         }
 
 
-        public IEnumerable<StudentHomeworkDetails> GetStudentPendingHomework(int studentID)
+        public IEnumerable<StudentHomeworkDetails> GetStudentPendingHomework(string userName)
         {
-                List<StudentHomeworkDetails> studentPendingHomeworkList = _studentRepository.GetStudentPendingHomework(studentID);
+              List<StudentHomeworkDetails> studentPendingHomeworkList = _studentRepository.GetStudentPendingHomework(userName);
 
                 return studentPendingHomeworkList;
 
         }
 
-        public IEnumerable<StudentHomeworkDetails> GetStudentCompletedHomework(int studentID)
+        public IEnumerable<StudentHomeworkDetails> GetStudentCompletedHomework(string userName)
         {
-            List<StudentHomeworkDetails> studentCompletedHomeworkList = _studentRepository.GetStudentCompletedHomework(studentID);
+            List<StudentHomeworkDetails> studentCompletedHomeworkList = _studentRepository.GetStudentCompletedHomework(userName);
 
             return studentCompletedHomeworkList;
         }

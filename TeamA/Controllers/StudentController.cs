@@ -24,16 +24,16 @@ namespace TeamA.Controllers
             return View();
         }
 
-        public ActionResult GetStudentPendingHomework(int studentID)
+        public ActionResult GetStudentPendingHomework(string userName)
         {
-            var studentPendingHomework = _studentService.GetStudentPendingHomework(studentID);
+            var studentPendingHomework = _studentService.GetStudentPendingHomework(userName);
 
             return View(studentPendingHomework);
         }
 
-        public ActionResult GetStudentCompletedHomework(int studentID)
+        public ActionResult GetStudentCompletedHomework(string userName)
         {
-            var studentCompletedHomework = _studentService.GetStudentCompletedHomework(studentID);
+             var studentCompletedHomework = _studentService.GetStudentCompletedHomework(userName);
             return View(studentCompletedHomework);
         }
         public ActionResult InsertStudentToHomework(string userName,int homeworkID,string fileName,string basePath)

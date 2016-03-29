@@ -88,7 +88,7 @@ namespace DAL.Repository
             }    
         }
 
-        public List<StudentHomeworkDetails> GetStudentPendingHomework(int studentID)
+        public List<StudentHomeworkDetails> GetStudentPendingHomework(string userName)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace DAL.Repository
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@StudentId", studentID);
+                    cmd.Parameters.AddWithValue("@username", userName);
                     con.Open();
 
                     SqlDataReader rdr = cmd.ExecuteReader();
@@ -110,14 +110,14 @@ namespace DAL.Repository
                    {
                        StudentHomeworkDetails studentPendingHomework = new StudentHomeworkDetails();
 
-                       studentPendingHomework.TeacherId=Convert.ToInt32(rdr["TeacherUserId"]);
-                       studentPendingHomework.TeacherName=rdr["TeacherName"].ToString();
-                       studentPendingHomework.StudentGrade=Convert.ToInt32(rdr["StudentGrade"]);
+                       studentPendingHomework.TeacherId=Convert.ToInt32(rdr["TeacherUserId"]);           
                        studentPendingHomework.HomeworkId=Convert.ToInt32(rdr["HomeworkId"]);
                        studentPendingHomework.HomeWorkName=rdr["HomeWorkName"].ToString();
                        studentPendingHomework.Description=rdr["Description"].ToString();
                        studentPendingHomework.Deadline=Convert.ToDateTime(rdr["Deadline"]);
-                       studentPendingHomework.UploadId = Convert.ToInt32(rdr["UploadID"]);
+                       studentPendingHomework.Status = rdr["Status"].ToString();
+                       studentPendingHomework.Comment = rdr["Comment"].ToString();
+                       studentPendingHomework.UploadDate = Convert.ToDateTime(rdr["UploadDate"]);
 
                        studentPendingHomeworkList.Add(studentPendingHomework);
                    }
@@ -140,7 +140,7 @@ namespace DAL.Repository
 
         }
 
-        public List<StudentHomeworkDetails> GetStudentCompletedHomework(int studentID)
+        public List<StudentHomeworkDetails> GetStudentCompletedHomework(string userName)
         {
             try
             {
@@ -153,7 +153,7 @@ namespace DAL.Repository
 
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@StudentId", studentID);
+                    cmd.Parameters.AddWithValue("@username", userName);
                     con.Open();
 
 
@@ -163,14 +163,15 @@ namespace DAL.Repository
                     {
                         StudentHomeworkDetails studentCompletedHomework = new StudentHomeworkDetails();
 
-                        studentCompletedHomework.TeacherId = Convert.ToInt32(rdr["TeacherUserId"]);
-                        studentCompletedHomework.TeacherName = rdr["TeacherName"].ToString();
-                        studentCompletedHomework.StudentGrade = Convert.ToInt32(rdr["StudentGrade"]);
+                        studentCompletedHomework.TeacherId = Convert.ToInt32(rdr["TeacherUserId"]);                                   
                         studentCompletedHomework.HomeworkId = Convert.ToInt32(rdr["HomeworkId"]);
                         studentCompletedHomework.HomeWorkName = rdr["HomeWorkName"].ToString();
                         studentCompletedHomework.Description = rdr["Description"].ToString();
                         studentCompletedHomework.Deadline = Convert.ToDateTime(rdr["Deadline"]);
-                        studentCompletedHomework.UploadId = Convert.ToInt32(rdr["UploadID"]);
+                        studentCompletedHomework.Comment = rdr["Comment"].ToString();
+                        studentCompletedHomework.Status = rdr["Status"].ToString();
+                        studentCompletedHomework.UploadDate = Convert.ToDateTime(rdr["UploadDate"]);
+                        studentCompletedHomework.StudentGrade = Convert.ToInt32(rdr["UploadID"]);
 
                         studentCompletedHomeworkList.Add(studentCompletedHomework);
                     }
