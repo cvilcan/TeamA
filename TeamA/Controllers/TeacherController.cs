@@ -101,7 +101,7 @@ namespace TeamA.Controllers
                 {
                     fileText = fileSystemService.GetFileText(realPath);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }
@@ -145,5 +145,7 @@ namespace TeamA.Controllers
             EmptyResult result = new EmptyResult();
             return View(result);
         }
+
+        
     }
 }
