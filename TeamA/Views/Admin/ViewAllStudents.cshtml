@@ -2,7 +2,9 @@
 
 @{
     ViewBag.Title = "ViewAllStudents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="container">
     <div class="page-header">
@@ -19,7 +21,9 @@
                 <th>@Html.DisplayNameFor(model => model.Email)</th>
                 <th>@Html.DisplayNameFor(model => model.IsConfirmed)</th>
                 <th>Reset Password</th>
+
             </tr>
+
         </thead>
         <tbody>
             @foreach (var item in Model)
@@ -35,13 +39,19 @@
                         {
                             <button type="button" class="btn btn-primary btn-xs resetStudButton" onclick="">Reset</button>
                            @*<input type="submit" name="name" class="btn btn-primary btn-xs resetStudButton" value="Reset" />*@
-                        }               
+                        }    
+                                   
                     </td>
+
                 </tr>
+                
 
             }
         </tbody>
+
     </table>
+    <div>
+        @Html.ActionLink("Back to Index", "Index", "Admin")
 
 </div>
 
