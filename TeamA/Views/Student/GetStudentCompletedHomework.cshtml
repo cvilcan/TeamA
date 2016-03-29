@@ -18,12 +18,11 @@
             <table class="table">
                 <thead>
                     <tr class="success">
-                        <th>@Html.DisplayNameFor(model => model.TeacherName)</th>
-                        <th>@Html.DisplayNameFor(model => model.StudentGrade)</th>
-                        <th>@Html.DisplayNameFor(model => model.HomeworkId)</th>
                         <th>@Html.DisplayNameFor(model => model.HomeWorkName)</th>
                         <th>@Html.DisplayNameFor(model => model.Description)</th>
                         <th>@Html.DisplayNameFor(model => model.Deadline)</th>
+                        <th>@Html.DisplayNameFor(model => model.Status)</th>
+                        <th>@Html.DisplayNameFor(model => model.StudentGrade)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,16 +30,7 @@
                     {
                         <tr class="info">
                             @Html.HiddenFor(modelItem => item.TeacherId)
-                            @Html.HiddenFor(modelItem => item.UploadId)
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TeacherName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.StudentGrade)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HomeworkId)
-                            </td>
+                            @Html.HiddenFor(modelItem => item.HomeworkId)
                             <td>
                                 @Html.DisplayFor(modelItem => item.HomeWorkName)
                             </td>
@@ -50,8 +40,13 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Deadline)
                             </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StudentGrade)
+                            </td>
                         </tr>
-
                     }
                 </tbody>
             </table>

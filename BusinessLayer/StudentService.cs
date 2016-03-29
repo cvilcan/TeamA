@@ -33,15 +33,6 @@ namespace BusinessLayer
             return studentsFromSameTeacher.ToList();
         }
 
-        //Returns ID, Username, Email
-        public IEnumerable<Tuple<int, string, string>> GetStudentsOfTeacher(string teacherName)
-        {
-            var teacher = _userService.GetUser(teacherName);
-            var students = _studentRepository.GetStudentsBelongingToTeacher(teacher.Item1);
-
-            return students;
-        }
-
         public Tuple<string, string, string> GetTeacherBelongingToStudent(string studentName)
         {
             var studentsToTeachers = _studentRepository.GetStudentsToTeachers();
@@ -49,6 +40,15 @@ namespace BusinessLayer
             return teachersOfStudent;
         }
 
+        public IEnumerable<Tuple<string, string, string>> GetStudentsByTeacher(string username)
+        {
+            var students = _userService.GetAllStudents();
+            var teacher = _userService.GetUser(username);
+            var studentsToTeachers = GetStudentsBelongingToTeacher(username);
+
+            return studentsToTeachers;
+
+        }
 
         public IEnumerable<StudentHomeworkDetails> GetStudentPendingHomework(string userName)
         {

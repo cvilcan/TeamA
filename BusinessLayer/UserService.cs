@@ -20,7 +20,7 @@ namespace BusinessLayer
     public class UserService
     {
         private UserRepository _userRepository = new UserRepository();
-        private StudentService _studentService = new StudentService();
+        //private StudentService _studentService = new StudentService();
         
 
         public IEnumerable<UserProfile> GetAllUsers()
@@ -97,17 +97,6 @@ namespace BusinessLayer
             var role = _userRepository.GetRole(username);
             return role;
         }
-
-        public IEnumerable<Tuple<string, string, string>> GetStudentsByTeacher(string username)
-        {
-            var students = GetAllStudents();
-            var teacher = GetUser(username);
-            var studentsToTeachers = _studentService.GetStudentsBelongingToTeacher(username);
-
-            return studentsToTeachers;
-
-        }
-
 
         public PdfDocument SeeInPDF(string path)
         {
