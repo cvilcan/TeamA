@@ -25,7 +25,7 @@
     <div class="container">
         <h2>Welcome home !</h2>
 
-            <div class="row-fluid">
+            @*<div class="row-fluid">
                 <div class="span6">
                     <div class="span6 pull-right">
                         <div class="btn-group">
@@ -38,7 +38,7 @@
 
     <button type="button" class="btn btn-default">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</button>
 
-</div>
+</div>*@
 
                         @*<div class="row">
                             <div class="col-md-10">
@@ -52,15 +52,17 @@
                             @Html.Partial("_LoginPartial")
                         </div>*@
                     </div>
-                    </div>
+                    @*</div>
                 </div>
-        </div>
+        </div>*@
 
 
 
 
                     <div class="container">
-
+                        <div class="col-md-2">
+                            @Html.Partial("_LoginPartial")
+                        </div>
                         
                                     <div class="panel panel-default">
                                         <div class="panel-body">
