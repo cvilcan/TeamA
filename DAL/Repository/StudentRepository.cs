@@ -16,12 +16,10 @@ namespace DAL.Repository
 
         public string cs = ConfigurationManager.ConnectionStrings["TeamAConnection"].ConnectionString;
 
-        public void InsertStudentToHomework(string username, string fileName, int homeworkID)
+        public int InsertStudentToHomework(string username, string fileName, int homeworkID)
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
-                var uploadDate = DateTime.Now;
-
                 SqlCommand cmd = new SqlCommand("spInsertStudentToHomework", con);
 
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -29,10 +27,9 @@ namespace DAL.Repository
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@filename", fileName);
                 cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
-                cmd.Parameters.AddWithValue("@uploadDate", uploadDate);
 
                 con.Open();
-                cmd.ExecuteNonQuery();
+                return (int)cmd.ExecuteScalar();
             }
         }
 
@@ -137,7 +134,6 @@ namespace DAL.Repository
                         studentPendingHomework.Deadline = Convert.ToDateTime(rdr["Deadline"]);
                         studentPendingHomework.Status = rdr["Status"].ToString();
                         studentPendingHomework.Comment = rdr["Comment"].ToString();
-                        studentPendingHomework.UploadDate = Convert.ToDateTime(rdr["UploadDate"]);
 
                         studentPendingHomeworkList.Add(studentPendingHomework);
                     }
@@ -190,8 +186,6 @@ namespace DAL.Repository
                         studentCompletedHomework.Deadline = Convert.ToDateTime(rdr["Deadline"]);
                         studentCompletedHomework.Comment = rdr["Comment"].ToString();
                         studentCompletedHomework.Status = rdr["Status"].ToString();
-                        studentCompletedHomework.UploadDate = Convert.ToDateTime(rdr["UploadDate"]);
-                        studentCompletedHomework.StudentGrade = Convert.ToInt32(rdr["UploadID"]);
 
                         studentCompletedHomeworkList.Add(studentCompletedHomework);
                     }
@@ -298,6 +292,9 @@ namespace DAL.Repository
 
             }
         }
+
+       
+
 
     }
 }

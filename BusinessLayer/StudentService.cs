@@ -1,4 +1,5 @@
 ﻿using AccessModels.Models;
+using BusinessLayer.Models;
 using DAL.Repository;
 using System;
 using System.Collections.Generic;
@@ -14,16 +15,16 @@ namespace BusinessLayer
         private StudentRepository _studentRepository = new StudentRepository();
         private UserService _userService = new UserService();
 
-        public void InsertStudentToHomework(string userName, int homeworkID, string fileName, string basePath)
+        public int InsertStudentToHomework(string userName, int homeworkID, string fileName, string path)
         {
-            _studentRepository.InsertStudentToHomework(userName, fileName, homeworkID);
+             int uploadID = _studentRepository.InsertStudentToHomework(userName, fileName, homeworkID);
 
+             if (!Directory.Exists(path))
+             {
+                 Directory.CreateDirectory(path);
+             }
 
-             List<StudentUploadPath>  uploadParams = _studentRepository.GetStudentUploadParameters(userName, homeworkID);
-
-           
-             Directory.CreateDirectory(basePath + "/" + uploadParams[0].TeacherId + "_" + uploadParams[0].TeacherName + 
-                 "/" + uploadParams[0].HomeWorkName + homeworkID + "/" + userName + "_" + uploadParams[0].StudentId + "/" + fileName + "_" + uploadParams[0].UploadID);
+             return uploadID;
         }
 
         
@@ -51,11 +52,27 @@ namespace BusinessLayer
 
         }
 
-        public IEnumerable<StudentHomeworkDetails> GetStudentPendingHomework(string userName)
+        public IEnumerable<StudentHomeworkDetailsVM> GetStudentPendingHomework(string userName)
         {
-              List<StudentHomeworkDetails> studentPendingHomeworkList = _studentRepository.GetStudentPendingHomework(userName);
+            List<StudentHomeworkDetails> studentPendingHomeworkList = _studentRepository.GetStudentPendingHomework(userName);
+            List<StudentHomeworkDetailsVM> studentPendingHomeworkListVM = new List<StudentHomeworkDetailsVM>();
+            foreach (var item in studentPendingHomeworkList)
+                studentPendingHomeworkListVM.Add(new StudentHomeworkDetailsVM()
+                    {
+                        Comment = item.Comment,
+                        Deadline = item.Deadline,
+                        Description = item.Description,
+                        HomeworkId = item.HomeworkId,
+                        HomeWorkName = item.HomeWorkName,
+                        Status = item.Status,
+                        StudentGrade = item.StudentGrade,
+                        TeacherId = item.TeacherId,
+                        TeacherName = item.TeacherName,
+                        UploadDate = item.UploadDate,
+                        UploadId = item.UploadId
+                    });
 
-                return studentPendingHomeworkList;
+            return studentPendingHomeworkListVM;
 
         }
 

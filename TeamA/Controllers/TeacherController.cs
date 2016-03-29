@@ -1,4 +1,5 @@
-﻿using BusinessLayer;
+﻿using AccessModels.Models;
+using BusinessLayer;
 using BusinessLayer.Mail;
 using BusinessLayer.Models;
 using System;
@@ -8,12 +9,14 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeamA.Attributes;
 using TeamA.Authorize;
 using TeamA.Models;
 
 namespace TeamA.Controllers
 {
-    // [CustomAuthorize(Roles = "Teacher")]
+    [CookieFilter]
+    [CustomAuthorize(Roles = "Teacher")]
     public class TeacherController : Controller
     {
         private HomeworkService homeworkService = new HomeworkService();
@@ -83,7 +86,7 @@ namespace TeamA.Controllers
         public ActionResult ViewStudentUploads(string teacherFolder, string homeworkFolder, string studentFolder, string path)
         {
             string realPath;
-            if ((Request.QueryString["teacherFolder"] != Session["SessionUser"] + "_" + Session["SessionID"]) || (Request.QueryString["teacherFolder"] == null))
+            if ((Request.QueryString["teacherFolder"] != Session["SessionUser"] + "_" + Session["SessionUserId"]) || (Request.QueryString["teacherFolder"] == null))
                 return View("Error", "You do not have the right to access this folder!");
             realPath = ConfigurationManager.AppSettings["BasePath"] + teacherFolder + "/";
             if (homeworkFolder != null)
@@ -102,6 +105,7 @@ namespace TeamA.Controllers
                 try
                 {
                     fileText = fileSystemService.GetFileText(realPath);
+
                 }
                 catch (Exception)
                 {
@@ -117,29 +121,84 @@ namespace TeamA.Controllers
            return View(teacherHomeworks);
         }
 
+
+        //Insert Grade 
         [HttpPost]
-        public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade = null, string comment = null)
+        public ActionResult InsertGradeOrStatus(int uploadId, int? grade = null, string comment = null)
         {
             try 
 			{                 
-                 if( grade <=10 && grade >=1)
+                 if( grade <=10 && grade >=1 && grade!=null)
                     {                
                         homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-                        ViewBag.Grade = "Valid Grade";
+
+
+
+                     
                     }
                 else
                     {
-                        ViewBag.Grade = "Please Enter a valid grade between 1 and 10";
+                  
 
             			homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
                     }
-                return RedirectToAction("ViewStudentHomework");
+
+
+
+                 return Redirect(Request.UrlReferrer.AbsoluteUri);
             }
             catch
             {
                 return RedirectToAction("Error");
             }
         }
+
+        //Comment
+        [HttpPost]
+        public ActionResult InsertCommentOrStatus(int uploadId, int? grade = null, string comment = null)
+        {
+            try
+            {
+                if (comment != null) { 
+                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                
+               
+                }
+                else
+                {
+                    
+                }
+                return Redirect(Request.UrlReferrer.AbsoluteUri);
+            }
+            catch
+            {
+                return RedirectToAction("Error");
+            }
+        }
+       
+        //Insert Rejected Status
+        [HttpPost]
+        public ActionResult InsertStatus(int uploadId, int? grade = null, string comment = null)
+        {
+            try
+            {
+                              
+               homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+
+               
+
+               return RedirectToAction(Request.UrlReferrer.AbsoluteUri);
+            }
+            catch
+            {
+                return RedirectToAction("Error");
+            }
+        
+        }
+
+
+
+
 
         public ActionResult DownloadAsPDF(string path)
         {
@@ -148,6 +207,22 @@ namespace TeamA.Controllers
             return View(result);
         }
 
+
+        //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului
+        public ActionResult  GetStudentsAvgGradeByTeacher(string userName)
+        {
+            List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher(userName);
+
+            return View();
+        }
+        //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului si de tema 
+        public ActionResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
+        {
+            List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework(userName, homeworkID);
+
+
+            return View(studentGradeByTeacherAndHomework);
+        }
         
     }
 }

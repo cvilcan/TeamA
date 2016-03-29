@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AccessModels.Models
 {
-    class StudentToHomework
+   public class StudentToHomework
     {
         public int StudentUserID { get; set; }
         public int HomeworkID { get; set; }
@@ -15,6 +15,6 @@ namespace AccessModels.Models
         public string Comment{ get; set; }
         public string Status { get; set; }
         public int Grade { get; set; }
-
+        public string StudentName { get; set; }
     }
 }
