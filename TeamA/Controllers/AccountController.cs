@@ -19,11 +19,10 @@ namespace TeamA.Controllers
 
 
         UserService userService = new UserService();
-
+        
         public ActionResult Index()
         {
-
-          
+            
           return View();
         }
 

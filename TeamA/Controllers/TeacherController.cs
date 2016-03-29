@@ -9,12 +9,14 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeamA.Attributes;
 using TeamA.Authorize;
 using TeamA.Models;
 
 namespace TeamA.Controllers
 {
-    // [CustomAuthorize(Roles = "Teacher")]
+    [CookieFilter]
+    [CustomAuthorize(Roles = "Teacher")]
     public class TeacherController : Controller
     {
         private HomeworkService homeworkService = new HomeworkService();
