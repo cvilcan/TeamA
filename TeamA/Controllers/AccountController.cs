@@ -86,7 +86,7 @@ namespace TeamA.Controllers
                     userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
                     return RedirectToAction("MessageView", (object)"A confirmation message has benn sent. Please confirm!");
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return RedirectToAction("Error", (object)"An error has ocurred.");
                 }
