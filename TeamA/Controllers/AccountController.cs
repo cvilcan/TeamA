@@ -37,31 +37,29 @@ namespace TeamA.Controllers
         {
             try
             {
-                if (userService.Login(vm.UserName, vm.Password))
-                {
-                    Session["SessionUser"] = vm.UserName;
-                    Session["SessionID"] = userService.GetUser(vm.UserName).Item1;
+                userService.Login(vm.UserName, vm.Password);
+                
+                Session["SessionUser"] = vm.UserName;
+                Session["SessionID"] = userService.GetUser(vm.UserName).Item1;
 
-                    var cookie = new HttpCookie("Cookie");
-                    cookie.Expires = DateTime.Now.AddDays(30);
-                    cookie["username"] = vm.UserName;
-                    cookie["password"] = vm.Password;
-
-
-                    Response.AppendCookie(cookie);
-                    string role = userService.GetRole(vm.UserName);
+                var cookie = new HttpCookie("Cookie");
+                cookie.Expires = DateTime.Now.AddDays(30);
+                cookie["username"] = vm.UserName;
+                cookie["password"] = vm.Password;
 
 
+                Response.AppendCookie(cookie);
+                string role = userService.GetRole(vm.UserName);
 
-
+                if (ReturnUrl == "")
                     return RedirectToAction("Index", role);
-                }
+                else
+                    return RedirectToAction(ReturnUrl);
             }
-            catch (Exception ) { }
-            
-            
-                return View("Error",(object)"Invalid credentials");
-            
+            catch (Exception e) 
+            {
+                return View("Error", (object)e.Message);
+            }
         }
 
         public ActionResult Register()
@@ -70,6 +68,7 @@ namespace TeamA.Controllers
             {
                 TeacherNameList = userService.GetAllTeachers().Select(x => x.Username).ToList()
             };
+            vm.TeacherNameList.Insert(0, null);
 
             return View(vm);
         }
@@ -82,20 +81,24 @@ namespace TeamA.Controllers
 
             if (ModelState.IsValid)
             {
-                userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
+                try
+                {
+                    userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
+                    return RedirectToAction("MessageView", (object)"A confirmation message has benn sent. Please confirm!")
+                }
+                catch (Exception e)
+                {
+                    return RedirectToAction("Error", (object)"An error has ocurred.");
+                }
             }
-            TeacherListVM listVM = new TeacherListVM()
-            {
-                TeacherNameList = userService.GetAllTeachers().Select(x => x.Username).ToList()
-
-            };
-            return View(listVM);
+            else
+                return RedirectToAction("Error", (object)"An error has ocurred.");
         }
 
         public ActionResult ConfirmRegistration(string GUID)
         {
             if (userService.CheckGuid(GUID) == 1)
-                return View("RegistrationConfirmed");
+                return View("MessageView", "Registration confirmed! Enjoy!");
             else return View("Error", "Invalid confirmation link!");
         }
 
