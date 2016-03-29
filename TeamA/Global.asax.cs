@@ -9,6 +9,7 @@ using System.Web.Routing;
 using System.Threading;
 using BusinessLayer.Models;
 using BusinessLayer.Timer;
+
 namespace TeamA
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -18,7 +19,7 @@ namespace TeamA
     {  
         protected void Application_Start()
         {
-
+            
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

@@ -62,5 +62,35 @@ namespace BusinessLayer
         {
             hwRepository.CheckHomeworkDeadLine();
         }
-    }
+
+        public Models.StudentHomeworkDetailsVM GetStudentHomeworkDetails(int studentID, int homeworkID)
+        {
+            var model = hwRepository.GetStudentHomeworkDetails(studentID, homeworkID);
+            return new Models.StudentHomeworkDetailsVM()
+            {
+                HomeworkId = model.HomeworkId,
+                HomeWorkName = model.HomeWorkName,
+                StudentGrade = model.StudentGrade,
+                Description = model.Description,
+                Status = model.Status,
+                TeacherId = model.TeacherId
+            };
+        }
+
+          public List<StudentToHomework> GetStudentsAvgGradeByTeacher(string userName)
+        {
+             List<StudentToHomework>  studentAvgGradeByTeacher = hwRepository.GetStudentsAvgGradeByTeacher(userName);
+       
+              return studentAvgGradeByTeacher;
+         }
+        public List<StudentToHomework> GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
+        {
+             List<StudentToHomework> studentGradeByTeacherAndHomework =hwRepository.GetStudentsGradeByTeacherAndHomework(userName,homeworkID);
+
+            return studentGradeByTeacherAndHomework;
+        }
+
+
 }
+    }
+

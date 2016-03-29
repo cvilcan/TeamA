@@ -24,8 +24,11 @@ namespace TeamA.Attributes
                 username = cookie["username"];
                 password = cookie["password"];
                 if (_userService.Login(username, password))
-                     HttpContext.Current.Session["SessionUser"] = username;
-                       HttpContext.Current.Session["SessionUserId"] =_userService.GetUser(username).Item1;
+                {
+                    HttpContext.Current.Session["SessionUser"] = username;
+                    HttpContext.Current.Session["SessionUserId"] = _userService.GetUser(username).Item1;
+                }
+
             }
             else
             {               
