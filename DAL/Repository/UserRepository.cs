@@ -84,18 +84,18 @@ namespace TeamA.Repository
 
 
                 int number = loginlist[0];
-                    
 
-                    
 
-                if(number==1)
+
+
+                if (number == 1)
                 {
                     return true;
                 }
                 else
-                {
-                    return false;
-                }
+                    if (number == 0)
+                        throw new Exception("User is not confirmed!");
+                    else throw new Exception("Invalid credentials!");
             }
         }
 
