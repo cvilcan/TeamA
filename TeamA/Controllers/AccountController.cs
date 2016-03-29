@@ -51,7 +51,7 @@ namespace TeamA.Controllers
                 Response.AppendCookie(cookie);
                 string role = userService.GetRole(vm.UserName);
 
-                if (ReturnUrl == "")
+                if ((ReturnUrl == "") || (ReturnUrl == null))
                     return RedirectToAction("Index", role);
                 else
                     return RedirectToAction(ReturnUrl);
@@ -84,7 +84,7 @@ namespace TeamA.Controllers
                 try
                 {
                     userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
-                    return RedirectToAction("MessageView", (object)"A confirmation message has benn sent. Please confirm!")
+                    return RedirectToAction("MessageView", (object)"A confirmation message has benn sent. Please confirm!");
                 }
                 catch (Exception e)
                 {
