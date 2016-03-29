@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Mail;
 using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,12 @@ namespace TeamA.Controllers
             try
             {
                 homeworkService.CreateHomework(vm.TeacherID, vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);
+                string getStudEmail = userService.GetAllStudents().Select(x => x.Email).FirstOrDefault();
+                if (getStudEmail != null)
+                {
+                    MailHelper.SendMail(new List<string> { getStudEmail }, "account@account.com", "New Homework" + vm.Deadline, vm.Description);
+                }
+                
                 return RedirectToAction("Index");
             }
             catch (Exception)
