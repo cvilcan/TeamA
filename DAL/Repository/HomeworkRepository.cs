@@ -182,7 +182,7 @@ namespace DAL.Repository
 
                     studentAvgGradeByTeacherAndHomework.StudentName = rdr["StudentName"].ToString();
                     studentAvgGradeByTeacherAndHomework.StudentUserID = Convert.ToInt32(rdr["StudentID"]);
-                    studentAvgGradeByTeacherAndHomework.Status = rdr["Status"].ToString();
+ 
                     studentAvgGradeByTeacherAndHomework.Comment = rdr["Comment"].ToString();
                     studentAvgGradeByTeacherAndHomework.UploadDate = Convert.ToDateTime(rdr["UploadDate"]);
                     studentAvgGradeByTeacherAndHomework.UploadID = Convert.ToInt32(rdr["UploadId"]);
