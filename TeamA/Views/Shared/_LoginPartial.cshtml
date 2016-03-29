@@ -11,6 +11,10 @@
 }
 else
 {
+    
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="span6 pull-right">
     <div class="btn-group">
    
         <button type="button" class="btn btn-default">
@@ -19,7 +23,14 @@ else
     
 
    
-        <button type="button" class="btn btn-default">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</button>
+        <button type="button" class="btn btn-default">
+            @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        </button>
     
         </div>
+                </div>
+            </div>
+        </div>
+        
+    
 }

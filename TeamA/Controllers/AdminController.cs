@@ -35,8 +35,7 @@ namespace TeamA.Controllers
             string str="";
             try { 
             adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, ConfigurationManager.AppSettings["BasePath"]);
-                       ViewBag.Success = "";
-            return View();
+            ViewBag.Success = "";            return View();
                 }
             catch(SqlException ex)
             {
