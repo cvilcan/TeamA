@@ -158,7 +158,7 @@ namespace DAL.Repository
 
 
 
-        } //
+        } 
 
         public List<StudentHomeworkDetails> GetStudentCompletedHomework(string userName)
         {
@@ -212,7 +212,7 @@ namespace DAL.Repository
 
         }
 
-        public List<StudentHomeworkDetails> GetPendingHomeworkUpload(string userName, int homeworkID) //
+        public List<StudentHomeworkDetails> GetPendingHomeworkUpload(string userName, int homeworkID)
         {
 
 
@@ -256,7 +256,7 @@ namespace DAL.Repository
 
 
 
-        }//
+        }
 
         public List<StudentHomeworkDetails> GetCompletedHomeworkUpload(string userName, int homeworkID)
         {
