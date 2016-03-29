@@ -16,6 +16,7 @@ namespace BusinessLayer
         private HomeworkRepository hwRepository = new HomeworkRepository();
         private UserRepository userRepository = new UserRepository();
         private UserService userService = new UserService();
+        private StudentService studentService = new StudentService();
 
 
         public int CreateHomework(int TeacherUserID, string name, string description, DateTime deadline, string basePath)
