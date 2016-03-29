@@ -118,12 +118,14 @@ namespace TeamA.Controllers
            return View(teacherHomeworks);
         }
 
+
+        //Insert Grade 
         [HttpPost]
-        public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade = null, string comment = null)
+        public ActionResult InsertGradeOrStatus(int uploadId, int? grade = null, string comment = null)
         {
             try 
 			{                 
-                 if( grade <=10 && grade >=1)
+                 if( grade <=10 && grade >=1 && grade!=null)
                     {                
                         homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
                         ViewBag.Grade = "Valid Grade";
@@ -141,6 +143,45 @@ namespace TeamA.Controllers
                 return RedirectToAction("Error");
             }
         }
+
+        //Comment
+        [HttpPost]
+        public ActionResult InsertCommentOrStatus(int uploadId, int? grade = null, string comment = null)
+        {
+            try
+            {
+                if (comment != null) { 
+                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                }
+                return RedirectToAction("ViewStudentHomework");
+            }
+            catch
+            {
+                return RedirectToAction("Error");
+            }
+        }
+       
+        //Insert Rejected Status
+        [HttpPost]
+        public ActionResult InsertStatus(int uploadId, int? grade = null, string comment = null)
+        {
+            try
+            {
+                              
+               homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+           
+                return RedirectToAction("ViewStudentHomework");
+            }
+            catch
+            {
+                return RedirectToAction("Error");
+            }
+        
+        }
+
+
+
+
 
         public ActionResult DownloadAsPDF(string path)
         {
