@@ -3,13 +3,11 @@
 @{Uri uri = Request.Url;}
 
 @*Show the current directory name using page URL. *@
-<h2>@Server.UrlDecode(uri.Segments.Last())</h2>
-
 @*If we were in root folder then don't show the up one level image. *@
-@if (uri.AbsolutePath.ToLower() != "/Teacher/")
-{
+@*@if (uri.AbsolutePath.ToLower() != "/Teacher/")
+{*@
     @*Making a URL to going up one level. *@
-    string[] upPath = Request.RawUrl.Split('/');
+    @*string[] upPath = Request.RawUrl.Split('/');
     string newPath = "";
     for (int i = 2; i < upPath.Length - 1; i++)
     {
@@ -23,8 +21,9 @@
        href="@newPath">
         <img src="@Url.Content("~/Content/images/up.png")" alt="Up" style="width: 20px; height: 20px; border: none" />
     </a>
+        }
+        *@
 
-}
 
 <table class="table">
     <tr>
