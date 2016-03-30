@@ -20,6 +20,21 @@ namespace BusinessLayer
         private StudentService studentService = new StudentService();
 
 
+
+        public IEnumerable<Homework> GetAllHomework()
+        {
+            try
+            {
+                IEnumerable<Homework> hw = hwRepository.GetAllHomework();
+                return hw;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Service error " + e);
+            }
+            return null;
+        }
+
         public int CreateHomework(int TeacherUserID, string name, string description, DateTime deadline, string basePath)
         {
             var teachers = userService.GetAllTeachers();

@@ -1,0 +1,24 @@
+﻿
+
+    @{
+        ViewBag.Title = "Raports";
+        Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+    }
+    <h2>Raports</h2>
+   
+
+    <div id="ReportDiv">
+
+
+</div>
+
+
+@Ajax.ActionLink("Student Average Grade", "GetStudentsAvgGradeByTeacher", new AjaxOptions()
+{
+    HttpMethod = "Get",
+    UpdateTargetId = "ReportDiv",
+    InsertionMode = InsertionMode.Replace
+
+})
+
+

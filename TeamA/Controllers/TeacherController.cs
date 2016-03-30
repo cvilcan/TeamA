@@ -209,19 +209,34 @@ namespace TeamA.Controllers
 
 
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului
-        public ActionResult  GetStudentsAvgGradeByTeacher(string userName)
+        public PartialViewResult GetStudentsAvgGradeByTeacher(string userName)
         {
-            List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher(userName);
+            List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher((string)Session["SessionUser"]);
 
-            return View();
+            return PartialView("GetStudentsAvgGradeByTeacher", studentAvgGradeByTeacher);
         }
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului si de tema 
-        public ActionResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
+        public PartialViewResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
         {
+            
+            HomeworkListVM homeworkVm = new HomeworkListVM()
+            {
+
+                HomeworkList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).Select(x => x.HomeworkName).ToList()              
+            };
+            //vm.TeacherNameList.Insert(0, null);
+
+            //return View(vm);
+
             List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework(userName, homeworkID);
 
 
-            return View(studentGradeByTeacherAndHomework);
+            return PartialView(studentGradeByTeacherAndHomework);
+        }
+
+        public ActionResult Raports()
+        {
+            return View("Raports");
         }
         
     }

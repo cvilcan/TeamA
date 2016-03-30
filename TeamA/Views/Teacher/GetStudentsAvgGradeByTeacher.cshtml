@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AccessModels.Models.StudentToHomework>
+
+
+<table>
+    <tr>
+        
+        
+        
+       
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+   
+        <th>
+            @Html.DisplayNameFor(model => model.Grade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+       
+    
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Grade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentName)
+        </td>
+
+        
+
+       
+    </tr>
+}
+
+</table>
