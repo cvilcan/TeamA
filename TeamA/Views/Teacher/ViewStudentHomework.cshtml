@@ -1,7 +1,5 @@
 ﻿@model string
 
-
-
 @{
     ViewBag.Title = "ViewStudentHomework";
     Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
@@ -13,86 +11,113 @@
 }
 
 <h2>ViewStudentHomework</h2>
+<div class="row">
+    <div class="container col-lg-6 col-md-6 col-sm-8 col-xs-8">
+       
 
-@Html.TextArea("fileText", Model, 50, 100, null)
+        <textarea cols="100"  id="fileText" style="width:100%;margin:auto" name="fileText" rows="20">  @Model   </textarea>
 
-
-
-    @using (Html.BeginForm("InsertCommentOrStatus", "Teacher", FormMethod.Post))
-    {
-
-
-
-        <div align="left">
-
-            <div>
-                @Html.Label("lblComment")
-            </div>
-            @Html.TextArea("comment", "", 5, 40, null)
-            <input type="submit" id="button" value="Submit Comment" class="bg-success btn-default" />
-        </div>
-        @Html.Hidden("uploadId", (int)ViewBag.UploadID);
-    }
-
-    @using (Html.BeginForm("InsertGradeOrStatus", "Teacher", FormMethod.Post))
-    {
-        <div align="left">
-            @Html.Label("lblGrade")
-
-
-            @*@Html.TextBox("grade", "", new { style = "background-color:whiteSmoke;width:40px; color:Black; font-weight:bold"})*@
-            @Html.Label("lblGrade")
-            <input type="text" name="grade" id="txtGrade" maxlength="2" max="10" min="1" onblur="minmax(document.getElementById('grade').innerHTML)" />
-
-            <input type="submit" id="btnGrade" class="bg-success btn-success" />
-        </div>
-
-       @Html.Hidden("uploadId", (int)ViewBag.UploadID);
-
-    }
-
-    @using (Html.BeginForm("InsertStatus", "Teacher", FormMethod.Post))
-{
-    <div align="center">
-        @Html.Label("lblReject")
-        <input type="submit" id="btnReject" class="bg-success btn-danger" value="Reject Homework" />
     </div>
-     @Html.Hidden("uploadId", (int)ViewBag.UploadID);
-}
+</div>
+
+        @Html.Hidden("uploadId", (int)ViewBag.UploadID)
+    <div class="row">
+    <div class="container col-lg-3 col-md-3 col-sm-4 col-xs-4">
+        <div align="left">
+            <b>Comment</b>
+            <textarea cols="50" id="txtComment" style="width:100%;margin:auto" name="txtComment" rows="5"></textarea>
+
+            <input type="submit" id="btnComment" value="Submit Comment" onclick="ShowCommentLabel(document.getElementById('uploadId').value, document.getElementById('txtComment').value)" class="bg-success btn-default" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="container col-lg-1 col-md-1 col-sm-2 col-xs-2">
+            <div align="left">
+                <b>Grade</b>
+                <input type="text" name="grade" id="txtGrade" maxlength="2" max="10" min="1" style="width:20px;margin:auto" />
+                <div class="row" style="height:5px"></div>
+                <input type="submit" value="Add Grade" id="btnGrade" onclick="ShowGradeLabel(document.getElementById('uploadId').value, document.getElementById('txtGrade').value)" class="bg-success btn-success" />
+            </div>
+
+            <div class="row"style="height:10px"></div>
+            
+
+            <div align="left">
+               
+                <input type="submit" id="btnReject" onclick="ShowRejectLabel(document.getElementById('uploadId').value)" class="bg-success btn-danger" value="Reject Homework" />
+            </div>
+
+            <div class="row">
+                <div class="container">
+                    <label id="lblReject" for="btnReject" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 
 
-
-
-<script type="text/javascript">
-
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
     $(document).ready();
-    //Redirects to home page on user submit if the credentials are match
-    $('#btnReject').click(
-        function () {
-                     
 
-            document.getElementById('lblReject').innerHTML.fontcolor('Green') ="Success"
-            $('#lblReject').fadeOut('10', document.getElementById('lblReject').innerHTML.fontcolor('Green') = "")
+    function ShowRejectLabel(uploadId) {
+        $.ajax({
+            url: '@Url.Action("InsertStatus", "Teacher")',
+            type: 'POST',
+            data: { uploadId: uploadId },
+            async: true,
+            success: function (data) {
+                if (data == "Success!") {
+                    $('#lblReject').text(data).css('color', 'green');
+                }
+                else {
+                    $('#lblReject').text(data).css('color', 'red');
+                }
+            }
+        });
+    }
+    function ShowGradeLabel(uploadId, Grade) {
+        $.ajax({
+            url: '@Url.Action("InsertGradeOrStatus", "Teacher")',
+            type: 'POST',
+            data: { uploadId:uploadId, grade: Grade },
+            async: true,
+            success: function (data) {
 
-        }
+                if (data == "Success!") {
+                    $('#lblReject').text(data).css('color', 'green');
+                }
+                else {
+                    $('#lblReject').text(data).css('color', 'red');
+                }
+             
+            }
+        });
 
-        );
+    }
 
-    $('#btnGrade').click(function () {
-
-        if ($('#txtGrade').val != null && $('#txtGrade').val >= 1 && $('#txtGrade').val <=10)
-        {
-            document.getElementById('lblGrade').innerHTML.fontcolor('Green')= "Grade inserted successfully"
-            $('#lblGrade').fadeOut('10', document.getElementById('lblGrade').innerHTML.fontcolor('Green') = "")
-        }
-        else
-        {
-            document.getElementById('lblGrade').innerHTML.fontcolor('Red') = "Please insert a grade between 1 and 10"
-            $('#lblGrade').fadeOut('10', document.getElementById('lblGrade').innerHTML.fontcolor('Green') = "")
-
-        }
-    });
-
-
+    function ShowCommentLabel(uploadId, comment) {
+        $.ajax({
+            url: '@Url.Action("InsertCommentOrStatus", "Teacher")',
+            type: 'POST',
+            data: { uploadId: uploadId, comment: comment },
+            async: true,
+            success: function (data) {
+              
+                if (data == "Success!")
+                    {
+                $('#lblReject').text(data).css('color','green');
+                }
+                else{
+                    $('#lblReject').text(data).css('color', 'red');
+                }
+            }
+        });
+    }
 </script>
+
