@@ -8,8 +8,8 @@ using TeamA.Repository;
 using AccessModels.Models;
 using System.Data.SqlClient;
 using System.IO;
-using BusinessLayer.Mail;
 using BusinessLayer.Models;
+using Helpers.Mail;
 
 namespace BusinessLayer
 {

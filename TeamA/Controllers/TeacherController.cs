@@ -1,6 +1,5 @@
 ﻿using AccessModels.Models;
 using BusinessLayer;
-using BusinessLayer.Mail;
 using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
