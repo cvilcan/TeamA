@@ -413,6 +413,8 @@
     </Content>
     <Content Include="Views\Shared\HomeworkPresenter.cshtml" />
     <Content Include="Views\Teacher\_ListHomeworks.cshtml" />
+    <Content Include="Views\Teacher\GenerateReportStudGradePDF.cshtml" />
+    <Content Include="Views\Teacher\GenerateReportStudAvgGradePDF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
