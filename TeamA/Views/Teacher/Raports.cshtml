@@ -12,24 +12,22 @@
 </div>
 
 
-@Ajax.ActionLink("Student Average Grade", "GetStudentsAvgGradeByTeacher", new AjaxOptions()
+@*@Ajax.ActionLink("Student Average Grade", "GetStudentsAvgGradeByTeacher", new AjaxOptions()
 {
     HttpMethod = "Get",
     UpdateTargetId = "ReportDiv",
     InsertionMode = InsertionMode.Replace
 
-})
+})*@
 
-@Ajax.ActionLink("Students grade by homework", "GetStudentsGradeByTeacherAndHomework", new AjaxOptions()
-{
-    HttpMethod = "Get",
-    UpdateTargetId = "ReportDiv",
-    InsertionMode = InsertionMode.Replace
+<input type="button" class="btn" id="GetStudentsAvgGradeByTeacher" value="Student Average Grade" />
 
-})
-
-<div class="table">
-<div class="form-group row">
+@*Ajax.ActionLink(" students grade by homework", "GetStudentsGradeByTeacherAndHomework" , new ajaxoptions()
+       {
+       httpmethod="Get" ,
+       updatetargetid="ReportDiv" ,
+       insertionmode=InsertionMode.Replace
+       })*@><div class="form-group row">
     <div class="col-sm-2">
        
     </div>
@@ -43,5 +41,26 @@
             }
         </select>
     </div>
-    </div>
 </div>
+
+<div id="tableDiv">
+</div>
+
+<script>
+    $(document).ready(function () 
+    {
+        $("#GetStudentsAvgGradeByTeacher").on("click", function () {
+            $.ajax
+            ({
+                url: "@Url.Action("GetStudentsAvgGradeByTeacher", "Teacher")",
+                method: "GET",
+                success: function (data, textStatus, XMLHttpRequest) 
+                {
+                    alert(data);
+                    $("#tableDiv").html(data);
+                }
+            })
+        })
+    })
+
+</script>

@@ -8,8 +8,8 @@ using TeamA.Repository;
 using AccessModels.Models;
 using System.Data.SqlClient;
 using System.IO;
-using BusinessLayer.Mail;
 using BusinessLayer.Models;
+using Helpers.Mail;
 
 namespace BusinessLayer
 {
@@ -79,10 +79,7 @@ namespace BusinessLayer
 
           int  commandStatus=  hwRepository.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
             string getStudEmail = userService.GetAllStudents().Select(x => x.Email).FirstOrDefault();
-            if (getStudEmail != null)
-            {
-                MailHelper.SendMail(new List<string> { getStudEmail }, "account@account.com", " Your teacher has viewed your homework", comment);
-            }
+
           if ((commandStatus == 0) && (grade!= null) && (comment==null))
           {
               if ((grade <= 10) && (grade >= 1 && grade != null))
@@ -103,6 +100,13 @@ namespace BusinessLayer
           else if ((commandStatus == 0) && (grade == null) && (comment == null))
           {
               throw new Exception("Failed to reject command!");
+          }
+          else
+          {
+              if (getStudEmail != null)
+              {
+                  MailHelper.SendMail(new List<string> { getStudEmail }, "account@account.com", "Homework review", "Your teacher has reviewd your homework");
+              }
           }
          
 
