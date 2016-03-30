@@ -168,7 +168,7 @@ namespace TeamA.Controllers
                 if (comment != null) 
 				{ 
                 
-                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                homeworkService.InsertCommentOrGradeOrStatus(uploadId, null, comment);
                 }
                 return Content("Success!");
             }
@@ -184,9 +184,9 @@ namespace TeamA.Controllers
         {
             try
             {
-                              
+                homeworkService.InsertCommentOrGradeOrStatus(uploadId, null, null);
                
-               return Content("Success!");
+                return Content("Success!");
             }
             catch (Exception e)
             {
@@ -202,7 +202,7 @@ namespace TeamA.Controllers
         }
 
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului
-        public PartialViewResult GetStudentsAvgGradeByTeacher(string userName)
+        public PartialViewResult GetStudentsAvgGradeByTeacher()
         {
 
             List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher((string)Session["SessionUser"]);

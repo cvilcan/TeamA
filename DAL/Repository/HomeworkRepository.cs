@@ -133,7 +133,6 @@ namespace DAL.Repository
 
                    
                 	con.Open();
-                	cmd.ExecuteNonQuery();
 
                     SqlDataReader rdr = cmd.ExecuteReader();
                     while(rdr.Read())
