@@ -40,7 +40,7 @@ namespace TeamA.Controllers
         {
             try
             {
-                homeworkService.CreateHomework(vm.TeacherID, vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);                
+                homeworkService.CreateHomework((int)Session["SessionUserId"], vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);                
                 
                 return RedirectToAction("Index");
             }
@@ -104,7 +104,7 @@ namespace TeamA.Controllers
                 string fileText = "";
                 try
                 {
-                    fileText = fileSystemService.GetFileText(realPath);
+                    fileText = HttpUtility.HtmlEncode(fileSystemService.GetFileText(realPath));
 
                 }
                 catch (Exception)
@@ -131,16 +131,13 @@ namespace TeamA.Controllers
 
                 if(grade != null)
                 { 
-                 homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-                 return Content("Success!");
+                     homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                     return Content("Success!");
                 }
                 else
                 {
                     return Content("Please enter a grade!");
                 }
-                
-
-                 
             }
             catch(Exception e)
             {
@@ -154,9 +151,11 @@ namespace TeamA.Controllers
         {
             try
             {
+                if (comment != null) 
+				{ 
                 
                 homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-               
+                }
                 return Content("Success!");
             }
             catch(Exception e)
@@ -172,22 +171,14 @@ namespace TeamA.Controllers
             try
             {
                               
-               homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-
-
-
+               
                return Content("Success!");
             }
             catch (Exception e)
             {
                 return Content(e.Message);
-            }
-        
+            }        
         }
-
-
-
-
 
         public ActionResult DownloadAsPDF(string path)
         {
@@ -196,22 +187,23 @@ namespace TeamA.Controllers
             return View(result);
         }
 
-
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului
         public ActionResult  GetStudentsAvgGradeByTeacher(string userName)
         {
             List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher(userName);
-
             return View();
         }
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului si de tema 
         public ActionResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
         {
             List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework(userName, homeworkID);
-
-
             return View(studentGradeByTeacherAndHomework);
         }
-        
+
+        public ActionResult ViewOneTeacherHomeworks()
+        {
+            var homeworks= homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]);
+            return View(homeworks);
+        }
     }
 }

@@ -111,6 +111,7 @@ namespace TeamA.Controllers
                 vm.Details = _homeworkService.GetStudentHomeworkDetails((int)Session["SessionUserId"], id);
 
                 vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url);
+                ViewBag.HomeworkID = id;
                 if (!vm.FolderStructure.isFile)
                     return View(vm);
                 else
@@ -118,7 +119,7 @@ namespace TeamA.Controllers
                     string fileText = "";
                     try
                     {
-                        fileText = _fileSystemService.GetFileText(realPath);
+                        fileText = HttpUtility.HtmlEncode(_fileSystemService.GetFileText(realPath));
                     }
                     catch (Exception)
                     {
@@ -130,7 +131,7 @@ namespace TeamA.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadHomework(HttpPostedFileBase homeworkFile, int homeworkID)
+        public ActionResult UploadHomework(HttpPostedFileBase homeworkFile, int id)
         {
             if ((homeworkFile != null) && (homeworkFile.ContentLength < 0))
                 return View("Error", (object)"Empty file!");
@@ -141,7 +142,7 @@ namespace TeamA.Controllers
                     string s = ConfigurationManager.AppSettings["BasePath"] + Request["teacherFolder"] + "/" + Request["homeworkFolder"] + "/" + Request["studentFolder"];
                     if (Request["path"] != null)
                         s += "/" + Request["path"];
-                    int uploadID = _studentService.InsertStudentToHomework((string)Session["SessionUser"], homeworkID, homeworkFile.FileName, s);
+                    int uploadID = _studentService.InsertStudentToHomework((string)Session["SessionUser"], id, homeworkFile.FileName, s);
                     _fileSystemService.SaveFile(s, homeworkFile, uploadID);
                     return Redirect(Request.UrlReferrer.AbsoluteUri);
                 }
