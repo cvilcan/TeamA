@@ -213,12 +213,12 @@ namespace TeamA.Controllers
 
         }
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului si de tema 
-        public PartialViewResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
+        public PartialViewResult GetStudentsGradeByTeacherAndHomework(int homeworkID)
         {
 
 
 
-            List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework(userName, homeworkID);
+            List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework((string)Session["SessionUser"], homeworkID);
             HomeworkListVM homeworkVm = new HomeworkListVM()
             {
 

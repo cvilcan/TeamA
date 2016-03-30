@@ -21,6 +21,7 @@
 })*@
 
 <input type="button" class="btn" id="GetStudentsAvgGradeByTeacher" value="Student Average Grade" />
+<input type="button" class="btn" id="GetStudentsGradeByTeacherAndHomework" value=" students grade by homework" />
 
 @*Ajax.ActionLink(" students grade by homework", "GetStudentsGradeByTeacherAndHomework" , new ajaxoptions()
        {
@@ -61,6 +62,24 @@
                 }
             })
         })
+    })
+    
+    $(document).ready(function () 
+    {
+        $("#GetStudentsGradeByTeacherAndHomework").on("click", function () {
+            var hID = $("#sel1")[0].options[$("#sel1")[0].options.selectedIndex].value;
+            $.ajax
+            ({
+                url: "@Url.Action("GetStudentsGradeByTeacherAndHomework", "Teacher")",
+                data: { homeworkID: hID },
+                method: "GET",
+            success: function (data, textStatus, XMLHttpRequest) 
+            {
+                alert(data);
+                $("#tableDiv").html(data);
+            }
+        })
+    })
     })
 
 </script>
