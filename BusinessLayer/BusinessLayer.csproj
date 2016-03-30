@@ -61,6 +61,7 @@
     <Compile Include="FileSystemService.cs" />
     <Compile Include="HomeworkService.cs" />
     <Compile Include="Mail\MailHelper.cs" />
+    <Compile Include="Models\AccountTeacherListVm.cs" />
     <Compile Include="Models\AccountVM.cs" />
     <Compile Include="Models\ExplorerModeVMl.cs" />
     <Compile Include="Models\HomeworkVM.cs" />

@@ -11,13 +11,13 @@ namespace DAL.Repository
 {
     public class AdminRepository
     {
+        string cs = ConfigurationManager.ConnectionStrings["TeamAConnection"].ConnectionString;
 
-
-        public void addTeachersFromAdmin(UserProfile up)
+        public void AddTeachersFromAdmin(UserProfile up)
         {
 
            
-                string cs = ConfigurationManager.ConnectionStrings["TeamAConnection"].ConnectionString;
+                
 
                 using (SqlConnection con = new SqlConnection(cs))
                 {
@@ -50,26 +50,23 @@ namespace DAL.Repository
             //}
         }
 
+        public void InsertTeacherToStudent(string teacherName, int studentID)
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("spInsertTeacherToStudent", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
 
+                cmd.Parameters.AddWithValue("@teacherName", teacherName);
+                cmd.Parameters.AddWithValue("@studentId", studentID);
+                
+                con.Open();
 
+                cmd.ExecuteNonQuery();
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
 
 
 

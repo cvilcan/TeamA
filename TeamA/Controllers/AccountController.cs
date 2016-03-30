@@ -90,7 +90,7 @@ namespace TeamA.Controllers
                     userService.CreateStudentUser(vm.UserName, vm.Password, vm.Email, vm.TeacherName);
                     return View("MessageView", (object)"A confirmation message has benn sent. Please confirm!");
                 }
-                catch (Exception e) 
+                catch (Exception)
                 {
                     return View("MessageView", (object)"An error has ocurred.");
                 }

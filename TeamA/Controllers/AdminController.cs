@@ -24,7 +24,9 @@ namespace TeamA.Controllers
         public ActionResult Index()
         {
             return View();
-        }        public ActionResult CreateTeacher()
+        }       
+        
+        public ActionResult CreateTeacher()
         {
             return View();
         }
@@ -34,7 +36,7 @@ namespace TeamA.Controllers
         {
             string str="";
             try { 
-            adminService.addTeachersFromAdmin(tcr.Username,tcr.Email, ConfigurationManager.AppSettings["BasePath"]);
+            adminService.AddTeachersFromAdmin(tcr.Username,tcr.Email, ConfigurationManager.AppSettings["BasePath"]);
             ViewBag.Success = "";            return View();
                 }
             catch(SqlException ex)
@@ -64,18 +66,76 @@ namespace TeamA.Controllers
 
         public ActionResult ViewAllStudents()
         {
-            var lista = userService.GetAllStudents().ToList();
-            List<AccountVM> VMList = new List<AccountVM>();
-            foreach (var item in lista)
+            var listStudents = userService.GetAllStudents().ToList();
+            var listTeachers = userService.GetAllTeachers();
+            AccountTeacherListVm vm = new AccountTeacherListVm();
+            vm.AccountList = new List<AccountVM>();
+            vm.TeacherList = new List<string>();
+            foreach (var item in listStudents)
             {
-                VMList.Add(new AccountVM()
-                {
-                    UserName= item.Username,
-                    Email = item.Email,
-                    IsConfirmed=item.IsConfirmed
+                vm.AccountList.Add(new AccountVM{
+                    UserName=item.Username,
+                    Email=item.Email,
+                    TeacherName= studentService.GetTeacherBelongingToStudent(item.Username).Item3,
+                    IsConfirmed = item.IsConfirmed
                 });
             }
-            return View(VMList);
+            foreach (var item in listTeachers)
+            {
+                vm.TeacherList.Add(item.Username);
+            }
+                       
+            return View(vm);
+        }
+
+        public PartialViewResult ViewAllStudentsBack()
+        {
+            var listStudents = userService.GetAllStudents().ToList();
+            var listTeachers = userService.GetAllTeachers();
+            AccountTeacherListVm vm = new AccountTeacherListVm();
+            vm.AccountList = new List<AccountVM>();
+            vm.TeacherList = new List<string>();
+            foreach (var item in listStudents)
+            {
+                vm.AccountList.Add(new AccountVM
+                {
+                    UserName = item.Username,
+                    Email = item.Email,
+                    TeacherName = studentService.GetTeacherBelongingToStudent(item.Username).Item3,
+                    IsConfirmed = item.IsConfirmed
+                });
+            }
+            foreach (var item in listTeachers)
+            {
+                vm.TeacherList.Add(item.Username);
+            }
+
+            return PartialView("_ViewAllStudents", vm);
+        }
+
+        [HttpPost]
+        public PartialViewResult ViewAllUnassignedStudents()
+        {
+            var listStudents = userService.GetAllUnassignedStudents().ToList();
+            var listTeachers = userService.GetAllTeachers();
+            AccountTeacherListVm vm = new AccountTeacherListVm();
+            vm.AccountList = new List<AccountVM>();
+            vm.TeacherList = new List<string>();
+            foreach (var item in listStudents)
+            {
+                vm.AccountList.Add(new AccountVM
+                {
+                    UserName = item.Username,
+                    Email = item.Email,
+                    TeacherName = studentService.GetTeacherBelongingToStudent(item.Username).Item3,
+                    IsConfirmed = item.IsConfirmed
+                });
+            }
+            foreach (var item in listTeachers)
+            {
+                vm.TeacherList.Add(item.Username);
+            }
+            return PartialView("_ViewAllStudents", vm);
         }
 
         public ActionResult ViewAllTeachers()
@@ -105,6 +165,24 @@ namespace TeamA.Controllers
             adminService.ResetPasswordSendMail(username);
             return new EmptyResult();
         }
+
+        public ActionResult UpdateTeacherOfStudent(string studentName, string teacherName)
+        {
+            var getStudentId = userService.GetUser(studentName);
+             try
+                {
+                    adminService.InsertTeacherToStudent(teacherName, getStudentId.Item1);
+                }
+                catch (Exception e)
+                {
+
+                    return View("Error",(object)"Try again!");
+                }
+		        
+	                  
+            return new EmptyResult();
+        }
+       
     }
 }
 

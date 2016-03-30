@@ -30,7 +30,7 @@ namespace BusinessLayer
 
 
 
-        public void addTeachersFromAdmin(string username,string email, string basePath) {
+        public void AddTeachersFromAdmin(string username,string email, string basePath) {
 
              try
             {
@@ -46,7 +46,7 @@ namespace BusinessLayer
 
                 
                 
-                adminRepository.addTeachersFromAdmin(up);
+                adminRepository.AddTeachersFromAdmin(up);
 
                 Directory.CreateDirectory(basePath + username + '_' + Convert.ToString(userSerivce.GetUser(username).Item1));
             }
@@ -58,6 +58,21 @@ namespace BusinessLayer
 
              }
         }
+
+        public void InsertTeacherToStudent(string teacherName, int studentID)
+        {
+            try
+            {
+                adminRepository.InsertTeacherToStudent(teacherName, studentID);
+            }
+            catch (SqlException e)
+            {
+
+                e.Message.ToString(); 
+            }
+            
+        }
+        
 
         public void ResetPasswordSendMail(string username)
         {

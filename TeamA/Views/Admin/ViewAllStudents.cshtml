@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BusinessLayer.Models.AccountVM>
+﻿@model BusinessLayer.Models.AccountTeacherListVm
 
 @{
     ViewBag.Title = "ViewAllStudents";
@@ -9,55 +9,58 @@
 <div class="container">
     <div class="page-header">
         <h1>All Students</h1>
+        <div class="checkbox text-right">
+            <label><input type="checkbox" id="Checkbox" value="" >Show Students without Teacher</label>
+        </div>
     </div>
+    
     
 </div>
 
-<div class="container">
-    <table class="table">
-        <thead>
-            <tr class="success">
-                <th>@Html.DisplayNameFor(model => model.UserName)</th>
-                <th>@Html.DisplayNameFor(model => model.Email)</th>
-                <th>@Html.DisplayNameFor(model => model.IsConfirmed)</th>
-                <th>Reset Password</th>
-
-            </tr>
-
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr class="info">
-                    <td class="userNameDiv">
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                    <td>@Html.DisplayFor(modelItem => item.IsConfirmed)</td>
-                    <td>
-                        @using (Html.BeginForm("SendMailWithPassword", "Admin", new { username = item.UserName }, FormMethod.Post))
-                        {
-                            <button type="button" class="btn btn-primary btn-xs resetStudButton" onclick="">Reset</button>
-                           @*<input type="submit" name="name" class="btn btn-primary btn-xs resetStudButton" value="Reset" />*@
-                        }    
-                                   
-                    </td>
-
-                </tr>
-                
-
-            }
-        </tbody>
-
-    </table>
-    <div>
-        @Html.ActionLink("Back to Index", "Index", "Admin")
-
-    </div>
+<div class="container" id="tabelDiv">     
+         @Html.Partial("_ViewAllStudents", Model)
+         @Html.ActionLink("Back to Index", "Index", "Admin")     
 </div>
 
+
 <script type="text/javascript">
+
     $(document).ready(function () {
+        $("#Checkbox").change(function (event) {
+            if (this.checked)
+            {
+                
+                $.ajax
+                ({
+                    url: "@Url.Action("ViewAllUnassignedStudents", "Admin")",
+                    method: "POST",
+                    dataType:"html",
+                    success: function (data, textStatus, XMLHttpRequest) {
+                        SetData(data);
+                        }
+                })
+            }
+            else
+            {
+                $.ajax
+                ({
+                    url: "@Url.Action("ViewAllStudentsBack", "Admin")",
+                    method: "get",
+                    dataType:"html",
+                    success: function (data, textStatus, XMLHttpRequest)
+                    {
+                    SetData(data);
+                    }
+                })
+            }
+                
+        }
+      )
+
+        function SetData(data) {
+            $("#tabelDiv").html(data); // HTML DOM replace
+        }
+
         $(".resetStudButton").click(function () {
             var Username = $(this).closest("tr").children(".userNameDiv")[0].innerText;
             var mvcURL = "/Admin/SendMailWithPassword"
@@ -74,5 +77,21 @@
             })
 
         })
-    })
+
+        $(document).on('change', '.TeacherSelect', function() 
+        {
+            var teacherName = $(this)[0].options[$(this)[0].selectedIndex].value;
+            var studentName = $(this).closest("tr").children(".userNameDiv")[0].innerText;
+            var mvcURL = "/Admin/UpdateTeacherOfStudent"
+            $.ajax({
+                url: mvcURL,
+                data: { studentName : studentName, teacherName: teacherName },
+                type: 'POST',
+                success: function () 
+                {
+                    alert("Ieeei!");
+                }
+            })
+        })
+    });
 </script>

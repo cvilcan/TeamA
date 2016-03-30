@@ -178,8 +178,34 @@ namespace TeamA.Repository
             }
 
 
-        }       
-    
+        }
 
+
+
+        public IEnumerable<UserProfile> GetAllUnassignedStudents()
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("spGetAllUnassignedStudents", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                List<UserProfile> lista = new List<UserProfile>();
+
+                while (rdr.Read())
+                {
+                    lista.Add(new UserProfile()
+                        {
+                            ID = (int)rdr["ID"],
+                            Username = (string)rdr["Username"],
+                            Email = (string)rdr["Email"],
+                            IsConfirmed = (int)rdr["IsConfirmed"],
+                            RoleName = (string)rdr["RoleName"]
+                        });
+                }
+
+                return lista;
+            }
+        }
     }
 }
