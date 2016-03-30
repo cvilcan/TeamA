@@ -158,7 +158,6 @@ namespace TeamA.Controllers
                 
                 homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
                 }
-                }
                 return Content("Success!");
             }
             catch(Exception e)
