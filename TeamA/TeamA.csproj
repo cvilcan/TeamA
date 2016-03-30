@@ -170,9 +170,13 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\administration.png" />
+    <Content Include="Content\images\background.png" />
     <Content Include="Content\images\folder.png" />
     <Content Include="Content\images\home.png" />
+    <Content Include="Content\images\student.png" />
     <Content Include="Content\images\tail-middle.jpg" />
+    <Content Include="Content\images\teacher.png" />
     <Content Include="Content\images\up.png" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -404,6 +408,8 @@
     <Content Include="Views\Student\ViewHomeworkFile.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Shared\HomeworkPresenter.cshtml" />
+    <Content Include="Views\Teacher\_ListHomeworks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

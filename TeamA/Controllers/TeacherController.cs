@@ -83,6 +83,21 @@ namespace TeamA.Controllers
             return new Rotativa.ViewAsPdf("Presenter", L);
         }
 
+        public ActionResult GenerateHomeworkPDF()
+        {
+            List<HomeworkVM> L = new List<HomeworkVM>();
+            var a = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]);
+            foreach (var item in a)
+                L.Add(new HomeworkVM()
+                {
+                    HomeworkID=item.HomeworkID,
+                    Name = item.Name,
+                    Description = item.Description,
+                    Deadline = item.Deadline
+                });
+            return new Rotativa.ViewAsPdf("HomeworkPresenter", L);
+        }
+
         public ActionResult ViewStudentUploads(string teacherFolder, string homeworkFolder, string studentFolder, string path)
         {
             string realPath;
