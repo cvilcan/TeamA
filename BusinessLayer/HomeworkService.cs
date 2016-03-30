@@ -9,6 +9,7 @@ using AccessModels.Models;
 using System.Data.SqlClient;
 using System.IO;
 using BusinessLayer.Mail;
+using BusinessLayer.Models;
 
 namespace BusinessLayer
 {
@@ -40,11 +41,21 @@ namespace BusinessLayer
             return homeworkID;
         }
 
-        public IEnumerable<Homework> GetOneTeacherHomework(string username)
+        public IEnumerable<HomeworkVM> GetOneTeacherHomework(string username)
         {
             var teacherHomework = hwRepository.GetOneTeacherHomework(username);
+            List<HomeworkVM> vmList = new List<HomeworkVM>();
+            foreach (var item in teacherHomework)
+                vmList.Add(new HomeworkVM()
+                    {
+                        Deadline = item.Deadline,
+                        Description = item.Description,
+                        HomeworkID = item.HomeworkID,
+                        Name = item.HomeworkName,
+                        TeacherID = item.TeacherUserID
+                    });
 
-            return teacherHomework;
+            return vmList;
         }
 
 

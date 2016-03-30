@@ -124,7 +124,7 @@ namespace TeamA.Controllers
                     {
                         return View("Error", (object)"An error ocurred");
                     }
-                    return View("ViewStudentHomework", (object)fileText);
+                    return View("ViewHomeworkFile", (object)fileText);
                 }
             }
         }
