@@ -51,7 +51,7 @@ namespace TeamA.Repository
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@username", userName);
-                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@password", FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1"));
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@teacherName", teacherName);
 
@@ -68,7 +68,7 @@ namespace TeamA.Repository
 
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                //password = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
+                password = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", password);
                 con.Open();

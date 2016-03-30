@@ -102,7 +102,7 @@ namespace TeamA.Controllers
         public ActionResult ConfirmRegistration(string GUID)
         {
             if (userService.CheckGuid(GUID) == 1)
-                return View("MessageView", "Registration confirmed! Enjoy!");
+                return View("MessageView", (object)"Registration confirmed! Enjoy!");
             else return View("Error", "Invalid confirmation link!");
         }
 
