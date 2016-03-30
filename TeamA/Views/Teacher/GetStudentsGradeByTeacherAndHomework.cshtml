@@ -1,10 +1,8 @@
 ﻿@using AccessModels
 @model IEnumerable<AccessModels.Models.StudentToHomework>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
+
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.StudentUserID)
@@ -16,9 +14,7 @@
         <th>
             @Html.DisplayNameFor(model => model.UploadDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Comment)
-        </th>
+      
       
         
         <th>
@@ -43,9 +39,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.UploadDate)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comment)
-        </td>
+        
         
         <td>
             @Html.DisplayFor(modelItem => item.Grade)
@@ -53,11 +47,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.StudentName)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
+        
     </tr>
 }
     
