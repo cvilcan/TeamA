@@ -119,7 +119,7 @@ namespace TeamA.Controllers
                     string fileText = "";
                     try
                     {
-                        fileText = HttpUtility.HtmlEncode(_fileSystemService.GetFileText(realPath));
+                        fileText =_fileSystemService.GetFileText(realPath);
                     }
                     catch (Exception)
                     {

@@ -171,6 +171,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\folder.png" />
+    <Content Include="Content\images\home.png" />
     <Content Include="Content\images\tail-middle.jpg" />
     <Content Include="Content\images\up.png" />
     <Content Include="Content\jquery.datetimepicker.css" />
