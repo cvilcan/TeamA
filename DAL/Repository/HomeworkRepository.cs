@@ -115,11 +115,12 @@ namespace DAL.Repository
 
         }
 
-        public void InsertCommentOrGradeOrStatus(int uploadID, int? grade=null, string comment=null )
+        public int InsertCommentOrGradeOrStatus(int uploadID, int? grade=null, string comment=null )
         {
             
             try
             {
+                int commandStatus=0;
                 using (SqlConnection con = new SqlConnection(cs))
                 {
 
@@ -130,14 +131,25 @@ namespace DAL.Repository
                     cmd.Parameters.AddWithValue("@Grade", grade);
                     cmd.Parameters.AddWithValue("@Comment", comment);
 
+                   
                 	con.Open();
                 	cmd.ExecuteNonQuery();
+
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while(rdr.Read())
+                    {
+                        commandStatus = Convert.ToInt32(rdr["col"]);
+                    }
+                    
             	}
+
+                return commandStatus;
              }
             catch (SqlException)
             {
-              
-            }        }
+                return 0;
+            }    
+        }
 
         public void CheckHomeworkDeadLine()
         {

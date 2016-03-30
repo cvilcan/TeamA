@@ -188,51 +188,16 @@ namespace TeamA.Controllers
         }
 
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului
-        public PartialViewResult GetStudentsAvgGradeByTeacher(string userName)
+        public ActionResult  GetStudentsAvgGradeByTeacher(string userName)
         {
-
-            List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher((string)Session["SessionUser"]);
-
-
-            
-            return PartialView("GetStudentsAvgGradeByTeacher", studentAvgGradeByTeacher);
-
+            List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher(userName);
+            return View();
         }
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului si de tema 
-        public PartialViewResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
+        public ActionResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
         {
-
-
-
             List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework(userName, homeworkID);
-            HomeworkListVM homeworkVm = new HomeworkListVM()
-            {
-
-                HomeworkList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).Select(x => x.Name).ToList()              
-            };
-            //vm.TeacherNameList.Insert(0, null);
-
-            //return View(vm);
-
-
-
-
-            return PartialView(studentGradeByTeacherAndHomework);
-        }
-
-        public ActionResult Raports()
-        {
-            //HomeworkListVM homeworkVm = new HomeworkListVM()
-            //{
-
-            //    HomeworkList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).Select(x => x.Name).ToList()
-            //};
-            List<HomeworkVM> vmList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).ToList();
-
-            return View("Raports", vmList);
-
-            
-
+            return View(studentGradeByTeacherAndHomework);
         }
 
         public ActionResult ViewOneTeacherHomeworks()
