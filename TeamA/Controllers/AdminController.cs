@@ -135,8 +135,6 @@ namespace TeamA.Controllers
             {
                 vm.TeacherList.Add(item.Username);
             }
-
-            //adminService.InsertTeacherToStudent()
             return PartialView("_ViewAllStudents", vm);
         }
 
@@ -168,6 +166,22 @@ namespace TeamA.Controllers
             return new EmptyResult();
         }
 
+        public ActionResult UpdateTeacherOfStudent(string studentName, string teacherName)
+        {
+            var getStudentId = userService.GetUser(studentName);
+             try
+                {
+                    adminService.InsertTeacherToStudent(teacherName, getStudentId.Item1);
+                }
+                catch (Exception e)
+                {
+
+                    return View("Error",(object)"Try again!");
+                }
+		        
+	                  
+            return new EmptyResult();
+        }
        
     }
 }
