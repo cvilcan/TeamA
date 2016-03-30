@@ -222,7 +222,6 @@ namespace DAL.Repository
                     
                     studentAvgGradeByTeacher.Comment = rdr["Comment"].ToString();
                     studentAvgGradeByTeacher.UploadDate = Convert.ToDateTime(rdr["UploadDate"]);
-                    studentAvgGradeByTeacher.UploadID = Convert.ToInt32(rdr["UploadId"]);
                     studentAvgGradeByTeacher.Grade = Convert.ToInt32(rdr["AvgGrade"]);
        
                     studentAvgGradeByTeacherList.Add(studentAvgGradeByTeacher);
