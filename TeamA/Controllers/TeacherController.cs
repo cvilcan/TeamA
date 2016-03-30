@@ -127,41 +127,43 @@ namespace TeamA.Controllers
         public ActionResult InsertGradeOrStatus(int uploadId, int? grade = null, string comment = null)
         {
             try 
-			{                 
-                 if( grade <=10 && grade >=1 && grade!=null)
-                    {                
-                        homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);                    
-                    }
+			{                              
+
+                if(grade != null)
+                { 
+                 homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                 return Content("Success!");
+                }
                 else
-                    {                  
-            			homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-                    }
-                 return Redirect(Request.UrlReferrer.AbsoluteUri);
-            }
-            catch
+                {
+                    return Content("Please enter a grade!");
+                }
+                
+
+                 return Redirect(Request.UrlReferrer.AbsoluteUri);            }
+            catch(Exception e)
             {
-                return RedirectToAction("Error");
+                return Content(e.Message);
             }
         }
 
-        //Comment
+        // Insert Comment
         [HttpPost]
         public ActionResult InsertCommentOrStatus(int uploadId, int? grade = null, string comment = null)
         {
             try
             {
-                if (comment != null) { 
-                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);                            
+                if (comment != null) 
+				{ 
+                
+                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
                 }
-                else
-                {
-                    
                 }
-                return Redirect(Request.UrlReferrer.AbsoluteUri);
+                return Content("Success!");
             }
-            catch
+            catch(Exception e)
             {
-                return RedirectToAction("Error");
+                return Content(e.Message);
             }
         }
        
@@ -172,12 +174,12 @@ namespace TeamA.Controllers
             try
             {
                               
-               homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);             
-               return RedirectToAction(Request.UrlReferrer.AbsoluteUri);
+               
+               return Content("Success!");
             }
-            catch
+            catch (Exception e)
             {
-                return RedirectToAction("Error");
+                return Content(e.Message);
             }        
         }
 
