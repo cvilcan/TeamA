@@ -1,5 +1,4 @@
 ﻿@model BusinessLayer.Models.AccountTeacherListVm
-
 <table class="table">
     <thead>
         <tr class="success">
@@ -28,7 +27,14 @@
                         <select class="form-control col-xs-4 row TeacherSelect" name="TeacherName" id="sel1">
                             @foreach (var itemList in Model.TeacherList)
                             {
-                                <option value="@itemList">@itemList</option>
+                                if (item.TeacherName != itemList)
+                                {
+                                    <option value="@itemList">@itemList</option>
+                                }
+                                else
+                                {
+                                    <option value="@itemList" selected>@itemList</option>
+                                }
                             }
                         </select>
                     }

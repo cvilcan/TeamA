@@ -53,7 +53,7 @@
 
 Upload files
 @using (Html.BeginForm("UploadHomework", "Student", 
-    new { teacherFolder = Request.QueryString["teacherFolder"], homeworkFolder = Request.QueryString["homeworkFolder"], studentFolder = Request.QueryString["studentFolder"], path = Request.QueryString["path"]}, 
+    new { id = ViewBag.HomeworkID ,teacherFolder = Request.QueryString["teacherFolder"], homeworkFolder = Request.QueryString["homeworkFolder"], studentFolder = Request.QueryString["studentFolder"], path = Request.QueryString["path"]}, 
     FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <input type="file" name="homeworkFile"/>

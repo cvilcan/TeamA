@@ -40,7 +40,7 @@ namespace TeamA.Controllers
         {
             try
             {
-                homeworkService.CreateHomework(vm.TeacherID, vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);                
+                homeworkService.CreateHomework((int)Session["SessionUserId"], vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);                
                 
                 return RedirectToAction("Index");
             }
@@ -104,7 +104,7 @@ namespace TeamA.Controllers
                 string fileText = "";
                 try
                 {
-                    fileText = fileSystemService.GetFileText(realPath);
+                    fileText = HttpUtility.HtmlEncode(fileSystemService.GetFileText(realPath));
 
                 }
                 catch (Exception)
@@ -131,16 +131,14 @@ namespace TeamA.Controllers
 
                 if(grade != null)
                 { 
-                 homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-                 return Content("Success!");
+                     homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                     return Content("Success!");
                 }
                 else
                 {
                     return Content("Please enter a grade!");
                 }
-                
-
-                 return Redirect(Request.UrlReferrer.AbsoluteUri);            }
+            }
             catch(Exception e)
             {
                 return Content(e.Message);
