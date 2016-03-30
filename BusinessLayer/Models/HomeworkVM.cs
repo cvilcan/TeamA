@@ -9,6 +9,8 @@ namespace BusinessLayer.Models
 {
     public class HomeworkVM
     {
+        public int HomeworkID { get; set; }
+
         [Required]
         [DisplayName("Homework name")]
         public string Name { get; set; }
