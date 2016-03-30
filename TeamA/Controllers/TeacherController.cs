@@ -130,21 +130,12 @@ namespace TeamA.Controllers
 			{                 
                  if( grade <=10 && grade >=1 && grade!=null)
                     {                
-                        homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-
-
-
-                     
+                        homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);                    
                     }
                 else
-                    {
-                  
-
+                    {                  
             			homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
                     }
-
-
-
                  return Redirect(Request.UrlReferrer.AbsoluteUri);
             }
             catch
@@ -160,9 +151,7 @@ namespace TeamA.Controllers
             try
             {
                 if (comment != null) { 
-                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-                
-               
+                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);                            
                 }
                 else
                 {
@@ -183,22 +172,14 @@ namespace TeamA.Controllers
             try
             {
                               
-               homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-
-               
-
+               homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);             
                return RedirectToAction(Request.UrlReferrer.AbsoluteUri);
             }
             catch
             {
                 return RedirectToAction("Error");
-            }
-        
+            }        
         }
-
-
-
-
 
         public ActionResult DownloadAsPDF(string path)
         {
@@ -207,22 +188,23 @@ namespace TeamA.Controllers
             return View(result);
         }
 
-
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului
         public ActionResult  GetStudentsAvgGradeByTeacher(string userName)
         {
             List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher(userName);
-
             return View();
         }
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului si de tema 
         public ActionResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
         {
             List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework(userName, homeworkID);
-
-
             return View(studentGradeByTeacherAndHomework);
         }
-        
+
+        public ActionResult ViewOneTeacherHomeworks()
+        {
+            var homeworks= homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]);
+            return View(homeworks);
+        }
     }
 }
