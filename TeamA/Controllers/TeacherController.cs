@@ -105,6 +105,7 @@ namespace TeamA.Controllers
                 try
                 {
                     fileText = fileSystemService.GetFileText(realPath);
+
                 }
                 catch (Exception)
                 {
@@ -120,29 +121,84 @@ namespace TeamA.Controllers
            return View(teacherHomeworks);
         }
 
+
+        //Insert Grade 
         [HttpPost]
-        public ActionResult InsertCommentOrGradeOrStatus(int uploadId, int? grade = null, string comment = null)
+        public ActionResult InsertGradeOrStatus(int uploadId, int? grade = null, string comment = null)
         {
             try 
 			{                 
-                 if( grade <=10 && grade >=1)
+                 if( grade <=10 && grade >=1 && grade!=null)
                     {                
                         homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-                        ViewBag.Grade = "Valid Grade";
+
+
+
+                     
                     }
                 else
                     {
-                        ViewBag.Grade = "Please Enter a valid grade between 1 and 10";
+                  
 
             			homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
                     }
-                return RedirectToAction("ViewStudentHomework");
+
+
+
+                 return Redirect(Request.UrlReferrer.AbsoluteUri);
             }
             catch
             {
                 return RedirectToAction("Error");
             }
         }
+
+        //Comment
+        [HttpPost]
+        public ActionResult InsertCommentOrStatus(int uploadId, int? grade = null, string comment = null)
+        {
+            try
+            {
+                if (comment != null) { 
+                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                
+               
+                }
+                else
+                {
+                    
+                }
+                return Redirect(Request.UrlReferrer.AbsoluteUri);
+            }
+            catch
+            {
+                return RedirectToAction("Error");
+            }
+        }
+       
+        //Insert Rejected Status
+        [HttpPost]
+        public ActionResult InsertStatus(int uploadId, int? grade = null, string comment = null)
+        {
+            try
+            {
+                              
+               homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+
+               
+
+               return RedirectToAction(Request.UrlReferrer.AbsoluteUri);
+            }
+            catch
+            {
+                return RedirectToAction("Error");
+            }
+        
+        }
+
+
+
+
 
         public ActionResult DownloadAsPDF(string path)
         {

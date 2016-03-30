@@ -5,24 +5,94 @@
 @{
     ViewBag.Title = "ViewStudentHomework";
     Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+
+    string s = Request.QueryString["path"].ToString();
+    var a = s.Split('_');
+    ViewBag.UploadID = Convert.ToInt32(a[a.Length - 1]);
     
 }
 
 <h2>ViewStudentHomework</h2>
 
-@using (Html.BeginForm("InsertCommentOrGradeOrStatus", "Teacher", new {  }, FormMethod.Post))
-{
 @Html.TextArea("fileText", Model, 50, 100, null)
 
 
-@Html.TextBox("Comment")
+
+    @using (Html.BeginForm("InsertCommentOrStatus", "Teacher", FormMethod.Post))
+    {
 
 
-@Html.Label("Grade", (string)ViewBag.Grade)
+
+        <div align="left">
+
+            <div>
+                @Html.Label("lblComment")
+            </div>
+            @Html.TextArea("comment", "", 5, 40, null)
+            <input type="submit" id="button" value="Submit Comment" class="bg-success btn-default" />
+        </div>
+        @Html.Hidden("uploadId", (int)ViewBag.UploadID);
+    }
+
+    @using (Html.BeginForm("InsertGradeOrStatus", "Teacher", FormMethod.Post))
+    {
+        <div align="left">
+            @Html.Label("lblGrade")
 
 
-@Html.TextBox("Grade", "", new { style = "background-color:whiteSmoke;width:2%; color:Black; font-weight:bold", title = "Enter Grade" })
+            @*@Html.TextBox("grade", "", new { style = "background-color:whiteSmoke;width:40px; color:Black; font-weight:bold"})*@
+            @Html.Label("lblGrade")
+            <input type="text" name="grade" id="txtGrade" maxlength="2" max="10" min="1" onblur="minmax(document.getElementById('grade').innerHTML)" />
 
+            <input type="submit" id="btnGrade" class="bg-success btn-success" />
+        </div>
 
-<button type="submit" id="button" class="bg-success"/>
+       @Html.Hidden("uploadId", (int)ViewBag.UploadID);
+
+    }
+
+    @using (Html.BeginForm("InsertStatus", "Teacher", FormMethod.Post))
+{
+    <div align="center">
+        @Html.Label("lblReject")
+        <input type="submit" id="btnReject" class="bg-success btn-danger" value="Reject Homework" />
+    </div>
+     @Html.Hidden("uploadId", (int)ViewBag.UploadID);
 }
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready();
+    //Redirects to home page on user submit if the credentials are match
+    $('#btnReject').click(
+        function () {
+                     
+
+            document.getElementById('lblReject').innerHTML.fontcolor('Green') ="Success"
+            $('#lblReject').fadeOut('10', document.getElementById('lblReject').innerHTML.fontcolor('Green') = "")
+
+        }
+
+        );
+
+    $('#btnGrade').click(function () {
+
+        if ($('#txtGrade').val != null && $('#txtGrade').val >= 1 && $('#txtGrade').val <=10)
+        {
+            document.getElementById('lblGrade').innerHTML.fontcolor('Green')= "Grade inserted successfully"
+            $('#lblGrade').fadeOut('10', document.getElementById('lblGrade').innerHTML.fontcolor('Green') = "")
+        }
+        else
+        {
+            document.getElementById('lblGrade').innerHTML.fontcolor('Red') = "Please insert a grade between 1 and 10"
+            $('#lblGrade').fadeOut('10', document.getElementById('lblGrade').innerHTML.fontcolor('Green') = "")
+
+        }
+    });
+
+
+</script>

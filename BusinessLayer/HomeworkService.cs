@@ -25,9 +25,7 @@ namespace BusinessLayer
             var teachers = userService.GetAllTeachers();
             UserProfile teacher = teachers.Where(t => t.ID == TeacherUserID).FirstOrDefault();
             int homeworkID = hwRepository.CreateHomework(TeacherUserID, name, description, deadline);
-
             string getStudEmail = userService.GetAllStudents().Select(x => x.Email).FirstOrDefault();
-            
 
             if (teacher != null)
             {
@@ -54,11 +52,14 @@ namespace BusinessLayer
         {
 
             hwRepository.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-
+            string getStudEmail = userService.GetAllStudents().Select(x => x.Email).FirstOrDefault();
+            if (getStudEmail != null)
+            {
+                MailHelper.SendMail(new List<string> { getStudEmail }, "account@account.com", " Your teacher has viewed your homework", comment);
+            }
         }
 
-        public void CheckHomeworkDeadLine()
-            
+        public void CheckHomeworkDeadLine()            
         {
             hwRepository.CheckHomeworkDeadLine();
         }

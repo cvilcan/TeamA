@@ -103,5 +103,10 @@ namespace BusinessLayer
             ConvertText2Pdf txt2pdf = new ConvertText2Pdf();
             return txt2pdf.Convert(path);
         }
+
+        public IEnumerable<UserProfile> GetAllUnassignedStudents()
+        {
+            return _userRepository.GetAllUnassignedStudents();
+        }
     }
 }
