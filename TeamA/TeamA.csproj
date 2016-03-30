@@ -413,12 +413,8 @@
     <Content Include="Views\Student\ViewHomeworkFile.cshtml">
       <SubType>Code</SubType>
     </Content>
-<<<<<<< HEAD
-
-=======
     <Content Include="Views\Shared\HomeworkPresenter.cshtml" />
     <Content Include="Views\Teacher\_ListHomeworks.cshtml" />
->>>>>>> 2581b685b46b2826ed920bd487285cfd9b1bbe57
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
