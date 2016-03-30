@@ -3,7 +3,13 @@
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
     background-color: #fff;
+    /*background: url("images/background.png");*/ 
+    /*background: linear-gradient(to right, #f6f1d3, #648880 85%, #293f50);*/
 }
+
+/*.jumbotron{
+    background:transparent;
+}*/
 .page-header{
     width:76em !important;
 }
