@@ -29,6 +29,39 @@ namespace DAL.Repository
                 return (int)cmd.ExecuteScalar();
             }
         }
+        public IEnumerable<Homework> GetAllHomework()
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                List<Homework> homeworkList = new List<Homework>();
+                SqlCommand cmd = new SqlCommand("spGetAllHomework", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    
+
+                    Homework u = new Homework();
+                    u.HomeworkID = Convert.ToInt32(rdr["HomeworkID"]);
+                    u.HomeworkName = rdr["HomeworkName"].ToString();
+                    u.TeacherUserID = Convert.ToInt32(rdr["TeacherUserID"].ToString());
+                    u.Description = rdr["Description"].ToString();
+
+                    u.Deadline = Convert.ToDateTime(rdr["Deadline"]);
+
+                    homeworkList.Add(u);
+                }
+                return homeworkList;
+            }
+        }
+
+
+
+
+
+
+
 
         public List<Homework> GetOneTeacherHomework(string username)
         {
@@ -187,7 +220,7 @@ namespace DAL.Repository
 
                     studentAvgGradeByTeacher.StudentName = rdr["Username"].ToString();
                     studentAvgGradeByTeacher.StudentUserID = Convert.ToInt32(rdr["StudentID"]);
-                    studentAvgGradeByTeacher.Status = rdr["Status"].ToString();
+                    
                     studentAvgGradeByTeacher.Comment = rdr["Comment"].ToString();
                     studentAvgGradeByTeacher.UploadDate = Convert.ToDateTime(rdr["UploadDate"]);
                     studentAvgGradeByTeacher.UploadID = Convert.ToInt32(rdr["UploadId"]);

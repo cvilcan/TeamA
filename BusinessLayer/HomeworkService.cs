@@ -8,8 +8,8 @@ using TeamA.Repository;
 using AccessModels.Models;
 using System.Data.SqlClient;
 using System.IO;
-using BusinessLayer.Mail;
 using BusinessLayer.Models;
+using Helpers.Mail;
 
 namespace BusinessLayer
 {
@@ -20,6 +20,21 @@ namespace BusinessLayer
         private UserService userService = new UserService();
         private StudentService studentService = new StudentService();
 
+
+
+        public IEnumerable<Homework> GetAllHomework()
+        {
+            try
+            {
+                IEnumerable<Homework> hw = hwRepository.GetAllHomework();
+                return hw;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Service error " + e);
+            }
+            return null;
+        }
 
         public int CreateHomework(int TeacherUserID, string name, string description, DateTime deadline, string basePath)
         {

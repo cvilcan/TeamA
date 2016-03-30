@@ -1,5 +1,6 @@
 ﻿using AccessModels.Models;
 using BusinessLayer;
+using BusinessLayer.Mail;
 using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace TeamA.Controllers
         {
             try
             {
-                homeworkService.CreateHomework((int)Session["SessionUserId"], vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);                
+                homeworkService.CreateHomework(vm.TeacherID, vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);                
                 
                 return RedirectToAction("Index");
             }
@@ -80,21 +81,6 @@ namespace TeamA.Controllers
                     StudentEmail = item.Email
                 });
             return new Rotativa.ViewAsPdf("Presenter", L);
-        }
-
-        public ActionResult GenerateHomeworkPDF()
-        {
-            List<HomeworkVM> L = new List<HomeworkVM>();
-            var a = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]);
-            foreach (var item in a)
-                L.Add(new HomeworkVM()
-                {
-                    HomeworkID=item.HomeworkID,
-                    Name = item.Name,
-                    Description = item.Description,
-                    Deadline = item.Deadline
-                });
-            return new Rotativa.ViewAsPdf("HomeworkPresenter", L);
         }
 
         public ActionResult ViewStudentUploads(string teacherFolder, string homeworkFolder, string studentFolder, string path)
@@ -141,40 +127,52 @@ namespace TeamA.Controllers
         public ActionResult InsertGradeOrStatus(int uploadId, int? grade = null, string comment = null)
         {
             try 
-			{                              
+			{                 
+                 if( grade <=10 && grade >=1 && grade!=null)
+                    {                
+                        homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
 
-                if(grade != null)
-                { 
-                     homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
-                     return Content("Success!");
-                }
+
+
+                     
+                    }
                 else
-                {
-                    return Content("Please enter a grade!");
-                }
+                    {
+                  
+
+            			homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                    }
+
+
+
+                 return Redirect(Request.UrlReferrer.AbsoluteUri);
             }
-            catch(Exception e)
+            catch
             {
-                return Content(e.Message);
+                return RedirectToAction("Error");
             }
         }
 
-        // Insert Comment
+        //Comment
         [HttpPost]
         public ActionResult InsertCommentOrStatus(int uploadId, int? grade = null, string comment = null)
         {
             try
             {
-                if (comment != null) 
-				{ 
-                
+                if (comment != null) { 
                 homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                
+               
                 }
-                return Content("Success!");
+                else
+                {
+                    
+                }
+                return Redirect(Request.UrlReferrer.AbsoluteUri);
             }
-            catch(Exception e)
+            catch
             {
-                return Content(e.Message);
+                return RedirectToAction("Error");
             }
         }
        
@@ -185,14 +183,22 @@ namespace TeamA.Controllers
             try
             {
                               
+               homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+
                
-               return Content("Success!");
+
+               return RedirectToAction(Request.UrlReferrer.AbsoluteUri);
             }
-            catch (Exception e)
+            catch
             {
-                return Content(e.Message);
-            }        
+                return RedirectToAction("Error");
+            }
+        
         }
+
+
+
+
 
         public ActionResult DownloadAsPDF(string path)
         {
@@ -201,34 +207,28 @@ namespace TeamA.Controllers
             return View(result);
         }
 
+
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului
         public PartialViewResult GetStudentsAvgGradeByTeacher(string userName)
         {
-
             List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher((string)Session["SessionUser"]);
 
-
-            
             return PartialView("GetStudentsAvgGradeByTeacher", studentAvgGradeByTeacher);
-
         }
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului si de tema 
         public PartialViewResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
         {
-
-
-
-            List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework(userName, homeworkID);
+            
             HomeworkListVM homeworkVm = new HomeworkListVM()
             {
 
-                HomeworkList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).Select(x => x.Name).ToList()              
+                HomeworkList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).Select(x => x.HomeworkName).ToList()              
             };
             //vm.TeacherNameList.Insert(0, null);
 
             //return View(vm);
 
-
+            List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework(userName, homeworkID);
 
 
             return PartialView(studentGradeByTeacherAndHomework);
@@ -236,23 +236,8 @@ namespace TeamA.Controllers
 
         public ActionResult Raports()
         {
-            //HomeworkListVM homeworkVm = new HomeworkListVM()
-            //{
-
-            //    HomeworkList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).Select(x => x.Name).ToList()
-            //};
-            List<HomeworkVM> vmList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).ToList();
-
-            return View("Raports", vmList);
-
-            
-
+            return View("Raports");
         }
-
-        public ActionResult ViewOneTeacherHomeworks()
-        {
-            var homeworks= homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]);
-            return View(homeworks);
-        }
+        
     }
 }

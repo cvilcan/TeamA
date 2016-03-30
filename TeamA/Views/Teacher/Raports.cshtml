@@ -1,0 +1,47 @@
+﻿@model System.Collections.Generic.IEnumerable<BusinessLayer.Models.HomeworkVM>
+@{
+        ViewBag.Title = "Raports";
+        Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+    }
+    <h2>Raports</h2>
+   
+
+    <div id="ReportDiv">
+
+
+</div>
+
+
+@Ajax.ActionLink("Student Average Grade", "GetStudentsAvgGradeByTeacher", new AjaxOptions()
+{
+    HttpMethod = "Get",
+    UpdateTargetId = "ReportDiv",
+    InsertionMode = InsertionMode.Replace
+
+})
+
+@Ajax.ActionLink("Students grade by homework", "GetStudentsGradeByTeacherAndHomework", new AjaxOptions()
+{
+    HttpMethod = "Get",
+    UpdateTargetId = "ReportDiv",
+    InsertionMode = InsertionMode.Replace
+
+})
+
+<div class="table">
+<div class="form-group row">
+    <div class="col-sm-2">
+       
+    </div>
+    <div class="col-sm-4">
+        <select class="form-control col-sm-2" name="HomeworkID" id="sel1">
+
+            @foreach (var item in Model)
+            {
+
+                <option value="@item.HomeworkID">@item.Name</option>
+            }
+        </select>
+    </div>
+    </div>
+</div>
