@@ -35,7 +35,7 @@ namespace TeamA
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
-
+            bundles.Add(new ScriptBundle("~/bundles/ajax").Include("~/Scripts/jquery.unobtrusive-ajax.js"));
           
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

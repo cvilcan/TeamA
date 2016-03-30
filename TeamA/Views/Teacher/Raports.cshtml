@@ -1,0 +1,83 @@
+﻿@model System.Collections.Generic.IEnumerable<BusinessLayer.Models.HomeworkVM>
+@{
+        ViewBag.Title = "Raports";
+        Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+    }
+    <h2>Raports</h2>
+   
+
+    <div id="ReportDiv">
+
+
+</div>
+
+
+@*@Ajax.ActionLink("Student Average Grade", "GetStudentsAvgGradeByTeacher", new AjaxOptions()
+{
+    HttpMethod = "Get",
+    UpdateTargetId = "ReportDiv",
+    InsertionMode = InsertionMode.Replace
+
+})*@
+
+<input type="button" class="btn" id="GetStudentsAvgGradeByTeacher" value="Student Average Grade" />
+<input type="button" class="btn" id="GetStudentsGradeByTeacherAndHomework" value=" students grade by homework" />
+
+@*Ajax.ActionLink(" students grade by homework", "GetStudentsGradeByTeacherAndHomework" , new ajaxoptions()
+       {
+       httpmethod="Get" ,
+       updatetargetid="ReportDiv" ,
+       insertionmode=InsertionMode.Replace
+       })*@<div class="form-group row">
+    <div class="col-sm-2">
+       
+    </div>
+    <div class="col-sm-4">
+        <select class="form-control col-sm-2" name="HomeworkID" id="sel1">
+
+            @foreach (var item in Model)
+            {
+
+                <option value="@item.HomeworkID">@item.Name</option>
+            }
+        </select>
+    </div>
+</div>
+
+<div id="tableDiv">
+</div>
+
+<script>
+    $(document).ready(function () 
+    {
+        $("#GetStudentsAvgGradeByTeacher").on("click", function () {
+            $.ajax
+            ({
+                url: "@Url.Action("GetStudentsAvgGradeByTeacher", "Teacher")",
+                method: "GET",
+                success: function (data, textStatus, XMLHttpRequest) 
+                {
+                    $("#tableDiv").html(data);
+                }
+            })
+        })
+    })
+    
+    $(document).ready(function () 
+    {
+        $("#GetStudentsGradeByTeacherAndHomework").on("click", function () {
+            var hID = $("#sel1")[0].options[$("#sel1")[0].options.selectedIndex].value;
+            $.ajax
+            ({
+                url: "@Url.Action("GetStudentsGradeByTeacherAndHomework", "Teacher")",
+                data: { homeworkID: hID },
+                method: "GET",
+            success: function (data, textStatus, XMLHttpRequest) 
+            {
+                $("#tableDiv").html(data);
+            }
+        })
+    })
+    })
+
+</script>

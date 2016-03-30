@@ -23,5 +23,6 @@ namespace BusinessLayer.Models
         [DisplayName("Deadline")]
         public DateTime Deadline { get; set; }
         public int TeacherID { get; set; }
+        
     }
 }

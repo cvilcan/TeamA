@@ -1,6 +1,5 @@
 ﻿using AccessModels.Models;
 using BusinessLayer;
-using BusinessLayer.Mail;
 using BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -83,6 +82,21 @@ namespace TeamA.Controllers
             return new Rotativa.ViewAsPdf("Presenter", L);
         }
 
+        public ActionResult GenerateHomeworkPDF()
+        {
+            List<HomeworkVM> L = new List<HomeworkVM>();
+            var a = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]);
+            foreach (var item in a)
+                L.Add(new HomeworkVM()
+                {
+                    HomeworkID=item.HomeworkID,
+                    Name = item.Name,
+                    Description = item.Description,
+                    Deadline = item.Deadline
+                });
+            return new Rotativa.ViewAsPdf("HomeworkPresenter", L);
+        }
+
         public ActionResult ViewStudentUploads(string teacherFolder, string homeworkFolder, string studentFolder, string path)
         {
             string realPath;
@@ -154,7 +168,7 @@ namespace TeamA.Controllers
                 if (comment != null) 
 				{ 
                 
-                homeworkService.InsertCommentOrGradeOrStatus(uploadId, grade, comment);
+                homeworkService.InsertCommentOrGradeOrStatus(uploadId, null, comment);
                 }
                 return Content("Success!");
             }
@@ -170,9 +184,9 @@ namespace TeamA.Controllers
         {
             try
             {
-                              
+                homeworkService.InsertCommentOrGradeOrStatus(uploadId, null, null);
                
-               return Content("Success!");
+                return Content("Success!");
             }
             catch (Exception e)
             {
@@ -188,16 +202,51 @@ namespace TeamA.Controllers
         }
 
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului
-        public ActionResult  GetStudentsAvgGradeByTeacher(string userName)
+        public PartialViewResult GetStudentsAvgGradeByTeacher()
         {
-            List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher(userName);
-            return View();
+
+            List<StudentToHomework> studentAvgGradeByTeacher = homeworkService.GetStudentsAvgGradeByTeacher((string)Session["SessionUser"]);
+
+
+            
+            return PartialView("GetStudentsAvgGradeByTeacher", studentAvgGradeByTeacher);
+
         }
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului si de tema 
-        public ActionResult GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
+        public PartialViewResult GetStudentsGradeByTeacherAndHomework(int homeworkID)
         {
-            List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework(userName, homeworkID);
-            return View(studentGradeByTeacherAndHomework);
+
+
+
+            List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework((string)Session["SessionUser"], homeworkID);
+            HomeworkListVM homeworkVm = new HomeworkListVM()
+            {
+
+                HomeworkList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).Select(x => x.Name).ToList()              
+            };
+            //vm.TeacherNameList.Insert(0, null);
+
+            //return View(vm);
+
+
+
+
+            return PartialView(studentGradeByTeacherAndHomework);
+        }
+
+        public ActionResult Raports()
+        {
+            //HomeworkListVM homeworkVm = new HomeworkListVM()
+            //{
+
+            //    HomeworkList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).Select(x => x.Name).ToList()
+            //};
+            List<HomeworkVM> vmList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).ToList();
+
+            return View("Raports", vmList);
+
+            
+
         }
 
         public ActionResult ViewOneTeacherHomeworks()
