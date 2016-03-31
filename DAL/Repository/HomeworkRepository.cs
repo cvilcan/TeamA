@@ -192,7 +192,9 @@ namespace DAL.Repository
                         StudentGrade = (int)rdr["StudentGrade"],
                         Description = (string)rdr["Description"],
                         Status = (string)rdr["Status"],
-                        TeacherId = (int)rdr["TeacherID"]
+                        TeacherId = (int)rdr["TeacherID"],
+                        TeacherName = (string)rdr["TeacherName"],
+                        Deadline = Convert.ToDateTime(rdr["Deadline"])
                     };
                     return model;
                 }

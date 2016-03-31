@@ -37,16 +37,18 @@ namespace TeamA.Controllers
         [HttpPost]
         public ActionResult CreateHomework(HomeworkVM vm)
         {
-            try
-            {
-                homeworkService.CreateHomework((int)Session["SessionUserId"], vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);                
-                
-                return RedirectToAction("Index");
-            }
-            catch (Exception)
-            {
-                return View("Error",(object)"Invalid credentials");
-            }
+            if (ModelState.IsValid)
+                try
+                {
+                    homeworkService.CreateHomework((int)Session["SessionUserId"], vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    return View("Error", (object)"Invalid credentials");
+                }
+            else return View("Error", (object)"Invalid data!");
         }
 
         [CustomAuthorize(Roles = "Teacher")]
@@ -212,13 +214,6 @@ namespace TeamA.Controllers
             {
                 return Content(e.Message);
             }        
-        }
-
-        public ActionResult DownloadAsPDF(string path)
-        {
-            userService.SeeInPDF(path);
-            EmptyResult result = new EmptyResult();
-            return View(result);
         }
 
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului

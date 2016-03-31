@@ -20,6 +20,7 @@ namespace BusinessLayer.Models
         public string Description { get; set; }
         
         [Required]
+        [MyDate]
         [DisplayName("Deadline")]
         public DateTime Deadline { get; set; }
         public int TeacherID { get; set; }

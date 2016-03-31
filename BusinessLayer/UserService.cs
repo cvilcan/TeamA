@@ -98,12 +98,6 @@ namespace BusinessLayer
             return role;
         }
 
-        public PdfDocument SeeInPDF(string path)
-        {
-            ConvertText2Pdf txt2pdf = new ConvertText2Pdf();
-            return txt2pdf.Convert(path);
-        }
-
         public IEnumerable<UserProfile> GetAllUnassignedStudents()
         {
             return _userRepository.GetAllUnassignedStudents();
