@@ -128,7 +128,9 @@ namespace BusinessLayer
                 StudentGrade = model.StudentGrade,
                 Description = model.Description,
                 Status = model.Status,
-                TeacherId = model.TeacherId
+                TeacherId = model.TeacherId,
+                TeacherName = model.TeacherName,
+                Deadline = model.Deadline
             };
         }
 
