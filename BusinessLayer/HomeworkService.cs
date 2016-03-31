@@ -130,7 +130,8 @@ namespace BusinessLayer
                 Status = model.Status,
                 TeacherId = model.TeacherId,
                 TeacherName = model.TeacherName,
-                Deadline = model.Deadline
+                Deadline = model.Deadline,
+                Comment = model.Comment
             };
         }
 

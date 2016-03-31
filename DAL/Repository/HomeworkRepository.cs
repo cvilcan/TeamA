@@ -194,7 +194,8 @@ namespace DAL.Repository
                         Status = (string)rdr["Status"],
                         TeacherId = (int)rdr["TeacherID"],
                         TeacherName = (string)rdr["TeacherName"],
-                        Deadline = Convert.ToDateTime(rdr["Deadline"])
+                        Deadline = Convert.ToDateTime(rdr["Deadline"]),
+                        Comment = Convert.IsDBNull(rdr["Comment"]) ? "" : (string)rdr["Comment"]
                     };
                     return model;
                 }
