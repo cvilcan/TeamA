@@ -38,6 +38,9 @@
         <th>
             Last accessed
         </th>
+        <th>
+            Deadline
+        </th>
     </tr>
     @*Listing the directories *@
     @foreach (BusinessLayer.Models.DirModel dir in Model.dirModelList)
@@ -89,6 +92,9 @@
             <td></td>
             <td>
                 @dir.DirAccessed
+            </td>
+            <td>
+                @dir.Deadline
             </td>
         </tr>
     }

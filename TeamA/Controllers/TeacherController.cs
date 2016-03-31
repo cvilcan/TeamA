@@ -130,8 +130,11 @@ namespace TeamA.Controllers
                 realPath += studentFolder + "/";
             if (path != null)
                 realPath += path;
-            var ex = fileSystemService.GetExplorerModel(realPath, Request.Url);
-
+            ExplorerModelVM ex = new ExplorerModelVM();
+            if (homeworkFolder == null)
+                ex = fileSystemService.GetExplorerModel(realPath, Request.Url);
+            else
+                ex = fileSystemService.GetExplorerModel(realPath, Request.Url, Convert.ToInt32(homeworkFolder.Split('_')[1]));
             if (!ex.isFile)
                 return View(ex);
             else
