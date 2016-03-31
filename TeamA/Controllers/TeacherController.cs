@@ -94,7 +94,26 @@ namespace TeamA.Controllers
                     Description = item.Description,
                     Deadline = item.Deadline
                 });
-            return new Rotativa.ViewAsPdf("HomeworkPresenter", L);
+            return new Rotativa.ViewAsPdf("ReportsPresenter", L);
+        }
+
+        public ActionResult GenerateReportStudGradePDF(int? homeworkID)
+        {
+            if (homeworkID != null)
+            {
+                var L = homeworkService.GetStudentsGradeByTeacherAndHomework((string)Session["SessionUser"], (int)homeworkID);
+
+                return new Rotativa.ViewAsPdf("GenerateReportStudGradePDF", new Tuple<List<StudentToHomework>, int>(L, (int)homeworkID));
+            }
+            else return View("Error", (object)"It died... tragically...");
+        }
+
+
+        public ActionResult GenerateReportStudAvgGradePDF()
+        {
+            IEnumerable<StudentToHomework> L = homeworkService.GetStudentsAvgGradeByTeacher((string)Session["SessionUser"]);
+
+            return new Rotativa.ViewAsPdf("GenerateReportStudAvgGradePDF", L);
         }
 
         public ActionResult ViewStudentUploads(string teacherFolder, string homeworkFolder, string studentFolder, string path)
@@ -210,29 +229,15 @@ namespace TeamA.Controllers
 
 
             
-            return PartialView("GetStudentsAvgGradeByTeacher", studentAvgGradeByTeacher);
+            return PartialView("_GetStudentsAvgGradeByTeacher", studentAvgGradeByTeacher);
 
         }
         //De facut View si scos raportul cu top 10 studenti in functie de numele profesorului si de tema 
         public PartialViewResult GetStudentsGradeByTeacherAndHomework(int homeworkID)
         {
-
-
-
             List<StudentToHomework> studentGradeByTeacherAndHomework = homeworkService.GetStudentsGradeByTeacherAndHomework((string)Session["SessionUser"], homeworkID);
-            HomeworkListVM homeworkVm = new HomeworkListVM()
-            {
 
-                HomeworkList = homeworkService.GetOneTeacherHomework((string)Session["SessionUser"]).Select(x => x.Name).ToList()              
-            };
-            //vm.TeacherNameList.Insert(0, null);
-
-            //return View(vm);
-
-
-
-
-            return PartialView(studentGradeByTeacherAndHomework);
+            return PartialView("_GetStudentsGradeByTeacherAndHomework", new Tuple<List<StudentToHomework>, int>(studentGradeByTeacherAndHomework, homeworkID));
         }
 
         public ActionResult Raports()

@@ -140,7 +140,7 @@ namespace BusinessLayer
          }
         public List<StudentToHomework> GetStudentsGradeByTeacherAndHomework(string userName, int homeworkID)
         {
-             List<StudentToHomework> studentGradeByTeacherAndHomework =hwRepository.GetStudentsGradeByTeacherAndHomework(userName,homeworkID);
+            List<StudentToHomework> studentGradeByTeacherAndHomework = hwRepository.GetStudentsGradeByTeacherAndHomework(userName,homeworkID);
 
             return studentGradeByTeacherAndHomework;
         }
