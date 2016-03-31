@@ -173,7 +173,7 @@ namespace TeamA.Controllers
                 {
                     adminService.InsertTeacherToStudent(teacherName, getStudentId.Item1);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                     return View("Error",(object)"Try again!");
