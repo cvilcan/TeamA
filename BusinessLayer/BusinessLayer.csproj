@@ -65,6 +65,7 @@
     <Compile Include="Models\ExplorerModeVMl.cs" />
     <Compile Include="Models\HomeworkListVM.cs" />
     <Compile Include="Models\HomeworkVM.cs" />
+    <Compile Include="Models\MyDateAttribute.cs" />
     <Compile Include="Models\StudentHomeworkBrowserDetailsVM.cs" />
     <Compile Include="Models\StudentHomeworkDetailsVM.cs" />
     <Compile Include="Models\StudentVM.cs" />
