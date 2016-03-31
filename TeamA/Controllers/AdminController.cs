@@ -70,7 +70,7 @@ namespace TeamA.Controllers
             var listTeachers = userService.GetAllTeachers();
             AccountTeacherListVm vm = new AccountTeacherListVm();
             vm.AccountList = new List<AccountVM>();
-            vm.TeacherList = new List<string>();
+            vm.TeacherList = new List<string>() { "" };
             foreach (var item in listStudents)
             {
                 vm.AccountList.Add(new AccountVM{
@@ -84,7 +84,7 @@ namespace TeamA.Controllers
             {
                 vm.TeacherList.Add(item.Username);
             }
-                       
+            vm.TeacherList.Insert(0, null);       
             return View(vm);
         }
 
@@ -173,7 +173,7 @@ namespace TeamA.Controllers
                 {
                     adminService.InsertTeacherToStudent(teacherName, getStudentId.Item1);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                     return View("Error",(object)"Try again!");
