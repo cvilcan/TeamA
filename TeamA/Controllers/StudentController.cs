@@ -110,7 +110,7 @@ namespace TeamA.Controllers
                 StudentHomeworkBroswerDetailsVM vm = new StudentHomeworkBroswerDetailsVM();
                 vm.Details = _homeworkService.GetStudentHomeworkDetails((int)Session["SessionUserId"], id);
 
-                vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url);
+                vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url, id);
                 ViewBag.HomeworkID = id;
                 if (!vm.FolderStructure.isFile)
                     return View(vm);

@@ -28,7 +28,13 @@ namespace TeamA.Controllers
 
         public ActionResult Login()
         {
-            return View();
+            if (Session["SessionUser"] == null)
+                return View();
+            else
+            {
+                LogOut();
+                return View();
+            }
         }
 
         [HttpPost]

@@ -22,11 +22,11 @@ namespace TeamA.Authorize
                 string userRole = _userService.GetRole(loggedUser);
                 foreach (string definedRole in this.Roles.Split(','))
                 {                  
-                        if (definedRole.Equals(userRole))
-                                        return true;                   
+                    if (definedRole.Equals(userRole))
+                        return true;                   
                 }                   
             }           
-                return false;
+            return false;
         }
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)

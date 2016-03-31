@@ -12,22 +12,16 @@
     @Html.HiddenFor(model => model.Details.TeacherId)
     @Html.HiddenFor(model => model.Details.HomeworkId)
     <div class="well">@Html.DisplayNameFor(model => model.Details.TeacherName):@Html.DisplayFor(model => model.Details.TeacherName)</div>
-    @*@*<div class="well">@Html.DisplayFor(model => model.Details.TeacherName)</div>*@
+
+    <div class="well"> @Html.DisplayNameFor(model => model.Details.Comment): @Html.DisplayFor(model => model.Details.Comment)</div>
 
     <div class="well"> @Html.DisplayNameFor(model => model.Details.StudentGrade): @Html.DisplayFor(model => model.Details.StudentGrade)</div>
 
-    @*<div class="well"> @Html.DisplayFor(model => model.Details.StudentGrade)</div>*@
-
     <div class="well">@Html.DisplayNameFor(model => model.Details.HomeWorkName):@Html.DisplayFor(model => model.Details.HomeWorkName)</div>
-
-    @*<div class="well">@Html.DisplayFor(model => model.Details.HomeWorkName)</div>*@
 
     <div class="well"> @Html.DisplayNameFor(model => model.Details.Description):@Html.DisplayFor(model => model.Details.Description)</div>
 
-    @*<div class="well"> @Html.DisplayFor(model => model.Details.Description)</div>*@
-
     <div class="well"> @Html.DisplayNameFor(model => model.Details.Deadline):@Html.DisplayFor(model => model.Details.Deadline)</div>
-    @*<div class="well">@Html.DisplayFor(model => model.Details.Deadline)</div>*@
 
 
 </fieldset>

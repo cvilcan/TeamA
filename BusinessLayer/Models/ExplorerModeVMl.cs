@@ -9,6 +9,7 @@ namespace BusinessLayer.Models
     {
         public string DirName { get; set; }
         public DateTime DirAccessed { get; set; }
+        public DateTime Deadline { get; set; }
     }
 
     public class FileModel

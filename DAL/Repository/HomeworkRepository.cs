@@ -269,6 +269,34 @@ namespace DAL.Repository
                 return studentAvgGradeByTeacherAndHomeworkList;
 
         }
+
+        public Homework GetHomework(int homeworkID)
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                List<StudentToHomework> studentAvgGradeByTeacherList = new List<StudentToHomework>();
+
+                SqlCommand cmd = new SqlCommand("spGetHomework", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@homeworkID", homeworkID);
+
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                Homework h = new Homework();
+
+                while (rdr.Read())
+                {
+                    h.Deadline = Convert.ToDateTime(rdr["Deadline"]);
+                    h.Description = (string)rdr["Description"];
+                    h.HomeworkID = homeworkID;
+                    h.HomeworkName = (string)rdr["HomeworkName"];
+                    h.TeacherUserID = (int)rdr["TeacherUserID"];
+                }
+
+                return h;
+            }
+        }
             
     }
 }
