@@ -161,16 +161,17 @@ namespace TeamA.Controllers
 
         // Insert Comment
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult InsertCommentOrStatus(int uploadId, int? grade = null, string comment = null)
         {
             try
             {
-                if (comment != null) 
-				{ 
-                
-                homeworkService.InsertCommentOrGradeOrStatus(uploadId, null, comment);
+                if ((comment != null) && (comment != ""))
+                {
+                    homeworkService.InsertCommentOrGradeOrStatus(uploadId, null, comment);
+                    return Content("Success!");
                 }
-                return Content("Success!");
+                else return Content("Comment must not be empty!");
             }
             catch(Exception e)
             {
