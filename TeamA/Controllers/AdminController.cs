@@ -36,7 +36,7 @@ namespace TeamA.Controllers
         {
             string str="";
             try { 
-            adminService.AddTeachersFromAdmin(tcr.Username,tcr.Email, ConfigurationManager.AppSettings["BasePath"]);
+            adminService.AddTeachersFromAdmin(tcr.Username,tcr.Email, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
             ViewBag.Success = "";            return View();
                 }
             catch(SqlException ex)

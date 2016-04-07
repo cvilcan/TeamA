@@ -40,7 +40,7 @@ namespace TeamA.Controllers
             if (ModelState.IsValid)
                 try
                 {
-                    homeworkService.CreateHomework((int)Session["SessionUserId"], vm.Name, vm.Description, vm.Deadline, ConfigurationManager.AppSettings["BasePath"]);
+                    homeworkService.CreateHomework((int)Session["SessionUserId"], vm.Name, vm.Description, vm.Deadline, Server.MapPath(ConfigurationManager.AppSettings["BasePath"]));
 
                     return RedirectToAction("Index");
                 }

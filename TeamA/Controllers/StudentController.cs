@@ -110,7 +110,7 @@ namespace TeamA.Controllers
                 StudentHomeworkBroswerDetailsVM vm = new StudentHomeworkBroswerDetailsVM();
                 vm.Details = _homeworkService.GetStudentHomeworkDetails((int)Session["SessionUserId"], id);
 
-                vm.FolderStructure = _fileSystemService.GetExplorerModel(realPath, Request.Url, id);
+                vm.FolderStructure = _fileSystemService.GetExplorerModel(Server.MapPath(realPath), Request.Url, id);
                 ViewBag.HomeworkID = id;
                 if (!vm.FolderStructure.isFile)
                     return View(vm);
@@ -119,7 +119,7 @@ namespace TeamA.Controllers
                     string fileText = "";
                     try
                     {
-                        fileText =_fileSystemService.GetFileText(realPath);
+                        fileText =_fileSystemService.GetFileText(Server.MapPath(realPath));
                     }
                     catch (Exception)
                     {
@@ -142,8 +142,8 @@ namespace TeamA.Controllers
                     string s = ConfigurationManager.AppSettings["BasePath"] + Request["teacherFolder"] + "/" + Request["homeworkFolder"] + "/" + Request["studentFolder"];
                     if (Request["path"] != null)
                         s += "/" + Request["path"];
-                    int uploadID = _studentService.InsertStudentToHomework((string)Session["SessionUser"], id, homeworkFile.FileName, s);
-                    _fileSystemService.SaveFile(s, homeworkFile, uploadID);
+                    int uploadID = _studentService.InsertStudentToHomework((string)Session["SessionUser"], id, homeworkFile.FileName, Server.MapPath(s));
+                    _fileSystemService.SaveFile(Server.MapPath(s), homeworkFile, uploadID);
                     return Redirect(Request.UrlReferrer.AbsoluteUri);
                 }
                 catch (Exception e)
